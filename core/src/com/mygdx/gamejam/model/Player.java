@@ -15,7 +15,10 @@ public class Player extends GameObject {
 	}
 
 	public void move(int deltaAbs, int deltaOrd) {
-		this.getCoord().move(deltaAbs, deltaOrd);
+		Tile destination = this.getMap().getTile(this.getCoord().getAbs() + deltaAbs, this.getCoord().getOrd() + deltaOrd);
+		if (destination.isWalkable()) {
+			this.getCoord().move(deltaAbs, deltaOrd);
+		}
 	}
 
 	public void loseLifePoint() {

@@ -26,4 +26,7 @@ public class Tile {
 		this.groundType = groundType;
 	}
 	
+	public boolean isWalkable() {
+		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE);
+	}
 }

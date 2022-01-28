@@ -55,18 +55,18 @@ public class GameJam extends ApplicationAdapter {
 		for (int abs = 0; abs < map.getWidth(); abs++) {
 			for (int ord = 0; ord < map.getHeight(); ord++) {
 				batch.draw(groundTextureMap.get(map.getTile(abs, ord).getGroundType()),
-						mapStartAbs + abs * Settings.TILE_SIZE,
-						mapStartOrd + ord * Settings.TILE_SIZE,
-						50,
-						50);
+							mapStartAbs + abs * Settings.TILE_SIZE,
+							mapStartOrd + ord * Settings.TILE_SIZE,
+							Settings.TILE_SIZE,
+							Settings.TILE_SIZE);
 			}
 		}
 		
 		batch.draw(texturePlayer,
-				   mapStartAbs + player.getCoord().getAbs() * Settings.TILE_SIZE,
+				   mapStartAbs + player.getCoord().getAbs() * Settings.TILE_SIZE + ((Settings.TILE_SIZE - Settings.PLAYER_WIDTH) / 2),
 				   mapStartOrd + player.getCoord().getOrd() * Settings.TILE_SIZE,
-				   32,
-				   48);
+				   Settings.PLAYER_WIDTH,
+				   Settings.PLAYER_HEIGHT);
 		
 		batch.end();
 	}

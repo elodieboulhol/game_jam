@@ -4,7 +4,10 @@ import com.mygdx.gamejam.model.Ground;
 
 public class Settings {
 	
-	public static int TILE_SIZE = 32;
+	public static int TILE_SIZE = 50;
+	public static int PLAYER_WIDTH = 40;
+	public static int PLAYER_HEIGHT = 48;
+	
 	public static int HEIGHT = 18;
 	public static int WIDTH = 18;
 	public static int LIFEPOINTS = 5;

@@ -4,6 +4,11 @@ public abstract class GameObject {
 	private Coordinates coord;
 	private TileMap map;
 
+	public GameObject(Coordinates coord, TileMap map) {
+		this.coord = coord;
+		this.map = map;
+	}
+	
 	public Coordinates getCoord() {
 		return coord;
 	}
@@ -12,9 +17,11 @@ public abstract class GameObject {
 		this.coord = coord;
 	}
 
-	public GameObject(Coordinates coord, TileMap map) {
-		this.coord = coord;
+	public TileMap getMap() {
+		return map;
+	}
+
+	public void setMap(TileMap map) {
 		this.map = map;
 	}
-	
 }

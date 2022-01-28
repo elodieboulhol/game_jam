@@ -22,6 +22,10 @@ public class TileMap {
 		}
 	}
 	
+	public Tile getTile(Coordinates coord) {
+		return map[coord.getAbs()][coord.getOrd()];
+	}
+	
 	public Tile getTile(int abs, int ord) {
 		return map[abs][ord];
 	}

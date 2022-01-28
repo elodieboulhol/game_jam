@@ -16,7 +16,6 @@ public class Player extends GameObject {
 	public Player(Coordinates coord, TileMap map) {
 		super(coord, map);
 		currentCoord = new CoordinatesFloat(coord.getAbs(), coord.getOrd());
-		srcCoord = new Coordinates(coord.getAbs(), coord.getOrd());
 	}
 	
 	public int getLifePoint() {
@@ -29,8 +28,6 @@ public class Player extends GameObject {
 		destination = this.getMap().getTile(this.getCoord().getAbs() + deltaAbs, this.getCoord().getOrd() + deltaOrd);
 		if (destination != null && destination.isWalkable()) {
 			
-			currentCoord = new CoordinatesFloat(this.getCoord().getAbs(),
-												this.getCoord().getOrd());
 			srcCoord = new Coordinates(this.getCoord().getAbs(),
 									   this.getCoord().getOrd());
 			animWalkingTimer = 0f;
@@ -56,6 +53,10 @@ public class Player extends GameObject {
 			
 			if (animWalkingTimer > ANIM_WALKING_TIME) {
 				state = PlayerState.STANDING;
+				this.currentCoord.setAbs(destination.getCoord().getAbs());
+				this.currentCoord.setOrd(destination.getCoord().getOrd());
+				this.srcCoord = null;
+				this.destination = null;
 			}
 		}
 	}

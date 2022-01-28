@@ -116,7 +116,7 @@ public class GameJam extends ApplicationAdapter {
 	    }
 		
 		batch.draw(player.getSprite(),
-				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE + ((Settings.TILE_SIZE - Settings.PLAYER_WIDTH) / 2),
+				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
 				   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
 				   Settings.TILE_SIZE,
 				   Settings.TILE_SIZE);

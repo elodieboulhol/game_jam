@@ -23,4 +23,8 @@ public abstract class GameObject {
 	public void setMap(TileMap map) {
 		this.map = map;
 	}
+	
+	public void interact(Player player) {
+		// Nothing, defined in the sub classes
+	}
 }

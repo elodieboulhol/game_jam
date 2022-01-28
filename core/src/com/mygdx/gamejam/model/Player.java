@@ -51,10 +51,15 @@ public class Player extends GameObject {
 				destination.getCoord().getOrd(),
 				animWalkingTimer / ANIM_WALKING_TIME));
 			
+			// End move
 			if (animWalkingTimer > ANIM_WALKING_TIME) {
 				state = PlayerState.STANDING;
 				this.currentCoord.setAbs(destination.getCoord().getAbs());
 				this.currentCoord.setOrd(destination.getCoord().getOrd());
+				
+				if (this.destination.getGameObject() != null) {
+					this.destination.getGameObject().interact(this);
+				}
 				this.srcCoord = null;
 				this.destination = null;
 			}

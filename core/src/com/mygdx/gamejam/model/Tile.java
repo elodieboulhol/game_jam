@@ -3,6 +3,15 @@ package com.mygdx.gamejam.model;
 public class Tile {
 	private Coordinates coord;
 	private Ground groundType;
+	private GameObject gameObject = null;
+
+	public GameObject getGameObject() {
+		return gameObject;
+	}
+
+	public void setGameObject(GameObject gameObject) {
+		this.gameObject = gameObject;
+	}
 
 	public Tile(Coordinates coord, Ground groundType) {
 		super();
@@ -28,5 +37,9 @@ public class Tile {
 	
 	public boolean isWalkable() {
 		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE);
+	}
+	
+	public boolean isEmpty() {
+		return this.gameObject == null;
 	}
 }

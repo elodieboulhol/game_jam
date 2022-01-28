@@ -1,5 +1,6 @@
 package com.mygdx.gamejam.model;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.gamejam.Settings;
 
@@ -9,23 +10,38 @@ public class Player extends GameObject {
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;
 	private Coordinates srcCoord;
+	private Tile destination = null;
+	private Direction currentDir;
+	private AnimationSet animations;
+
 	private float animWalkingTimer = 0;
 	private static float ANIM_WALKING_TIME = 0.25f;
-	private Tile destination = null;
+
+	private float walkTimer;
+	private boolean moveRequestThisFrame;
 	
-	public Player(Coordinates coord, TileMap map) {
+	public Player(Coordinates coord, TileMap map, AnimationSet animations) {
 		super(coord, map);
-		currentCoord = new CoordinatesFloat(coord.getAbs(), coord.getOrd());
+		this.currentCoord = new CoordinatesFloat(coord.getAbs(), coord.getOrd());
+		this.currentDir = Direction.DOWN;
+		this.animations = animations; 
 	}
 	
 	public int getLifePoint() {
 		return lifePoint;
 	}
 
-	public void move(int deltaAbs, int deltaOrd) {
-		if (state != PlayerState.STANDING) return;
+	public void move(Direction dir) {
+		this.currentDir = dir;
 		
-		destination = this.getMap().getTile(this.getCoord().getAbs() + deltaAbs, this.getCoord().getOrd() + deltaOrd);
+		if (state == PlayerState.WALKING) {
+			if (currentDir == dir) {
+				moveRequestThisFrame = true;
+			}
+			return;
+		}
+		
+		destination = this.getMap().getTile(this.getCoord().getAbs() + dir.getDeltaAbs(), this.getCoord().getOrd() + dir.getDeltaOrd());
 		if (destination != null && destination.isWalkable()) {
 			
 			srcCoord = new Coordinates(this.getCoord().getAbs(),
@@ -33,13 +49,14 @@ public class Player extends GameObject {
 			animWalkingTimer = 0f;
 			state = PlayerState.WALKING;
 			
-			this.getCoord().move(deltaAbs, deltaOrd);
+			this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
 		}
 	}
 	
 	public void update(float delta) {
 		if (state == PlayerState.WALKING) {
 			animWalkingTimer += delta;
+			walkTimer += delta;
 			
 			currentCoord.setAbs(Interpolation.pow2.apply(
 				srcCoord.getAbs(),
@@ -52,13 +69,23 @@ public class Player extends GameObject {
 				animWalkingTimer / ANIM_WALKING_TIME));
 			
 			if (animWalkingTimer > ANIM_WALKING_TIME) {
+				float leftOverTimer = animWalkingTimer - ANIM_WALKING_TIME;
+				walkTimer -= leftOverTimer;
+				
 				state = PlayerState.STANDING;
 				this.currentCoord.setAbs(destination.getCoord().getAbs());
 				this.currentCoord.setOrd(destination.getCoord().getOrd());
 				this.srcCoord = null;
 				this.destination = null;
+				
+				if (moveRequestThisFrame) {
+					move(this.currentDir);
+				} else {
+					walkTimer = 0f;
+				}
 			}
 		}
+		moveRequestThisFrame = false;
 	}
 
 	public CoordinatesFloat getCurrentCoord() {
@@ -69,6 +96,15 @@ public class Player extends GameObject {
 		this.currentCoord = currentCoord;
 	}
 
+	public Texture getSprite() {
+		if (this.state == PlayerState.WALKING) {
+			return animations.getWalking(this.currentDir).getKeyFrame(walkTimer);
+		} else if (this.state == PlayerState.STANDING) {
+			return animations.getStanding(this.currentDir);
+		}
+		return animations.getStanding(Direction.DOWN);
+	}
+	
 	public void loseLifePoint() {
 		this.lifePoint -= 1;
 	}

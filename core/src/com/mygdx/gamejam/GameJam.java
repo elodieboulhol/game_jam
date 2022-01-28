@@ -7,25 +7,25 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameJam extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture texturePlayer;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		player = new Texture("img/player_png_front.png");
+		texturePlayer = new Texture("img/player_png_front.png");
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		batch.draw(player, 0, 0, 32, 48);
+		batch.draw(texturePlayer, 0, 0, 32, 48);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		player.dispose();
+		texturePlayer.dispose();
 	}
 }

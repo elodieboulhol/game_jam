@@ -1,12 +1,31 @@
 package com.mygdx.gamejam.model;
 
-public class Player extends GameObject {
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.mygdx.gamejam.Settings;
+
+public class Player extends GameObject {
+	private int lifePoint;
+	
 	public Player(Coordinates coord) {
 		super(coord);
+		this.lifePoint = Settings.LIFEPOINTS;
 	}
 	
-	public void move(int absMove, int ordMove) {
-		this.getCoord().move(absMove, ordMove);
+	public int getLifePoint() {
+		return lifePoint;
+	}
+
+	public void move(int deltaAbs, int deltaOrd) {
+		this.getCoord().move(deltaAbs, deltaOrd);
+	}
+
+	public void loseLifePoint() {
+		this.lifePoint -= 1;
+	}
+	
+	public void winLifePoint() {
+		this.lifePoint += 1;
 	}
 }

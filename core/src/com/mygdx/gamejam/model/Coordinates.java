@@ -25,8 +25,8 @@ public class Coordinates {
 		this.ord = ord;
 	}
 
-	public void move(int absMove, int ordMove) {
-		this.abs += absMove;
-		this.ord += ordMove;
+	public void move(int deltaAbs, int deltaOrd) {
+		this.abs += deltaAbs;
+		this.ord += deltaOrd;
 	}
 }

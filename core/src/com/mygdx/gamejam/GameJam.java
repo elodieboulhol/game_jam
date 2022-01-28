@@ -12,20 +12,20 @@ public class GameJam extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		player = new Texture("img/player_png_front.png");
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(player, 0, 0, 32, 48);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		player.dispose();
 	}
 }

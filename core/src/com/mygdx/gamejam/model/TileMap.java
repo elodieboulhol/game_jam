@@ -27,6 +27,9 @@ public class TileMap {
 	}
 	
 	public Tile getTile(int abs, int ord) {
+		if (abs >= this.width || abs < 0 || ord >= this.height || ord < 0) {
+			return null;
+		}
 		return map[abs][ord];
 	}
 

@@ -45,7 +45,8 @@ public class GameJam extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
-		camera.update(player.getCoord().getAbs(), player.getCoord().getOrd());
+		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
+		player.update(Gdx.graphics.getDeltaTime());
 		
 		batch.begin();
 		
@@ -63,8 +64,8 @@ public class GameJam extends ApplicationAdapter {
 		}
 		
 		batch.draw(texturePlayer,
-				   mapStartAbs + player.getCoord().getAbs() * Settings.TILE_SIZE + ((Settings.TILE_SIZE - Settings.PLAYER_WIDTH) / 2),
-				   mapStartOrd + player.getCoord().getOrd() * Settings.TILE_SIZE,
+				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE + ((Settings.TILE_SIZE - Settings.PLAYER_WIDTH) / 2),
+				   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
 				   Settings.PLAYER_WIDTH,
 				   Settings.PLAYER_HEIGHT);
 		

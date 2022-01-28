@@ -9,5 +9,21 @@ public class Tile {
 		this.coord = coord;
 		this.groundType = groundType;
 	}
+
+	public Coordinates getCoord() {
+		return coord;
+	}
+
+	public void setCoord(Coordinates coord) {
+		this.coord = coord;
+	}
+
+	public Ground getGroundType() {
+		return groundType;
+	}
+
+	public void setGroundType(Ground groundType) {
+		this.groundType = groundType;
+	}
 	
 }

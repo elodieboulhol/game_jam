@@ -8,8 +8,8 @@ import com.mygdx.gamejam.Settings;
 public class Player extends GameObject {
 	private int lifePoint;
 	
-	public Player(Coordinates coord) {
-		super(coord);
+	public Player(Coordinates coord, TileMap map) {
+		super(coord, map);
 		this.lifePoint = Settings.LIFEPOINTS;
 	}
 	

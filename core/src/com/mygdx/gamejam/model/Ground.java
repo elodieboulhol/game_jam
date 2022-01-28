@@ -4,5 +4,6 @@ public enum Ground {
 	GRASS,
 	ROCK,
 	TREE,
+	BRIDGE,
 	WATER
 }

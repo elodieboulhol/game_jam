@@ -1,8 +1,5 @@
 package com.mygdx.gamejam.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.mygdx.gamejam.Settings;
 
 public class Player extends GameObject {

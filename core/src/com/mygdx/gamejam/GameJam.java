@@ -8,18 +8,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.gamejam.controller.PlayerController;
+import com.mygdx.gamejam.model.Camera;
 import com.mygdx.gamejam.model.Coordinates;
 import com.mygdx.gamejam.model.Ground;
 import com.mygdx.gamejam.model.Player;
 import com.mygdx.gamejam.model.TileMap;
 
 public class GameJam extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture texturePlayer;
-	HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
-	PlayerController playerController;
-	Player player;
-	TileMap map;
+	private SpriteBatch batch;
+	private Texture texturePlayer;
+	private HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
+	private PlayerController playerController;
+	private Player player;
+	private TileMap map;
+	private Camera camera;
 	
 	@Override
 	public void create () {
@@ -35,6 +37,7 @@ public class GameJam extends ApplicationAdapter {
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1.length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(0, 0), map);
 		playerController = new PlayerController(player);
+		camera = new Camera();
 		
 		Gdx.input.setInputProcessor(playerController);
 	}
@@ -42,21 +45,26 @@ public class GameJam extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
+		camera.update(player.getCoord().getAbs(), player.getCoord().getOrd());
+		
 		batch.begin();
+		
+		float mapStartAbs = Gdx.graphics.getWidth() / 2 - camera.getCameraAbs() * Settings.TILE_SIZE ;		
+		float mapStartOrd = Gdx.graphics.getHeight() / 2 - camera.getCameraOrd() * Settings.TILE_SIZE ;
 		
 		for (int abs = 0; abs < map.getWidth(); abs++) {
 			for (int ord = 0; ord < map.getHeight(); ord++) {
 				batch.draw(groundTextureMap.get(map.getTile(abs, ord).getGroundType()),
-						   abs * Settings.TILE_SIZE,
-						   ord * Settings.TILE_SIZE,
-						   50,
-						   50);
+						mapStartAbs + abs * Settings.TILE_SIZE,
+						mapStartOrd + ord * Settings.TILE_SIZE,
+						50,
+						50);
 			}
 		}
 		
 		batch.draw(texturePlayer,
-				   player.getCoord().getAbs() * Settings.TILE_SIZE,
-				   player.getCoord().getOrd() * Settings.TILE_SIZE,
+				   mapStartAbs + player.getCoord().getAbs() * Settings.TILE_SIZE,
+				   mapStartOrd + player.getCoord().getOrd() * Settings.TILE_SIZE,
 				   32,
 				   48);
 		

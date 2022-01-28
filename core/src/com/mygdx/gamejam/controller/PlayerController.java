@@ -2,10 +2,12 @@ package com.mygdx.gamejam.controller;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Player;
 
 public class PlayerController extends InputAdapter {
 	private Player player;
+	private boolean up, down, left, right;
 	
 	public PlayerController(Player player) {
 		this.player = player;
@@ -14,14 +16,45 @@ public class PlayerController extends InputAdapter {
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.UP) {
-			player.move(0, 1);
+			up = true;
 		} else if (keycode == Keys.DOWN) {
-			player.move(0, -1);
+			down = true;
 		} else if (keycode == Keys.LEFT) {
-			player.move(-1, 0);
+			left = true;
 		} else if (keycode == Keys.RIGHT) {
-			player.move(1, 0);
+			right = true;
 		}
 		return false;
+	}
+	
+	public boolean keyUp(int keycode) {
+		if (keycode == Keys.UP) {
+			up = false;
+		} else if (keycode == Keys.DOWN) {
+			down = false;
+		} else if (keycode == Keys.LEFT) {
+			left = false;
+		} else if (keycode == Keys.RIGHT) {
+			right = false;
+		}
+		return false;
+	}
+	
+	
+	// TODO : replace 0, 1, -1 by Direction class
+	public void update(float delta) {
+		if (up) {
+			player.move(Direction.UP);
+			return;
+		} else if (down) {
+			player.move(Direction.DOWN);
+			return;
+		} else if (left) {
+			player.move(Direction.LEFT);
+			return;
+		} else if (right) {
+			player.move(Direction.RIGHT);
+			return;
+		}
 	}
 }

@@ -19,6 +19,10 @@ public class Settings {
 	public static int LIFESIZE = 32;
 	public static int LIFESPACE = 3;
 	
+	public static int FIREBALL_SIZE = 70;
+	public static int FIREBALL_ABS = Settings.SCREEN_WIDTH - Settings.LIFEABS - Settings.FIREBALL_SIZE;
+	public static int FIREBALL_ORD = SCREEN_HEIGHT - 60;
+	
 	public static int KEY_ABS = 25;
 	public static int KEY_ORD = 25;
 	public static int NB_MONSTER = 10;

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -38,6 +39,7 @@ public class GameScreen implements Screen {
 
 	private AnimationSetPlayer animationsPlayer;
 	private AnimationSetMonster animationsMonster;
+	private HashMap<Integer, Texture> fireballCounterTextureMap = new HashMap<Integer, Texture>();;	
 	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
@@ -69,11 +71,13 @@ public class GameScreen implements Screen {
 //	private Array<Texture> textureAnimationsMonster4Right = new Array<Texture>();
 	
 	private Music gameMusic;
+	private Sound fireballSound;
 	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
 		gameMusic.setLooping(true);
+		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 		
 		Timer.schedule(new Task(){
 		    @Override
@@ -174,10 +178,15 @@ public class GameScreen implements Screen {
 		fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
 		fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
 		
+		fireballCounterTextureMap.put(new Integer(0), new Texture("img/fireball_counter_0.png"));
+		fireballCounterTextureMap.put(new Integer(1), new Texture("img/fireball_counter_1.png"));
+		fireballCounterTextureMap.put(new Integer(2), new Texture("img/fireball_counter_2.png"));
+		fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
+		
 		// TODO Check this
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(30, 20), map, animationsPlayer);
-		playerController = new PlayerController(player);
+		playerController = new PlayerController(player, fireballSound);
 		camera = new Camera();
 	}
 	
@@ -260,6 +269,12 @@ public class GameScreen implements Screen {
 							Settings.LIFESIZE);
 		}
 		
+		game.batch.draw(fireballCounterTextureMap.get(new Integer(player.getNbFireball())), 
+						Settings.FIREBALL_ABS,
+						Settings.FIREBALL_ORD,
+						Settings.FIREBALL_SIZE,
+						Settings.FIREBALL_SIZE);
+		
 		game.batch.draw(player.getSprite(),
 				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
 				   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
@@ -314,6 +329,9 @@ public class GameScreen implements Screen {
 		for(Texture texture : textureAnimationsPlayerUp) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerRight) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerLeft) texture.dispose();
+		
+		gameMusic.dispose();
+		fireballSound.dispose();
 	}
 
 }

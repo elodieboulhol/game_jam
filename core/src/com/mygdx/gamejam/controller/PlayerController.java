@@ -12,10 +12,11 @@ public class PlayerController extends InputAdapter {
 	private Player player;
 	private boolean up, down, left, right;
 	
-	private Sound fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
+	private Sound fireballSound;
 	
-	public PlayerController(Player player) {
+	public PlayerController(Player player, Sound fireballSound) {
 		this.player = player;
+		this.fireballSound = fireballSound;
 	}
 	
 	@Override

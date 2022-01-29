@@ -1,11 +1,14 @@
 package com.mygdx.gamejam.model;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 
 public class Monster extends GameObject {
 	private MonsterType monsterType;
 	private MonsterState monsterState;
+	
+	private static Sound hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/punch.mp3"));;
 
 	private static float ANIM_TIME = 1.5f;
 	private float animTimer = 0;
@@ -55,6 +58,7 @@ public class Monster extends GameObject {
 		}
 
 		player.loseLifePoint();
+		hitSound.play();
 	}
 	
 	public void update(float delta) {

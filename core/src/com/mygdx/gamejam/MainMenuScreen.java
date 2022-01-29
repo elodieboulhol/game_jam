@@ -4,25 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainMenuScreen implements Screen {
 
 	private final NightHunt game;
-	
+
 	OrthographicCamera camera;
+	
+	Texture playTexture, exitTexture, arrowTexture;
+	
+	private boolean isArrowOnPlay = true;
 	
 	public MainMenuScreen(final NightHunt game) {
 		this.game = game;
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
+		
+		playTexture = new Texture("img/menu_play.png");
+		exitTexture = new Texture("img/menu_exit.png");
+		arrowTexture = new Texture("img/menu_arrow.png");
 	}
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -34,15 +41,47 @@ public class MainMenuScreen implements Screen {
 
 		game.batch.begin();
 		
-		// TODO : améliorer ça
-		game.font.draw(game.batch, "Welcome to NightHunt !", 100, 150);
-		game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+		game.batch.draw(playTexture,
+						Settings.SCREEN_WIDTH / 3,
+						Settings.SCREEN_HEIGHT / 2,
+						Settings.SCREEN_WIDTH / 3,
+						Settings.SCREEN_HEIGHT / 2);
+		game.batch.draw(exitTexture,
+						Settings.SCREEN_WIDTH / 3,
+						Settings.SCREEN_HEIGHT / 4,
+						Settings.SCREEN_WIDTH / 3,
+						Settings.SCREEN_HEIGHT / 2);
+		
+		if (isArrowOnPlay) {
+			game.batch.draw(arrowTexture,
+							Settings.SCREEN_WIDTH / 6,
+							Settings.SCREEN_HEIGHT / 2,
+							Settings.SCREEN_WIDTH / 4,
+							Settings.SCREEN_HEIGHT / 2);
+		} else {
+			game.batch.draw(arrowTexture,
+							Settings.SCREEN_WIDTH / 6,
+							Settings.SCREEN_HEIGHT / 4,
+							Settings.SCREEN_WIDTH / 4,
+							Settings.SCREEN_HEIGHT / 2);
+		}
+		
 		game.batch.end();
 
-		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-			game.setScreen(new GameScreen(game));
-			dispose();
+		if (Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+			if (isArrowOnPlay) isArrowOnPlay = false;
+			else isArrowOnPlay = true;
 		}
+		if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isKeyPressed(Keys.ENTER)) {
+			if (isArrowOnPlay) {
+				game.setScreen(new GameScreen(game));
+				dispose();
+			} else {
+				Gdx.app.exit();
+				System.exit(0);
+			}
+		}
+		
 		
 	}
 

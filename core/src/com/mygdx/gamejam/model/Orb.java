@@ -31,13 +31,13 @@ public class Orb extends GameObject {
 	}
 	
 	@Override
-	public void interact(Player player, Direction dir) {
+	public void interact(Player player) {
 		if (this.orbType == OrbType.ATTACK) {
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
 			// TODO
 		} else if (this.orbType == OrbType.LIFE) {
-			// TODO
+			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
 		}
 		this.getMap().getOrbsList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);

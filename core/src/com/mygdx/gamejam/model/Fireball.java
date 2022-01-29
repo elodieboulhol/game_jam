@@ -23,26 +23,31 @@ public class Fireball extends GameObject {
 	 */
 	public void move() {
 		destination = this.getMap().getTile(this.getCoord().getAbs() + this.currentDir.getDeltaAbs(), this.getCoord().getOrd() + this.currentDir.getDeltaOrd());
+		srcCoord = new Coordinates(this.getCoord().getAbs(),
+	   			   				   this.getCoord().getOrd());
+		
 		if (destination != null && destination.isWalkable()) {
-			
-			srcCoord = new Coordinates(this.getCoord().getAbs(),
-						   			   this.getCoord().getOrd());
 			animThrowingTimer = 0f;
 			
 			this.getCoord().move(this.currentDir.getDeltaAbs(), this.currentDir.getDeltaOrd());
 		}
 	}
 	
-	public void update(float delta) {
+	/**
+	 * Update the position of the fireball
+	 * @param delta
+	 * @return true if the fireball hits an obstacle, false otherwise
+	 */
+	public boolean update(float delta) {
 		if (destination != null) {
 			animThrowingTimer += delta;
 			
-			currentCoord.setAbs(Interpolation.pow2.apply(
+			currentCoord.setAbs(Interpolation.linear.apply(
 				srcCoord.getAbs(),
 				destination.getCoord().getAbs(),
 				animThrowingTimer / ANIM_THROWING_TIME));
 			
-			currentCoord.setOrd(Interpolation.pow2.apply(
+			currentCoord.setOrd(Interpolation.linear.apply(
 				srcCoord.getOrd(),
 				destination.getCoord().getOrd(),
 				animThrowingTimer / ANIM_THROWING_TIME));
@@ -52,6 +57,7 @@ public class Fireball extends GameObject {
 				
 				if (destination.isWalkable() && destination.isEmpty()) {
 					this.move();
+					return false;
 				} else {
 					this.currentCoord.setAbs(destination.getCoord().getAbs());
 					this.currentCoord.setOrd(destination.getCoord().getOrd());
@@ -63,10 +69,11 @@ public class Fireball extends GameObject {
 					
 					this.srcCoord = null;
 					this.destination = null;
-					// this.getMap().getFireballList().remove(this);
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	public Direction getCurrentDir() {

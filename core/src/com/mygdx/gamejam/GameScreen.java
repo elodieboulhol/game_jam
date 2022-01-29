@@ -1,6 +1,7 @@
 package com.mygdx.gamejam;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -103,7 +104,12 @@ public class GameScreen implements Screen {
 		playerController.update(delta);
 		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
 		player.update(delta);
-		for (Fireball fireball : map.getFireballList()) fireball.update(delta);
+		
+		Iterator<Fireball> fireballList = map.getFireballList().iterator();
+	    while (fireballList.hasNext()) {
+	    	Fireball fireball = fireballList.next();
+	    	if (fireball.update(delta)) fireballList.remove();
+	    }
 		
 		game.batch.begin();
 		
@@ -144,7 +150,7 @@ public class GameScreen implements Screen {
 							Settings.LIFESIZE);
 		}
 		
-		for (int nbLostLifePoint = player.getLifePoint(); nbLostLifePoint < Settings.MAX_LIFEPOINTS; nbLostLifePoint++) {
+		for (int nbLostLifePoint = Math.max(0, player.getLifePoint()); nbLostLifePoint < Settings.MAX_LIFEPOINTS; nbLostLifePoint++) {
 			game.batch.draw(emptyHeartTexture, 
 							Settings.LIFEABS + nbLostLifePoint * (Settings.LIFESIZE + Settings.LIFESPACE),
 							Settings.LIFEORD,

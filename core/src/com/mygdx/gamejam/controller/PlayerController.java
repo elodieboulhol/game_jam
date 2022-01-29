@@ -1,13 +1,17 @@
 package com.mygdx.gamejam.controller;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Player;
 
 public class PlayerController extends InputAdapter {
 	private Player player;
-	private boolean up, down, left, right, attack;
+	private boolean up, down, left, right;
+	
+	private Sound fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 	
 	public PlayerController(Player player) {
 		this.player = player;
@@ -24,7 +28,10 @@ public class PlayerController extends InputAdapter {
 		} else if (keycode == Keys.RIGHT) {
 			right = true;
 		} else if (keycode == Keys.SPACE) {
-			attack = true;
+			if (player.getNbFireball() > 0) {
+				fireballSound.play();
+				player.attack();
+			}
 		}
 		return false;
 	}
@@ -38,8 +45,6 @@ public class PlayerController extends InputAdapter {
 			left = false;
 		} else if (keycode == Keys.RIGHT) {
 			right = false;
-		} else if (keycode == Keys.SPACE) {
-			attack = false;
 		}
 		return false;
 	}
@@ -58,8 +63,6 @@ public class PlayerController extends InputAdapter {
 		} else if (right) {
 			player.move(Direction.RIGHT);
 			return;
-		} else if (attack) {
-			player.attack();
 		}
 	}
 }

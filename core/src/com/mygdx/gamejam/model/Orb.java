@@ -1,5 +1,7 @@
 package com.mygdx.gamejam.model;
 
+import com.mygdx.gamejam.Settings;
+
 public class Orb extends GameObject {
 	private OrbType orbType;
 	
@@ -31,7 +33,7 @@ public class Orb extends GameObject {
 	@Override
 	public void interact(Player player) {
 		if (this.orbType == OrbType.ATTACK) {
-			// TODO
+			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
 			// TODO
 		} else if (this.orbType == OrbType.LIFE) {

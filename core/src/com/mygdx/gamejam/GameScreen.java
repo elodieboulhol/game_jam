@@ -1,6 +1,7 @@
 package com.mygdx.gamejam;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,6 +15,7 @@ import com.mygdx.gamejam.model.AnimationSet;
 import com.mygdx.gamejam.model.Camera;
 import com.mygdx.gamejam.model.Coordinates;
 import com.mygdx.gamejam.model.Direction;
+import com.mygdx.gamejam.model.Fireball;
 import com.mygdx.gamejam.model.Ground;
 import com.mygdx.gamejam.model.Monster;
 import com.mygdx.gamejam.model.MonsterType;
@@ -33,6 +35,7 @@ public class GameScreen implements Screen {
 	private HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
 	private HashMap<MonsterType, Texture> monsterTextureMap = new HashMap<MonsterType, Texture>();
+	private HashMap<Direction, Texture> fireballTextureMap = new HashMap<Direction, Texture>();
 	private PlayerController playerController;
 	private Player player;
 	private TileMap map;
@@ -93,6 +96,11 @@ public class GameScreen implements Screen {
 		monsterTextureMap.put(MonsterType.MONSTER3, new Texture("img/monster3_left.png"));
 		monsterTextureMap.put(MonsterType.MONSTER4, new Texture("img/monster4_left.png"));
 		
+		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
+		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));
+		fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
+		fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
+		
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(30, 20), map, animationsPlayer);
 		// map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1.length, Settings.GROUNDMAP1[0].length);
@@ -116,6 +124,12 @@ public class GameScreen implements Screen {
 		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
 		player.update(delta);
 		
+		Iterator<Fireball> fireballList = map.getFireballList().iterator();
+	    while (fireballList.hasNext()) {
+	    	Fireball fireball = fireballList.next();
+	    	if (fireball.update(delta)) fireballList.remove();
+	    }
+		
 		game.batch.begin();
 		
 		float mapStartAbs = Gdx.graphics.getWidth() / 2 - camera.getCameraAbs() * Settings.TILE_SIZE ;		
@@ -137,8 +151,7 @@ public class GameScreen implements Screen {
 					   	  mapStartOrd + orb.getCoord().getOrd() * Settings.TILE_SIZE,
 					   	  Settings.TILE_SIZE,
 					   	  Settings.TILE_SIZE); 		
-	    }
-		
+	    }	
 
 		for (Monster monster : map.getMonsterList()) {
 			game.batch.draw(monsterTextureMap.get(monster.getMonsterType()),
@@ -146,6 +159,14 @@ public class GameScreen implements Screen {
 				   	  mapStartOrd + monster.getCoord().getOrd() * Settings.TILE_SIZE,
 				   	  Settings.TILE_SIZE,
 				   	  Settings.TILE_SIZE); 
+		}
+
+		for (Fireball fireball : map.getFireballList()) {
+			game.batch.draw(fireballTextureMap.get(fireball.getCurrentDir()),
+							mapStartAbs + fireball.getCoord().getAbs() * Settings.TILE_SIZE,
+							mapStartOrd + fireball.getCoord().getOrd() * Settings.TILE_SIZE,
+							Settings.TILE_SIZE,
+							Settings.TILE_SIZE);
 		}
 		
 		for (int nbLifePoint = 0; nbLifePoint < player.getLifePoint(); nbLifePoint++) {
@@ -156,7 +177,7 @@ public class GameScreen implements Screen {
 							Settings.LIFESIZE);
 		}
 		
-		for (int nbLostLifePoint = player.getLifePoint(); nbLostLifePoint < Settings.MAX_LIFEPOINTS; nbLostLifePoint++) {
+		for (int nbLostLifePoint = Math.max(0, player.getLifePoint()); nbLostLifePoint < Settings.MAX_LIFEPOINTS; nbLostLifePoint++) {
 			game.batch.draw(emptyHeartTexture, 
 							Settings.LIFEABS + nbLostLifePoint * (Settings.LIFESIZE + Settings.LIFESPACE),
 							Settings.LIFEORD,
@@ -208,11 +229,13 @@ public class GameScreen implements Screen {
 		for(HashMap.Entry<Ground, Texture> ground : groundTextureMap.entrySet()) {
 		    ground.getValue().dispose();
 		}
+		for(HashMap.Entry<Direction, Texture> fireball : fireballTextureMap.entrySet()) {
+		    fireball.getValue().dispose();
+		}
 		for(Texture texture : textureAnimationsPlayerDown) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerUp) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerRight) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerLeft) texture.dispose();
-		
 	}
 
 }

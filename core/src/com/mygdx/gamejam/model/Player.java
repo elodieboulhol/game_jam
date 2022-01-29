@@ -6,7 +6,8 @@ import com.mygdx.gamejam.Settings;
 
 public class Player extends GameObject {
 	private int lifePoint = Settings.MAX_LIFEPOINTS;
-	
+	private int nbFireball = 0;
+
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;
 	private Coordinates srcCoord;
@@ -42,13 +43,12 @@ public class Player extends GameObject {
 		}
 		
 		destination = this.getMap().getTile(this.getCoord().getAbs() + dir.getDeltaAbs(), this.getCoord().getOrd() + dir.getDeltaOrd());
+		srcCoord = new Coordinates(this.getCoord().getAbs(), this.getCoord().getOrd());
+		
 		if (destination != null && destination.isWalkable()) {
 			
-			srcCoord = new Coordinates(this.getCoord().getAbs(),
-									   this.getCoord().getOrd());
 			animWalkingTimer = 0f;
 			state = PlayerState.WALKING;
-			
 			this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
 		}
 	}
@@ -81,9 +81,6 @@ public class Player extends GameObject {
 					this.destination.getGameObject().interact(this);
 				}
 
-				this.srcCoord = null;
-				this.destination = null;
-
 				if (moveRequestThisFrame) {
 					move(this.currentDir);
 				} else {
@@ -109,6 +106,26 @@ public class Player extends GameObject {
 			return animations.getStanding(this.currentDir);
 		}
 		return animations.getStanding(Direction.DOWN);
+	}
+	
+	/**
+	 * Throw a fireball
+	 */
+	public void attack() {
+		if (nbFireball > 0) {
+			nbFireball--;
+			Fireball fireball = new Fireball(this.getCoord().clone(), this.getMap(), this.currentDir);
+			this.getMap().getFireballList().add(fireball);
+			fireball.move();
+		}		
+	}
+	
+	public int getNbFireball() {
+		return nbFireball;
+	}
+	
+	public void incrNbFireball() {
+		nbFireball++;
 	}
 	
 	public void loseLifePoint() {

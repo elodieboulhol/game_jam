@@ -12,6 +12,7 @@ public class Settings {
 	// public static int HEIGHT = 18;
 	// public static int WIDTH = 18;
 	public static int MAX_LIFEPOINTS = 3;
+	public static int MAX_NBFIREBALLS = 3;
 	
 	public static int LIFEABS = 10;
 	public static int LIFEORD = SCREEN_HEIGHT - 40;

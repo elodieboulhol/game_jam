@@ -1,24 +1,43 @@
 package com.mygdx.gamejam.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
+import com.mygdx.gamejam.Settings;
+
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public class Monster extends GameObject {
 	private MonsterType monsterType;
 	private MonsterState monsterState;
+	private Task task;
 	
-	private static Sound hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/punch.mp3"));;
+	private static Sound hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/punch.mp3"));
+	private static Sound fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 
 	private static float ANIM_TIME = 1.5f;
 	private float animTimer = 0;
 	private float monsterTimer;
 	
-
+	
 	public Monster(Coordinates coord, TileMap map, MonsterType monsterType, MonsterState monsterState) {
 		super(coord, map);
 		this.monsterType = monsterType;
 		this.monsterState = monsterState;
+		
+		this.task = new Task(){
+		    @Override
+		    public void run() {
+				fireballSound.play();
+				Direction dir = Direction.values()[new Random().nextInt(Direction.values().length)];
+				Fireball fireball = new Fireball(getCoord().clone(), getMap(), dir);
+				getMap().getFireballList().add(fireball);
+				fireball.move();	    
+			}
+		};
 	}
 
 	public MonsterType getMonsterType() {
@@ -66,6 +85,14 @@ public class Monster extends GameObject {
 	public void interact(Fireball fireball) {
 		this.getMap().getMonsterList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);
+	}
+	
+	public void sendFireballs() {
+		Timer.schedule(this.task, Settings.FIREBALL_MONSTER_DELAY, Settings.FIREBALL_MONSTER_TIMING);
+	}
+	
+	public void stopSendFireballs() {
+		this.task.cancel();
 	}
 	
 	public void update(float delta) {

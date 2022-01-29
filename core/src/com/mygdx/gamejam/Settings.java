@@ -32,12 +32,15 @@ public class Settings {
 	
 	public static int PLAYER_ABS = 11;
 	public static int PLAYER_ORD = 6;
-	public static int NB_MONSTER = 10;
 	
+	public static int NB_MONSTER = 10;
+	public static int NB_NORMAL_MONSTER = 4;
+	public static int FIREBALL_MONSTER_TIMING = 1;
+	public static int FIREBALL_MONSTER_DELAY = 1;
 
 	public static int ICE_TIMING = 5;
 	
-	public static float DAY_LENGTH = 2f; 
+	public static float DAY_LENGTH = 6f; 
 	
 	public static Ground[][] GROUNDMAP1= {
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },

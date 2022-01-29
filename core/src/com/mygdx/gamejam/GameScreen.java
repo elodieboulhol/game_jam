@@ -86,8 +86,18 @@ public class GameScreen implements Screen {
 		Timer.schedule(new Task(){
 		    @Override
 		    public void run() {
-		        if (isDay) isDay = false;
-		        else isDay = true;
+		        if (isDay) {
+		        	isDay = false;
+		    		for (Monster monster : map.getMonsterList()) {
+		    			monster.sendFireballs();
+		    		}
+		        }
+		        else {
+		        	isDay = true;
+		    		for (Monster monster : map.getMonsterList()) {
+		    			monster.stopSendFireballs();
+		    		}
+		        }
 		    }
 		}, Settings.DAY_LENGTH, Settings.DAY_LENGTH);
 
@@ -166,14 +176,14 @@ public class GameScreen implements Screen {
 		dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
 		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
 		dayGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg.png"));
-		dayGroundTextureMap.put(Ground.PLANK, new Texture("img/grass_night.png"));
+		dayGroundTextureMap.put(Ground.PLANK, new Texture("img/plank.png"));
 		
 		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
 		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
 		nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
 		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
 		nightGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg_night.png"));
-		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/grass.png"));
+		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/plank_night.png"));
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
@@ -249,6 +259,9 @@ public class GameScreen implements Screen {
 
 		for (Monster monster : map.getMonsterList()) {
 			monster.update(delta);
+//			if (!isDay) {
+//				monster.sendFireballs();
+//			}
 			game.batch.draw(monster.getSprite(animationsMonster),
 				   	  mapStartAbs + monster.getCoord().getAbs() * Settings.TILE_SIZE,
 				   	  mapStartOrd + monster.getCoord().getOrd() * Settings.TILE_SIZE,

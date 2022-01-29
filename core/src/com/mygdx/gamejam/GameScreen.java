@@ -15,7 +15,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.controller.PlayerController;
-import com.mygdx.gamejam.model.AnimationSet;
+import com.mygdx.gamejam.model.AnimationSetMonster;
+import com.mygdx.gamejam.model.AnimationSetPlayer;
 import com.mygdx.gamejam.model.Camera;
 import com.mygdx.gamejam.model.Coordinates;
 import com.mygdx.gamejam.model.Direction;
@@ -38,18 +39,19 @@ public class GameScreen implements Screen {
 	private Texture keyTexture;
 	private Texture closedChestTexture;
 	private Texture openedChestTexture;
+
+	private AnimationSetPlayer animationsPlayer;
+	private AnimationSetMonster animationsMonster;
 	private HashMap<Integer, Texture> fireballCounterTextureMap = new HashMap<Integer, Texture>();;	
 	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
-	private HashMap<MonsterType, Texture> monsterTextureMap = new HashMap<MonsterType, Texture>();
+//	private HashMap<MonsterType, Texture> monsterTextureMap = new HashMap<MonsterType, Texture>();
 	private HashMap<Direction, Texture> fireballTextureMap = new HashMap<Direction, Texture>();
 	private PlayerController playerController;
 	private Player player;
 	private TileMap map;
 	private Camera camera;
-	private AnimationSet animationsPlayer;
-	private AnimationSet animationsMonster;
 	
 	private Array<Texture> textureAnimationsPlayerUp = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerDown = new Array<Texture>();
@@ -61,10 +63,15 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsPlayerMoonWalkLeft = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerMoonWalkRight = new Array<Texture>();
 	
-	private Array<Texture> textureAnimationsMonsterUp = new Array<Texture>();
-	private Array<Texture> textureAnimationsMonsterDown = new Array<Texture>();
-	private Array<Texture> textureAnimationsMonsterLeft = new Array<Texture>();
-	private Array<Texture> textureAnimationsMonsterRight = new Array<Texture>();
+	private Array<Texture> textureAnimationsMonster1Left = new Array<Texture>();
+	private Array<Texture> textureAnimationsMonster2Left = new Array<Texture>();
+	private Array<Texture> textureAnimationsMonster3Left = new Array<Texture>();
+	private Array<Texture> textureAnimationsMonster4Left = new Array<Texture>();
+	
+//	private Array<Texture> textureAnimationsMonster1Right = new Array<Texture>();
+//	private Array<Texture> textureAnimationsMonster2Right = new Array<Texture>();
+//	private Array<Texture> textureAnimationsMonster3Right = new Array<Texture>();
+//	private Array<Texture> textureAnimationsMonster4Right = new Array<Texture>();
 	
 	private Music gameMusic;
 	private Sound fireballSound;
@@ -107,7 +114,7 @@ public class GameScreen implements Screen {
 		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk2.png"));
 		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk1.png"));
 		
-		animationsPlayer = new AnimationSet(
+		animationsPlayer = new AnimationSetPlayer(
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerUp, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerDown, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerLeft, PlayMode.LOOP_PINGPONG),
@@ -122,9 +129,36 @@ public class GameScreen implements Screen {
 							new Texture("img/player_right.png")
 						);
 		
-//		textureAnimationsMonsterUp.add(new Texture(""));
-//		textureAnimationsMonsterUp.add(new Texture(""));
+		textureAnimationsMonster1Left.add(new Texture("img/monster1_left_red.png"));
+		textureAnimationsMonster1Left.add(new Texture("img/monster1_left.png"));
+//		textureAnimationsMonster1Right.add(new Texture("img/monster1_right_red.png"));
+//		textureAnimationsMonster1Right.add(new Texture("img/monster1_right.png"));
 		
+		textureAnimationsMonster2Left.add(new Texture("img/monster2_left_red.png"));
+		textureAnimationsMonster2Left.add(new Texture("img/monster2_left.png"));
+//		textureAnimationsMonster2Right.add(new Texture("img/monster2_right_red.png"));
+//		textureAnimationsMonster2Right.add(new Texture("img/monster2_right.png"));
+		
+		textureAnimationsMonster3Left.add(new Texture("img/monster3_left_red.png"));
+		textureAnimationsMonster3Left.add(new Texture("img/monster3_left.png"));
+//		textureAnimationsMonster3Right.add(new Texture("img/monster3_right_red.png"));
+//		textureAnimationsMonster3Right.add(new Texture("img/monster3_right.png"));
+		
+		textureAnimationsMonster4Left.add(new Texture("img/monster4_left_red.png"));
+		textureAnimationsMonster4Left.add(new Texture("img/monster4_left.png"));
+//		textureAnimationsMonster4Right.add(new Texture("img/monster4_right_red.png"));
+//		textureAnimationsMonster4Right.add(new Texture("img/monster4_right.png"));
+		
+		animationsMonster = new AnimationSetMonster(
+				new Animation<Texture>(0.3f/2f, textureAnimationsMonster1Left, PlayMode.LOOP_PINGPONG),
+				new Animation<Texture>(0.3f/2f, textureAnimationsMonster2Left, PlayMode.LOOP_PINGPONG),
+				new Animation<Texture>(0.3f/2f, textureAnimationsMonster3Left, PlayMode.LOOP_PINGPONG),
+				new Animation<Texture>(0.3f/2f, textureAnimationsMonster4Left, PlayMode.LOOP_PINGPONG),
+				new Texture("img/monster1_left.png"),
+				new Texture("img/monster2_left.png"),
+				new Texture("img/monster3_left.png"),
+				new Texture("img/monster4_left.png")
+				);
 		
 		dayGroundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
 		dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
@@ -140,10 +174,10 @@ public class GameScreen implements Screen {
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
 		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
 
-		monsterTextureMap.put(MonsterType.MONSTER1, new Texture("img/monster1_left.png"));
-		monsterTextureMap.put(MonsterType.MONSTER2, new Texture("img/monster2_left.png"));
-		monsterTextureMap.put(MonsterType.MONSTER3, new Texture("img/monster3_left.png"));
-		monsterTextureMap.put(MonsterType.MONSTER4, new Texture("img/monster4_left.png"));
+//		monsterTextureMap.put(MonsterType.MONSTER1, new Texture("img/monster1_left.png"));
+//		monsterTextureMap.put(MonsterType.MONSTER2, new Texture("img/monster2_left.png"));
+//		monsterTextureMap.put(MonsterType.MONSTER3, new Texture("img/monster3_left.png"));
+//		monsterTextureMap.put(MonsterType.MONSTER4, new Texture("img/monster4_left.png"));
 		
 		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
 		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));
@@ -209,7 +243,8 @@ public class GameScreen implements Screen {
 	    }	
 
 		for (Monster monster : map.getMonsterList()) {
-			game.batch.draw(monsterTextureMap.get(monster.getMonsterType()),
+			monster.update(delta);
+			game.batch.draw(monster.getSprite(animationsMonster),
 				   	  mapStartAbs + monster.getCoord().getAbs() * Settings.TILE_SIZE,
 				   	  mapStartOrd + monster.getCoord().getOrd() * Settings.TILE_SIZE,
 				   	  Settings.TILE_SIZE,

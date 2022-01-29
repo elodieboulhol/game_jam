@@ -6,12 +6,12 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
-public class AnimationSet {
+public class AnimationSetPlayer {
 	private Map<Direction, Animation<Texture>> walking;
 	private Map<Direction, Animation<Texture>> moonwalking;
 	private Map<Direction, Texture> standing;
 	
-	public AnimationSet(Animation<Texture> walkUp,
+	public AnimationSetPlayer(Animation<Texture> walkUp,
 					Animation<Texture> walkDown,
 					Animation<Texture> walkLeft,
 					Animation<Texture> walkRight,

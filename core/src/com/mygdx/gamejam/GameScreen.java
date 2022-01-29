@@ -35,6 +35,9 @@ public class GameScreen implements Screen {
 	
 	private Texture fullHeartTexture;
 	private Texture emptyHeartTexture;
+	private Texture keyTexture;
+	private Texture closedChestTexture;
+	private Texture openedChestTexture;
 	private HashMap<Integer, Texture> fireballCounterTextureMap = new HashMap<Integer, Texture>();;	
 	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
@@ -82,6 +85,9 @@ public class GameScreen implements Screen {
 
 		fullHeartTexture = new Texture("img/heart_full.png");
 		emptyHeartTexture = new Texture("img/heart_empty.png");
+		keyTexture = new Texture("img/key.png");
+		closedChestTexture = new Texture("img/chest.png");
+		openedChestTexture = new Texture("img/chest_coins.png");
 		
 		textureAnimationsPlayerUp.add(new Texture("img/player_up_walk1.png"));
 		textureAnimationsPlayerUp.add(new Texture("img/player_up_walk2.png"));
@@ -151,7 +157,7 @@ public class GameScreen implements Screen {
 		
 		// TODO Check this
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
-		player = new Player(new Coordinates(30, 20), map, animationsPlayer);
+		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
 		playerController = new PlayerController(player, fireballSound);
 		camera = new Camera();
 	}
@@ -216,6 +222,34 @@ public class GameScreen implements Screen {
 							mapStartOrd + fireball.getCoord().getOrd() * Settings.TILE_SIZE,
 							Settings.TILE_SIZE,
 							Settings.TILE_SIZE);
+		}
+		
+		if (map.getChest().isOpen()) {
+			game.batch.draw(openedChestTexture, 
+					mapStartAbs + map.getChest().getCoord().getAbs() * Settings.TILE_SIZE,
+					mapStartOrd + map.getChest().getCoord().getOrd() * Settings.TILE_SIZE,
+					Settings.TILE_SIZE,
+					Settings.TILE_SIZE);
+		} else {
+			game.batch.draw(closedChestTexture, 
+					mapStartAbs + map.getChest().getCoord().getAbs() * Settings.TILE_SIZE,
+					mapStartOrd + map.getChest().getCoord().getOrd() * Settings.TILE_SIZE,
+					Settings.TILE_SIZE,
+					Settings.TILE_SIZE);
+		}
+		
+		if (map.getKey() != null) {
+			game.batch.draw(keyTexture, 
+							mapStartAbs + map.getKey().getCoord().getAbs() * Settings.TILE_SIZE,
+							mapStartOrd + map.getKey().getCoord().getOrd() * Settings.TILE_SIZE,
+							Settings.TILE_SIZE,
+							Settings.TILE_SIZE);
+		} else if (player.hasKey()) {
+			game.batch.draw(keyTexture, 
+							Settings.KEY_ABS_SCREEN,
+							Settings.KEY_ORD_SCREEN,
+							Settings.KEY_ORD_SCREEN_SIZE,
+							Settings.KEY_ORD_SCREEN_SIZE);
 		}
 		
 		for (int nbLifePoint = 0; nbLifePoint < player.getLifePoint(); nbLifePoint++) {

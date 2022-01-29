@@ -6,7 +6,6 @@ import com.mygdx.gamejam.NightHunt;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		System.out.println("tetst");
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "NightHunt";
 		config.width = 800;

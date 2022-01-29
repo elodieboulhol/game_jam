@@ -12,6 +12,7 @@ public class TileMap {
 	private ArrayList<Orb> orbsList;
 	private ArrayList<Fireball> fireballList = new ArrayList<Fireball>();
 	private Key key;
+	private Chest chest;
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
@@ -27,7 +28,13 @@ public class TileMap {
 			}
 		}
 		
-		this.key = new Key(new Coordinates(Settings.KEY_ABS, Settings.KEY_ORD), this);
+		Coordinates keyCoord = new Coordinates(Settings.KEY_ABS_MAP, Settings.KEY_ORD_MAP);
+		this.key = new Key(keyCoord, this);
+		this.getTile(keyCoord).setGameObject(this.key);
+		
+		Coordinates chestCoord = new Coordinates(Settings.CHEST_ABS, Settings.CHEST_ORD);
+		this.chest = new Chest(chestCoord, this);
+		this.getTile(chestCoord).setGameObject(this.chest);
 		
 		this.orbsList = new ArrayList<Orb>();
 		for (int nbOrb = 0; nbOrb < NB_ORB; nbOrb++) {
@@ -120,6 +127,10 @@ public class TileMap {
 
 	public void setKey(Key key) {
 		this.key = key;
+	}
+
+	public Chest getChest() {
+		return chest;
 	}
 
 }

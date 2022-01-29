@@ -4,9 +4,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.mygdx.gamejam.model.Chest;
 import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Player;
 import com.mygdx.gamejam.model.PlayerState;
+import com.mygdx.gamejam.model.Tile;
 
 public class PlayerController extends InputAdapter {
 	private Player player;
@@ -30,7 +32,14 @@ public class PlayerController extends InputAdapter {
 		} else if (keycode == Keys.RIGHT) {
 			right = true;
 		} else if (keycode == Keys.SPACE) {
-			if (player.getNbFireball() > 0) {
+			if (player.hasKey()) {
+				Tile destination = player.getMap().getTile(player.getCoord().getAbs() + player.getCurrentDir().getDeltaAbs(),
+														   player.getCoord().getOrd() + player.getCurrentDir().getDeltaOrd());
+				if (destination.getGameObject() != null && destination.getGameObject() instanceof Chest) {
+					Chest chest = (Chest) destination.getGameObject();
+					chest.setOpen(true);
+				}
+			} else if (player.getNbFireball() > 0) {
 				fireballSound.play();
 				player.attack();
 			}

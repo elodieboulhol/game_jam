@@ -8,6 +8,7 @@ public class Key extends GameObject {
 	
 	@Override
 	public void interact(Player player) {
+		System.out.println("here ! ");
 		this.getMap().setKey(null);
 		player.setHasKey(true);
 	}

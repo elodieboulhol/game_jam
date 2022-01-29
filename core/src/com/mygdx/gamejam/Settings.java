@@ -9,8 +9,6 @@ public class Settings {
 	
 	public static int TILE_SIZE = 50;
 	
-	// public static int HEIGHT = 18;
-	// public static int WIDTH = 18;
 	public static int MAX_LIFEPOINTS = 3;
 	public static int MAX_NBFIREBALLS = 3;
 	
@@ -23,8 +21,17 @@ public class Settings {
 	public static int FIREBALL_ABS = Settings.SCREEN_WIDTH - Settings.LIFEABS - Settings.FIREBALL_SIZE;
 	public static int FIREBALL_ORD = SCREEN_HEIGHT - 60;
 	
-	public static int KEY_ABS = 25;
-	public static int KEY_ORD = 25;
+	public static int KEY_ORD_SCREEN_SIZE = TILE_SIZE;
+	public static int KEY_ABS_SCREEN = FIREBALL_ABS;
+	public static int KEY_ORD_SCREEN = KEY_ORD_SCREEN_SIZE / 3;
+	public static int KEY_ABS_MAP = 30;
+	public static int KEY_ORD_MAP = 26;
+	
+	public static int CHEST_ABS= 27;
+	public static int CHEST_ORD = 27;
+	
+	public static int PLAYER_ABS = 30;
+	public static int PLAYER_ORD = 20;
 	public static int NB_MONSTER = 10;
 	
 	public static float DAY_LENGTH = 2f; 

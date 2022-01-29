@@ -36,6 +36,9 @@ public class Tile {
 	}
 	
 	public boolean isWalkable() {
+		if (this.gameObject != null && this.gameObject instanceof Chest) {
+			return false;
+		}
 		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE);
 	}
 	

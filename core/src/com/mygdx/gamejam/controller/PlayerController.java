@@ -38,8 +38,10 @@ public class PlayerController extends InputAdapter {
 				if (destination.getGameObject() != null && destination.getGameObject() instanceof Chest) {
 					Chest chest = (Chest) destination.getGameObject();
 					chest.setOpen(true);
+					return false;
 				}
-			} else if (player.getNbFireball() > 0) {
+			}
+			if (player.getNbFireball() > 0) {
 				fireballSound.play();
 				player.attack();
 			}

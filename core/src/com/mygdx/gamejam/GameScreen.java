@@ -46,6 +46,11 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsPlayerDown = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerLeft = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerRight = new Array<Texture>();
+
+	private Array<Texture> textureAnimationsPlayerMoonWalkUp = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkDown = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkLeft = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkRight = new Array<Texture>();
 	
 	private Array<Texture> textureAnimationsMonsterUp = new Array<Texture>();
 	private Array<Texture> textureAnimationsMonsterDown = new Array<Texture>();
@@ -66,12 +71,25 @@ public class GameScreen implements Screen {
 		textureAnimationsPlayerLeft.add(new Texture("img/player_left_walk2.png"));
 		textureAnimationsPlayerRight.add(new Texture("img/player_right_walk1.png"));
 		textureAnimationsPlayerRight.add(new Texture("img/player_right_walk2.png"));
+
+		textureAnimationsPlayerMoonWalkUp.add(new Texture("img/player_down_walk2.png"));
+		textureAnimationsPlayerMoonWalkUp.add(new Texture("img/player_down_walk1.png"));
+		textureAnimationsPlayerMoonWalkDown.add(new Texture("img/player_up_walk2.png"));
+		textureAnimationsPlayerMoonWalkDown.add(new Texture("img/player_up_walk1.png"));
+		textureAnimationsPlayerMoonWalkLeft.add(new Texture("img/player_right_walk2.png"));
+		textureAnimationsPlayerMoonWalkLeft.add(new Texture("img/player_right_walk1.png"));
+		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk2.png"));
+		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk1.png"));
 		
 		animationsPlayer = new AnimationSet(
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerUp, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerDown, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerLeft, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerRight, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkUp, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkDown, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkLeft, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkRight, PlayMode.LOOP_PINGPONG),
 							new Texture("img/player_up.png"),
 							new Texture("img/player_down.png"),
 							new Texture("img/player_left.png"),

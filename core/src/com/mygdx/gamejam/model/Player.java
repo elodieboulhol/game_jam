@@ -27,7 +27,11 @@ public class Player extends GameObject {
 		this.currentDir = Direction.DOWN;
 		this.animations = animations; 
 	}
-	
+		
+	public void setState(PlayerState state) {
+		this.state = state;
+	}
+
 	public int getLifePoint() {
 		return lifePoint;
 	}
@@ -47,14 +51,19 @@ public class Player extends GameObject {
 		
 		if (destination != null && destination.isWalkable()) {
 			
-			animWalkingTimer = 0f;
-			state = PlayerState.WALKING;
-			this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
+			if (state == PlayerState.MOONWALKING) {
+				animWalkingTimer = 0f;
+				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
+			} else {
+				animWalkingTimer = 0f;
+				state = PlayerState.WALKING;
+				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
+			}
 		}
 	}
-	
+
 	public void update(float delta) {
-		if (state == PlayerState.WALKING) {
+		if (state == PlayerState.WALKING || state == PlayerState.MOONWALKING) {
 			animWalkingTimer += delta;
 			walkTimer += delta;
 			
@@ -78,10 +87,8 @@ public class Player extends GameObject {
 				this.currentCoord.setOrd(destination.getCoord().getOrd());
 				
 				if (this.destination.getGameObject() != null) {
-					this.destination.getGameObject().interact(this);
-				}
-
-				if (moveRequestThisFrame) {
+					this.destination.getGameObject().interact(this, this.currentDir);
+				} else if (moveRequestThisFrame) {
 					move(this.currentDir);
 				} else {
 					walkTimer = 0f;
@@ -95,6 +102,10 @@ public class Player extends GameObject {
 		return currentCoord;
 	}
 
+	public PlayerState getState() {
+		return state;
+	}
+
 	public void setCurrentCoord(CoordinatesFloat currentCoord) {
 		this.currentCoord = currentCoord;
 	}
@@ -102,6 +113,8 @@ public class Player extends GameObject {
 	public Texture getSprite() {
 		if (this.state == PlayerState.WALKING) {
 			return animations.getWalking(this.currentDir).getKeyFrame(walkTimer);
+		} else if (this.state == PlayerState.MOONWALKING) {
+			return animations.getMoonwalking(this.currentDir).getKeyFrame(walkTimer);
 		} else if (this.state == PlayerState.STANDING) {
 			return animations.getStanding(this.currentDir);
 		}
@@ -135,15 +148,4 @@ public class Player extends GameObject {
 	public void winLifePoint() {
 		this.lifePoint += 1;
 	}
-	
-//	public void playerKilledByMonster(Monster monster) {
-//		monster.setMonsterState(MonsterState.RED);
-//		this.loseLifePoint();
-//	}
-
-//	public void playerKillsMonster(Monster monster) {
-//		monster.setMonsterState(MonsterState.DEAD);
-//		this.getMap().getMonsterList().remove(monster);
-//		this.getMap().getTile(this.srcCoord).setGameObject(null);
-//	}
 }

@@ -33,6 +33,7 @@ public class Monster extends GameObject {
 		this.monsterState = monsterState;
 	}
 	
+	@Override
 	public void interact(Player player) {
 		this.setMonsterState(MonsterState.RED);
 		if (this.monsterType == MonsterType.MONSTER1_NORMAL) this.monsterType = MonsterType.MONSTER1_RED;
@@ -59,6 +60,12 @@ public class Monster extends GameObject {
 
 		player.loseLifePoint();
 		hitSound.play();
+	}
+	
+	@Override
+	public void interact(Fireball fireball) {
+		this.getMap().getMonsterList().remove(this);
+		this.getMap().getTile(this.getCoord()).setGameObject(null);
 	}
 	
 	public void update(float delta) {

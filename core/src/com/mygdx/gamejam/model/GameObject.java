@@ -27,4 +27,8 @@ public abstract class GameObject {
 	public void interact(Player player) {
 		// Nothing, defined in the sub classes
 	}
+	
+	public void interact(Fireball fireball) {
+		// Nothing, defined in the sub classes
+	}
 }

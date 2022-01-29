@@ -43,5 +43,4 @@ public class Orb extends GameObject {
 		this.getMap().getTile(this.getCoord()).setGameObject(null);
 		player.getMap().genNewOrb();
 	}
-
 }

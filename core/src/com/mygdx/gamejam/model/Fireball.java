@@ -61,14 +61,11 @@ public class Fireball extends GameObject {
 				} else {
 					this.currentCoord.setAbs(destination.getCoord().getAbs());
 					this.currentCoord.setOrd(destination.getCoord().getOrd());
-					/*
+					
 					if (this.destination.getGameObject() != null) {
 						this.destination.getGameObject().interact(this);
 					}
-					*/
-					
-					this.srcCoord = null;
-					this.destination = null;
+
 					return true;
 				}
 			}

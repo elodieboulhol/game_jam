@@ -80,9 +80,10 @@ public class Player extends GameObject {
 				if (this.destination.getGameObject() != null) {
 					this.destination.getGameObject().interact(this);
 				}
+
 				this.srcCoord = null;
 				this.destination = null;
-				
+
 				if (moveRequestThisFrame) {
 					move(this.currentDir);
 				} else {
@@ -117,4 +118,15 @@ public class Player extends GameObject {
 	public void winLifePoint() {
 		this.lifePoint += 1;
 	}
+	
+//	public void playerKilledByMonster(Monster monster) {
+//		monster.setMonsterState(MonsterState.RED);
+//		this.loseLifePoint();
+//	}
+
+//	public void playerKillsMonster(Monster monster) {
+//		monster.setMonsterState(MonsterState.DEAD);
+//		this.getMap().getMonsterList().remove(monster);
+//		this.getMap().getTile(this.srcCoord).setGameObject(null);
+//	}
 }

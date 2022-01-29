@@ -2,7 +2,6 @@ package com.mygdx.gamejam.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.gamejam.GameJam;
 import com.mygdx.gamejam.NightHunt;
 
 public class DesktopLauncher {

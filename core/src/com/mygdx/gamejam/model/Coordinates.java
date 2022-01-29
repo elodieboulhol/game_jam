@@ -50,4 +50,10 @@ public class Coordinates {
 			return false;
 		return true;
 	}
+	
+	
+	@Override
+	public Coordinates clone() {
+		return new Coordinates(this.abs, this.ord);
+	}
 }

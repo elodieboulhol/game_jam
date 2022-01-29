@@ -7,7 +7,7 @@ import com.mygdx.gamejam.model.Player;
 
 public class PlayerController extends InputAdapter {
 	private Player player;
-	private boolean up, down, left, right;
+	private boolean up, down, left, right, attack;
 	
 	public PlayerController(Player player) {
 		this.player = player;
@@ -23,6 +23,8 @@ public class PlayerController extends InputAdapter {
 			left = true;
 		} else if (keycode == Keys.RIGHT) {
 			right = true;
+		} else if (keycode == Keys.SPACE) {
+			attack = true;
 		}
 		return false;
 	}
@@ -36,12 +38,13 @@ public class PlayerController extends InputAdapter {
 			left = false;
 		} else if (keycode == Keys.RIGHT) {
 			right = false;
+		} else if (keycode == Keys.SPACE) {
+			attack = false;
 		}
 		return false;
 	}
 	
 	
-	// TODO : replace 0, 1, -1 by Direction class
 	public void update(float delta) {
 		if (up) {
 			player.move(Direction.UP);
@@ -55,6 +58,8 @@ public class PlayerController extends InputAdapter {
 		} else if (right) {
 			player.move(Direction.RIGHT);
 			return;
+		} else if (attack) {
+			player.attack();
 		}
 	}
 }

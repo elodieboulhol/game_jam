@@ -13,6 +13,8 @@ import com.mygdx.gamejam.controller.PlayerController;
 import com.mygdx.gamejam.model.AnimationSet;
 import com.mygdx.gamejam.model.Camera;
 import com.mygdx.gamejam.model.Coordinates;
+import com.mygdx.gamejam.model.Direction;
+import com.mygdx.gamejam.model.Fireball;
 import com.mygdx.gamejam.model.Ground;
 import com.mygdx.gamejam.model.Orb;
 import com.mygdx.gamejam.model.OrbType;
@@ -28,6 +30,7 @@ public class GameScreen implements Screen {
 	private AnimationSet animations;
 	private HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
+	private HashMap<Direction, Texture> fireballTextureMap = new HashMap<Direction, Texture>();
 	private PlayerController playerController;
 	private Player player;
 	private TileMap map;
@@ -73,6 +76,11 @@ public class GameScreen implements Screen {
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
 		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
 		
+		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
+		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));
+		fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
+		fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
+		
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(30, 20), map, animations);
 		// map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1.length, Settings.GROUNDMAP1[0].length);
@@ -95,6 +103,7 @@ public class GameScreen implements Screen {
 		playerController.update(delta);
 		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
 		player.update(delta);
+		for (Fireball fireball : map.getFireballList()) fireball.update(delta);
 		
 		game.batch.begin();
 		
@@ -118,6 +127,14 @@ public class GameScreen implements Screen {
 					   	  Settings.TILE_SIZE,
 					   	  Settings.TILE_SIZE); 		
 	    }
+		
+		for (Fireball fireball : map.getFireballList()) {
+			game.batch.draw(fireballTextureMap.get(fireball.getCurrentDir()),
+							mapStartAbs + fireball.getCoord().getAbs() * Settings.TILE_SIZE,
+							mapStartOrd + fireball.getCoord().getOrd() * Settings.TILE_SIZE,
+							Settings.TILE_SIZE,
+							Settings.TILE_SIZE);
+		}
 		
 		for (int nbLifePoint = 0; nbLifePoint < player.getLifePoint(); nbLifePoint++) {
 			game.batch.draw(fullHeartTexture, 
@@ -178,6 +195,9 @@ public class GameScreen implements Screen {
 		}
 		for(HashMap.Entry<Ground, Texture> ground : groundTextureMap.entrySet()) {
 		    ground.getValue().dispose();
+		}
+		for(HashMap.Entry<Direction, Texture> fireball : fireballTextureMap.entrySet()) {
+		    fireball.getValue().dispose();
 		}
 		for(Texture texture : textureAnimationsDown) texture.dispose();
 		for(Texture texture : textureAnimationsUp) texture.dispose();

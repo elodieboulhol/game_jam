@@ -6,7 +6,8 @@ import com.mygdx.gamejam.Settings;
 
 public class Player extends GameObject {
 	private int lifePoint = Settings.MAX_LIFEPOINTS;
-	
+	private int nbFireball = 0;
+
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;
 	private Coordinates srcCoord;
@@ -108,6 +109,26 @@ public class Player extends GameObject {
 			return animations.getStanding(this.currentDir);
 		}
 		return animations.getStanding(Direction.DOWN);
+	}
+	
+	/**
+	 * Throw a fireball
+	 */
+	public void attack() {
+		if (nbFireball > 0) {
+			nbFireball--;
+			Fireball fireball = new Fireball(this.getCoord().clone(), this.getMap(), this.currentDir);
+			this.getMap().getFireballList().add(fireball);
+			fireball.move();
+		}		
+	}
+	
+	public int getNbFireball() {
+		return nbFireball;
+	}
+	
+	public void incrNbFireball() {
+		nbFireball++;
 	}
 	
 	public void loseLifePoint() {

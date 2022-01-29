@@ -8,6 +8,8 @@ public class TileMap {
 	private int width;
 	private int height;
 	private ArrayList<Orb> orbsList;
+	private ArrayList<Fireball> fireballList = new ArrayList<Fireball>();
+
 	private static int NB_ORB = 8;
 
 	public TileMap(Ground[][] groundMap, int width, int height) {
@@ -71,4 +73,9 @@ public class TileMap {
 	public int getHeight() {
 		return height;
 	}
+		
+	public ArrayList<Fireball> getFireballList() {
+		return fireballList;
+	}
+
 }

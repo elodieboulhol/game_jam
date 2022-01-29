@@ -31,7 +31,7 @@ public class Orb extends GameObject {
 	}
 	
 	@Override
-	public void interact(Player player, Direction dir) {
+	public void interact(Player player) {
 		if (this.orbType == OrbType.ATTACK) {
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {

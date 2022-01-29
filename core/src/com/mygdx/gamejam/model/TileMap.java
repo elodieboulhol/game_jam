@@ -11,6 +11,7 @@ public class TileMap {
 	private int height;
 	private ArrayList<Orb> orbsList;
 	private ArrayList<Fireball> fireballList = new ArrayList<Fireball>();
+	private Key key;
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
@@ -26,6 +27,7 @@ public class TileMap {
 			}
 		}
 		
+		this.key = new Key(new Coordinates(Settings.KEY_ABS, Settings.KEY_ORD), this);
 		
 		this.orbsList = new ArrayList<Orb>();
 		for (int nbOrb = 0; nbOrb < NB_ORB; nbOrb++) {
@@ -110,6 +112,14 @@ public class TileMap {
 		
 	public ArrayList<Fireball> getFireballList() {
 		return fireballList;
+	}
+
+	public Key getKey() {
+		return key;
+	}
+
+	public void setKey(Key key) {
+		this.key = key;
 	}
 
 }

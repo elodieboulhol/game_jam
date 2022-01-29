@@ -15,7 +15,7 @@ public class Player extends GameObject {
 	private Coordinates srcCoord;
 	private Tile destination = null;
 	private Direction currentDir;
-	private AnimationSet animations;
+	private AnimationSetPlayer animations;
 
 	private float animWalkingTimer = 0;
 	private static float ANIM_WALKING_TIME = 0.25f;
@@ -23,7 +23,7 @@ public class Player extends GameObject {
 	private float walkTimer;
 	private boolean moveRequestThisFrame;
 	
-	public Player(Coordinates coord, TileMap map, AnimationSet animations) {
+	public Player(Coordinates coord, TileMap map, AnimationSetPlayer animations) {
 		super(coord, map);
 		this.currentCoord = new CoordinatesFloat(coord.getAbs(), coord.getOrd());
 		this.currentDir = Direction.DOWN;

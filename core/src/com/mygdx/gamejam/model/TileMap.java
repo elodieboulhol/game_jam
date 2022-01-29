@@ -59,8 +59,8 @@ public class TileMap {
 	
 	public void genNewMonster() {
 		// Pick random monster
-		MonsterType monsterType = MonsterType.values()[new Random().nextInt(MonsterType.values().length)];
-
+		MonsterType monsterType = MonsterType.values()[new Random().nextInt(4)];
+		
 		// Pick random tile
 		Coordinates coordMonster = Coordinates.randomCoordinates(this.width, this.height);
 		Tile tileMonster = this.getTile(coordMonster);

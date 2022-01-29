@@ -10,7 +10,7 @@ public class Fireball extends GameObject {
 	private Tile destination = null;
 
 	private float animThrowingTimer = 0;
-	private static float ANIM_THROWING_TIME = 0.25f;
+	private static float ANIM_THROWING_TIME = 0.20f;
 	
 	public Fireball(Coordinates coord, TileMap map, Direction currentDir) {
 		super(coord, map);
@@ -26,7 +26,7 @@ public class Fireball extends GameObject {
 		srcCoord = new Coordinates(this.getCoord().getAbs(),
 	   			   				   this.getCoord().getOrd());
 		
-		if (destination != null && destination.isWalkable()) {
+		if (destination != null && (destination.isWalkable() || destination.getGroundType() == Ground.WATER)) {
 			animThrowingTimer = 0f;
 			
 			this.getCoord().move(this.currentDir.getDeltaAbs(), this.currentDir.getDeltaOrd());
@@ -55,7 +55,7 @@ public class Fireball extends GameObject {
 			// End move
 			if (animThrowingTimer > ANIM_THROWING_TIME) {
 				
-				if (destination.isWalkable() && destination.isEmpty()) {
+				if ((destination.isWalkable() || destination.getGroundType() == Ground.WATER) && destination.isEmpty()) {
 					this.move();
 					return false;
 				} else {

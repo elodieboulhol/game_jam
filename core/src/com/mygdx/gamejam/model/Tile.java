@@ -39,7 +39,7 @@ public class Tile {
 		if (this.gameObject != null && this.gameObject instanceof Chest) {
 			return false;
 		}
-		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE || this.groundType == Ground.ICE);
+		return (this.groundType == Ground.GRASS || this.groundType == Ground.PLANK || this.groundType == Ground.ICE);
 	}
 	
 	public void interact(Player player) {
@@ -64,6 +64,6 @@ public class Tile {
 	}
 	
 	public boolean isEmpty() {
-		return this.gameObject == null;
+		return (this.gameObject == null || this.gameObject instanceof Orb);
 	}
 }

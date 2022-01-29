@@ -19,12 +19,12 @@ public class TileMap {
 
 	public TileMap(Ground[][] groundMap, int width, int height) {
 		super();
-		this.map = new Tile[width][height];
+		this.map = new Tile[height][width];
 		this.width = width;
 		this.height = height;
-		for (int abs = 0; abs < width; abs++) {
-			for (int ord = 0; ord < height; ord++) {
-				map[abs][ord] = new Tile(new Coordinates(abs, ord), groundMap[abs][ord]);
+		for (int ord = 0; ord < height; ord++) {
+			for (int abs = 0; abs < width; abs++) {
+				map[ord][abs] = new Tile(new Coordinates(abs, ord), groundMap[height - 1 - ord][abs]);
 			}
 		}
 		
@@ -99,14 +99,14 @@ public class TileMap {
 	}
 
 	public Tile getTile(Coordinates coord) {
-		return map[coord.getAbs()][coord.getOrd()];
+		return map[coord.getOrd()][coord.getAbs()];
 	}
 	
 	public Tile getTile(int abs, int ord) {
 		if (abs >= this.width || abs < 0 || ord >= this.height || ord < 0) {
 			return null;
 		}
-		return map[abs][ord];
+		return map[ord][abs];
 	}
 
 	public int getWidth() {

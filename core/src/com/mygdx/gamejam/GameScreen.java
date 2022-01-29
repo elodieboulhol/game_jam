@@ -2,12 +2,11 @@ package com.mygdx.gamejam;
 
 import java.util.HashMap;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.gamejam.controller.PlayerController;
@@ -20,10 +19,12 @@ import com.mygdx.gamejam.model.OrbType;
 import com.mygdx.gamejam.model.Player;
 import com.mygdx.gamejam.model.TileMap;
 
-public class GameJam extends ApplicationAdapter {
-	private SpriteBatch batch;
+public class GameScreen implements Screen {
+	private final NightHunt game;
 	
-	private Texture texturePlayer;
+	private Texture fullHeartTexture;
+	private Texture emptyHeartTexture;
+	
 	private AnimationSet animations;
 	private HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
@@ -36,22 +37,19 @@ public class GameJam extends ApplicationAdapter {
 	private Array<Texture> textureAnimationsDown = new Array<Texture>();
 	private Array<Texture> textureAnimationsLeft = new Array<Texture>();
 	private Array<Texture> textureAnimationsRight = new Array<Texture>();
+	
+	public GameScreen(final NightHunt game) {
+		this.game = game;
 
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
+		fullHeartTexture = new Texture("img/heart_full.png");
+		emptyHeartTexture = new Texture("img/heart_empty.png");
 		
-		texturePlayer = new Texture("img/player_down.png");
-
 		textureAnimationsUp.add(new Texture("img/player_up_walk1.png"));
 		textureAnimationsUp.add(new Texture("img/player_up_walk2.png"));
-		
 		textureAnimationsDown.add(new Texture("img/player_down_walk1.png"));
 		textureAnimationsDown.add(new Texture("img/player_down_walk2.png"));
-
 		textureAnimationsLeft.add(new Texture("img/player_left_walk1.png"));
 		textureAnimationsLeft.add(new Texture("img/player_left_walk2.png"));
-
 		textureAnimationsRight.add(new Texture("img/player_right_walk1.png"));
 		textureAnimationsRight.add(new Texture("img/player_right_walk2.png"));
 		
@@ -81,27 +79,31 @@ public class GameJam extends ApplicationAdapter {
 		playerController = new PlayerController(player);
 		camera = new Camera();
 		
+		// Gdx.input.setInputProcessor(playerController);
+	}
+	
+	@Override
+	public void show() {
 		Gdx.input.setInputProcessor(playerController);
+		
 	}
 
 	@Override
-	public void render () {
-		float delta = Gdx.graphics.getDeltaTime();
-		
+	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0, 0);
 		
 		playerController.update(delta);
 		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
 		player.update(delta);
 		
-		batch.begin();
+		game.batch.begin();
 		
 		float mapStartAbs = Gdx.graphics.getWidth() / 2 - camera.getCameraAbs() * Settings.TILE_SIZE ;		
 		float mapStartOrd = Gdx.graphics.getHeight() / 2 - camera.getCameraOrd() * Settings.TILE_SIZE ;
 		
 		for (int abs = 0; abs < map.getWidth(); abs++) {
 			for (int ord = 0; ord < map.getHeight(); ord++) {
-				batch.draw(groundTextureMap.get(map.getTile(abs, ord).getGroundType()),
+				game.batch.draw(groundTextureMap.get(map.getTile(abs, ord).getGroundType()),
 						   mapStartAbs + abs * Settings.TILE_SIZE,
 						   mapStartOrd + ord * Settings.TILE_SIZE,
 						   Settings.TILE_SIZE,
@@ -110,26 +112,67 @@ public class GameJam extends ApplicationAdapter {
 		}
 		
 		for (Orb orb : map.getOrbsList()) { 		      
-	           batch.draw(orbTextureMap.get(orb.getOrbType()),
+	           game.batch.draw(orbTextureMap.get(orb.getOrbType()),
 					   	  mapStartAbs + orb.getCoord().getAbs() * Settings.TILE_SIZE,
 					   	  mapStartOrd + orb.getCoord().getOrd() * Settings.TILE_SIZE,
 					   	  Settings.TILE_SIZE,
 					   	  Settings.TILE_SIZE); 		
 	    }
 		
-		batch.draw(player.getSprite(),
+		for (int nbLifePoint = 0; nbLifePoint < player.getLifePoint(); nbLifePoint++) {
+			game.batch.draw(fullHeartTexture, 
+							Settings.LIFEABS + nbLifePoint * (Settings.LIFESIZE + Settings.LIFESPACE),
+							Settings.LIFEORD,
+							Settings.LIFESIZE,
+							Settings.LIFESIZE);
+		}
+		
+		for (int nbLostLifePoint = player.getLifePoint(); nbLostLifePoint < Settings.MAX_LIFEPOINTS; nbLostLifePoint++) {
+			game.batch.draw(emptyHeartTexture, 
+							Settings.LIFEABS + nbLostLifePoint * (Settings.LIFESIZE + Settings.LIFESPACE),
+							Settings.LIFEORD,
+							Settings.LIFESIZE,
+							Settings.LIFESIZE);
+		}
+		
+		game.batch.draw(player.getSprite(),
 				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
 				   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
 				   Settings.TILE_SIZE,
 				   Settings.TILE_SIZE);
 		
-		batch.end();
+		game.batch.end();
+		
 	}
-	
+
 	@Override
-	public void dispose () {
-		batch.dispose();
-		texturePlayer.dispose();
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		fullHeartTexture.dispose();
+		emptyHeartTexture.dispose();
 		for(HashMap.Entry<OrbType, Texture> orb : orbTextureMap.entrySet()) {
 		    orb.getValue().dispose();
 		}
@@ -140,5 +183,7 @@ public class GameJam extends ApplicationAdapter {
 		for(Texture texture : textureAnimationsUp) texture.dispose();
 		for(Texture texture : textureAnimationsRight) texture.dispose();
 		for(Texture texture : textureAnimationsLeft) texture.dispose();
+		
 	}
+
 }

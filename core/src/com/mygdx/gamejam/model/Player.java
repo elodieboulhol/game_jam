@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.gamejam.Settings;
 
 public class Player extends GameObject {
-	private int lifePoint = Settings.LIFEPOINTS;
+	private int lifePoint = Settings.MAX_LIFEPOINTS;
 	
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;

@@ -5,11 +5,14 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.controller.PlayerController;
 import com.mygdx.gamejam.model.AnimationSet;
 import com.mygdx.gamejam.model.Camera;
@@ -27,12 +30,15 @@ import com.mygdx.gamejam.model.TileMap;
 public class GameScreen implements Screen {
 	private final NightHunt game;
 	
+	private boolean isDay = true;
+	
 	private Texture fullHeartTexture;
 	private Texture emptyHeartTexture;
 	
 	private AnimationSet animationsPlayer;
 	private AnimationSet animationsMonster;
-	private HashMap<Ground, Texture> groundTextureMap = new HashMap<Ground, Texture>();
+	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
+	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
 	private HashMap<MonsterType, Texture> monsterTextureMap = new HashMap<MonsterType, Texture>();
 	private HashMap<Direction, Texture> fireballTextureMap = new HashMap<Direction, Texture>();
@@ -41,7 +47,6 @@ public class GameScreen implements Screen {
 	private TileMap map;
 	private Camera camera;
 	
-
 	private Array<Texture> textureAnimationsPlayerUp = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerDown = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerLeft = new Array<Texture>();
@@ -52,8 +57,20 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsMonsterLeft = new Array<Texture>();
 	private Array<Texture> textureAnimationsMonsterRight = new Array<Texture>();
 	
+	private Music gameMusic;
+	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
+		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
+		gameMusic.setLooping(true);
+		
+		Timer.schedule(new Task(){
+		    @Override
+		    public void run() {
+		        if (isDay) isDay = false;
+		        else isDay = true;
+		    }
+		}, Settings.DAY_LENGTH, Settings.DAY_LENGTH);
 
 		fullHeartTexture = new Texture("img/heart_full.png");
 		emptyHeartTexture = new Texture("img/heart_empty.png");
@@ -82,10 +99,15 @@ public class GameScreen implements Screen {
 //		textureAnimationsMonsterUp.add(new Texture(""));
 		
 		
-		groundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
-		groundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
-		groundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
-		groundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
+		dayGroundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
+		dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
+		dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
+		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
+		
+		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
+		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
+		nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
+		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
@@ -101,19 +123,17 @@ public class GameScreen implements Screen {
 		fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
 		fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
 		
+		// TODO Check this
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(30, 20), map, animationsPlayer);
-		// map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1.length, Settings.GROUNDMAP1[0].length);
 		playerController = new PlayerController(player);
 		camera = new Camera();
-		
-		// Gdx.input.setInputProcessor(playerController);
 	}
 	
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(playerController);
-		
+		gameMusic.play();
 	}
 
 	@Override
@@ -137,11 +157,14 @@ public class GameScreen implements Screen {
 		
 		for (int abs = 0; abs < map.getWidth(); abs++) {
 			for (int ord = 0; ord < map.getHeight(); ord++) {
-				game.batch.draw(groundTextureMap.get(map.getTile(abs, ord).getGroundType()),
-						   mapStartAbs + abs * Settings.TILE_SIZE,
-						   mapStartOrd + ord * Settings.TILE_SIZE,
-						   Settings.TILE_SIZE,
-						   Settings.TILE_SIZE);
+				Texture groundTexture;
+				if (isDay) groundTexture = dayGroundTextureMap.get(map.getTile(abs, ord).getGroundType());
+				else groundTexture = nightGroundTextureMap.get(map.getTile(abs, ord).getGroundType());
+				game.batch.draw(groundTexture,
+							    mapStartAbs + abs * Settings.TILE_SIZE,
+							    mapStartOrd + ord * Settings.TILE_SIZE,
+							    Settings.TILE_SIZE,
+							    Settings.TILE_SIZE);
 			}
 		}
 		
@@ -226,7 +249,10 @@ public class GameScreen implements Screen {
 		for(HashMap.Entry<OrbType, Texture> orb : orbTextureMap.entrySet()) {
 		    orb.getValue().dispose();
 		}
-		for(HashMap.Entry<Ground, Texture> ground : groundTextureMap.entrySet()) {
+		for(HashMap.Entry<Ground, Texture> ground : dayGroundTextureMap.entrySet()) {
+		    ground.getValue().dispose();
+		}
+		for(HashMap.Entry<Ground, Texture> ground : nightGroundTextureMap.entrySet()) {
 		    ground.getValue().dispose();
 		}
 		for(HashMap.Entry<Direction, Texture> fireball : fireballTextureMap.entrySet()) {

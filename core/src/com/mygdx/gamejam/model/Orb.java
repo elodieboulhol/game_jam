@@ -37,7 +37,7 @@ public class Orb extends GameObject {
 		} else if (this.orbType == OrbType.ICE) {
 			// TODO
 		} else if (this.orbType == OrbType.LIFE) {
-			// TODO
+			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
 		}
 		this.getMap().getOrbsList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);

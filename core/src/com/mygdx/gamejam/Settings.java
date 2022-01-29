@@ -34,6 +34,9 @@ public class Settings {
 	public static int PLAYER_ORD = 20;
 	public static int NB_MONSTER = 10;
 	
+
+	public static int ICE_TIMING = 5;
+	
 	public static float DAY_LENGTH = 2f; 
 	
 	public static Ground[][] GROUNDMAP1= {

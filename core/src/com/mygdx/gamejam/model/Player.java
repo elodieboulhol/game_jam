@@ -38,6 +38,10 @@ public class Player extends GameObject {
 		return lifePoint;
 	}
 
+	public void setLifePoint(int lifePoint) {
+		this.lifePoint = lifePoint;
+	}
+
 	public void move(Direction dir) {
 		this.currentDir = dir;
 		
@@ -51,8 +55,7 @@ public class Player extends GameObject {
 		destination = this.getMap().getTile(this.getCoord().getAbs() + dir.getDeltaAbs(), this.getCoord().getOrd() + dir.getDeltaOrd());
 		srcCoord = new Coordinates(this.getCoord().getAbs(), this.getCoord().getOrd());
 		
-		if (destination != null && destination.isWalkable()) {
-			
+		if (destination != null && (destination.isWalkable() || destination.getGroundType() == Ground.WATER)) {
 			if (state == PlayerState.MOONWALKING) {
 				animWalkingTimer = 0f;
 				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
@@ -90,6 +93,8 @@ public class Player extends GameObject {
 				
 				if (this.destination.getGameObject() != null) {
 					this.destination.getGameObject().interact(this);
+				} else if (this.destination.getGroundType() == Ground.WATER) {
+					this.destination.interact(this);
 				} else if (moveRequestThisFrame) {
 					move(this.currentDir);
 				} else {

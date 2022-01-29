@@ -2,6 +2,8 @@ package com.mygdx.gamejam.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.Settings;
 
 public class Orb extends GameObject {
@@ -37,11 +39,35 @@ public class Orb extends GameObject {
 	
 	@Override
 	public void interact(Player player) {
+		
 		if (this.orbType == OrbType.ATTACK) {
 			orbSound.play();
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
 			freezingSound.play();
+			for (int width = 0; width < getMap().getWidth(); width++) {
+				for (int height = 0; height < getMap().getHeight(); height++) {
+					if (getMap().getTile(new Coordinates(width, height)).getGroundType() == Ground.WATER) {
+						getMap().getTile(new Coordinates(width, height)).setGroundType(Ground.ICE);
+					}
+				}
+			}
+			Timer.schedule(new MyTask(player){
+			    @Override
+			    public void run() {
+					for (int width = 0; width < getMap().getWidth(); width++) {
+						for (int height = 0; height < getMap().getHeight(); height++) {
+							if (getMap().getTile(new Coordinates(width, height)).getGroundType() == Ground.ICE) {
+								getMap().getTile(new Coordinates(width, height)).setGroundType(Ground.WATER);
+							}
+						}
+					}
+					// If ice breaks and player is on water : he lose all of his lives
+					if (getMap().getTile(this.param.getCoord()).getGroundType() == Ground.WATER) {
+						this.param.setLifePoint(0);
+					}
+			    }
+			}, Settings.ICE_TIMING);
 		} else if (this.orbType == OrbType.LIFE) {
 			orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();

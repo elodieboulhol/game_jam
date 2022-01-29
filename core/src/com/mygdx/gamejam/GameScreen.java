@@ -27,6 +27,7 @@ import com.mygdx.gamejam.model.MonsterType;
 import com.mygdx.gamejam.model.Orb;
 import com.mygdx.gamejam.model.OrbType;
 import com.mygdx.gamejam.model.Player;
+import com.mygdx.gamejam.model.PlayerState;
 import com.mygdx.gamejam.model.TileMap;
 
 public class GameScreen implements Screen {
@@ -164,11 +165,13 @@ public class GameScreen implements Screen {
 		dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
 		dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
 		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
+		dayGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg.png"));
 		
 		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
 		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
 		nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
 		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
+		nightGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg_night.png"));
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
@@ -233,7 +236,7 @@ public class GameScreen implements Screen {
 							    Settings.TILE_SIZE);
 			}
 		}
-		
+
 		for (Orb orb : map.getOrbsList()) { 		      
 	           game.batch.draw(orbTextureMap.get(orb.getOrbType()),
 					   	  mapStartAbs + orb.getCoord().getAbs() * Settings.TILE_SIZE,

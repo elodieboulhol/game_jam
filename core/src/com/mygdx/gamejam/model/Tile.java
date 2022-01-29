@@ -39,7 +39,28 @@ public class Tile {
 		if (this.gameObject != null && this.gameObject instanceof Chest) {
 			return false;
 		}
-		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE);
+		return (this.groundType == Ground.GRASS || this.groundType == Ground.BRIDGE || this.groundType == Ground.ICE);
+	}
+	
+	public void interact(Player player) {
+		player.setState(PlayerState.MOONWALKING);
+		
+		switch (player.getCurrentDir()) {
+		case LEFT:
+			player.move(Direction.RIGHT);
+			break;
+		case RIGHT:
+			player.move(Direction.LEFT);
+			break;
+		case UP:
+			player.move(Direction.DOWN);
+			break;
+		case DOWN:
+			player.move(Direction.UP);
+			break;
+		}
+
+		player.loseLifePoint();
 	}
 	
 	public boolean isEmpty() {

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -63,11 +64,13 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsMonsterRight = new Array<Texture>();
 	
 	private Music gameMusic;
+	private Sound fireballSound;
 	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
 		gameMusic.setLooping(true);
+		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 		
 		Timer.schedule(new Task(){
 		    @Override
@@ -144,7 +147,7 @@ public class GameScreen implements Screen {
 		// TODO Check this
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
 		player = new Player(new Coordinates(30, 20), map, animationsPlayer);
-		playerController = new PlayerController(player);
+		playerController = new PlayerController(player, fireballSound);
 		camera = new Camera();
 	}
 	
@@ -280,6 +283,9 @@ public class GameScreen implements Screen {
 		for(Texture texture : textureAnimationsPlayerUp) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerRight) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerLeft) texture.dispose();
+		
+		gameMusic.dispose();
+		fireballSound.dispose();
 	}
 
 }

@@ -1,8 +1,13 @@
 package com.mygdx.gamejam.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 public class Monster extends GameObject {
 	private MonsterType monsterType;
 	private MonsterState monsterState;
+	
+	private static Sound hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/punch.mp3"));;
 
 	public Monster(Coordinates coord, TileMap map, MonsterType monsterType, MonsterState monsterState) {
 		super(coord, map);
@@ -42,5 +47,6 @@ public class Monster extends GameObject {
 		}
 
 		player.loseLifePoint();
+		hitSound.play();
 	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Player;
+import com.mygdx.gamejam.model.PlayerState;
 
 public class PlayerController extends InputAdapter {
 	private Player player;
@@ -51,6 +52,7 @@ public class PlayerController extends InputAdapter {
 	
 	
 	public void update(float delta) {
+		if (player.getState() == PlayerState.MOONWALKING) return;
 		if (up) {
 			player.move(Direction.UP);
 			return;

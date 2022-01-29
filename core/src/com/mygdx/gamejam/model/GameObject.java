@@ -24,7 +24,7 @@ public abstract class GameObject {
 		this.map = map;
 	}
 	
-	public void interact(Player player) {
+	public void interact(Player player, Direction dir) {
 		// Nothing, defined in the sub classes
 	}
 }

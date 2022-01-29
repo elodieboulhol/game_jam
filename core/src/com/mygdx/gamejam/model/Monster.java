@@ -22,9 +22,25 @@ public class Monster extends GameObject {
 		this.monsterState = monsterState;
 	}
 	
-	public void interact(Player player) {
-		this.setMonsterState(MonsterState.RED);
-		player.move(Direction.LEFT);
+	public void interact(Player player, Direction dir) {
+//		this.setMonsterState(MonsterState.RED);
+		player.setState(PlayerState.MOONWALKING);
+		
+		switch (dir) {
+		case LEFT:
+			player.move(Direction.RIGHT);
+			break;
+		case RIGHT:
+			player.move(Direction.LEFT);
+			break;
+		case UP:
+			player.move(Direction.DOWN);
+			break;
+		case DOWN:
+			player.move(Direction.UP);
+			break;
+		}
+
 		player.loseLifePoint();
 	}
 }

@@ -1,9 +1,14 @@
 package com.mygdx.gamejam.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.mygdx.gamejam.Settings;
 
 public class Orb extends GameObject {
 	private OrbType orbType;
+	
+	private static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
+	private static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	
 	public Orb(Coordinates coord, TileMap map, OrbType orbType) {
 		super(coord, map);
@@ -33,10 +38,12 @@ public class Orb extends GameObject {
 	@Override
 	public void interact(Player player) {
 		if (this.orbType == OrbType.ATTACK) {
+			orbSound.play();
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
-			// TODO
+			freezingSound.play();
 		} else if (this.orbType == OrbType.LIFE) {
+			orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
 		}
 		this.getMap().getOrbsList().remove(this);

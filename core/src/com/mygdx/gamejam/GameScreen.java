@@ -164,11 +164,13 @@ public class GameScreen implements Screen {
 		dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
 		dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
 		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
+		dayGroundTextureMap.put(Ground.PLANK, new Texture("img/grass_night.png"));
 		
 		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
 		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
 		nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
 		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
+		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/grass.png"));
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
@@ -190,7 +192,7 @@ public class GameScreen implements Screen {
 		fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
 		
 		// TODO Check this
-		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1[0].length);
+		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1.length);
 		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
 		playerController = new PlayerController(player, fireballSound);
 		camera = new Camera();

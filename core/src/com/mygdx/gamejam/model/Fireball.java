@@ -82,11 +82,6 @@ public class Fireball extends GameObject {
 		}
 		return false;
 	}
-	
-//	public void interact(Player player) {
-//		player.loseLifePoint();
-//		this.getMap().getTile(this.getCoord()).setGameObject(null);
-//	}
 
 	public Direction getCurrentDir() {
 		return currentDir;

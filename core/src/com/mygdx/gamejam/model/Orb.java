@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.Settings;
 
 public class Orb extends GameObject {
 	private OrbType orbType;
-	
-	private static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
-	private static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	
 	public Orb(Coordinates coord, TileMap map, OrbType orbType) {
 		super(coord, map);
@@ -41,10 +39,10 @@ public class Orb extends GameObject {
 	public void interact(Player player) {
 		
 		if (this.orbType == OrbType.ATTACK) {
-			orbSound.play();
+			GameScreen.orbSound.play();
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
-			freezingSound.play();
+			GameScreen.freezingSound.play();
 			for (int width = 0; width < getMap().getWidth(); width++) {
 				for (int height = 0; height < getMap().getHeight(); height++) {
 					if (getMap().getTile(new Coordinates(width, height)).getGroundType() == Ground.WATER) {
@@ -65,11 +63,12 @@ public class Orb extends GameObject {
 					// If ice breaks and player is on water : he lose all of his lives
 					if (getMap().getTile(this.param.getCoord()).getGroundType() == Ground.WATER) {
 						this.param.setLifePoint(0);
+						GameScreen.ploofSound.play();
 					}
 			    }
 			}, Settings.ICE_TIMING);
 		} else if (this.orbType == OrbType.LIFE) {
-			orbSound.play();
+			GameScreen.orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
 		}
 		this.getMap().getOrbsList().remove(this);

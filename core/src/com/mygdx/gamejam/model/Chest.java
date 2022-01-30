@@ -16,6 +16,5 @@ public class Chest extends GameObject {
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
-		GameScreen.chestSound.play();
 	}
 }

@@ -68,11 +68,12 @@ public class GameScreen implements Screen {
 	
 	private Music gameMusic;
 	private Sound fireballSound;
+	private Sound chestOpenSound;
+	private Sound chestClosedSound;
 	
 	public static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
 	public static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	public static Sound ploofSound = Gdx.audio.newSound(Gdx.files.internal("sound/ploof.mp3"));
-	public static Sound chestSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
 	public static Sound boomSound = Gdx.audio.newSound(Gdx.files.internal("sound/boom.mp3"));
 	
 	private Task switchDayTask;
@@ -82,6 +83,8 @@ public class GameScreen implements Screen {
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
 		gameMusic.setLooping(true);
 		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
+		chestOpenSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
+		chestClosedSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_locked.mp3"));
 		
 		switchDayTask = new Task(){
 		    @Override
@@ -195,7 +198,7 @@ public class GameScreen implements Screen {
 		
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1.length);
 		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
-		playerController = new PlayerController(player, fireballSound);
+		playerController = new PlayerController(player, fireballSound, chestOpenSound, chestClosedSound);
 		camera = new Camera();
 	}
 	
@@ -409,6 +412,8 @@ public class GameScreen implements Screen {
 		gameMusic.stop();
 		gameMusic.dispose();
 		fireballSound.dispose();
+		chestOpenSound.dispose();
+		chestClosedSound.dispose();
 	}
 
 }

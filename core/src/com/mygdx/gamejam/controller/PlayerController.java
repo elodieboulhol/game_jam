@@ -3,6 +3,7 @@ package com.mygdx.gamejam.controller;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.InputAdapter;
+import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.model.Chest;
 import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Player;
@@ -14,10 +15,14 @@ public class PlayerController extends InputAdapter {
 	private boolean up, down, left, right;
 	
 	private Sound fireballSound;
+	private Sound chestOpenSound;
+	private Sound chestClosedSound;
 	
-	public PlayerController(Player player, Sound fireballSound) {
+	public PlayerController(Player player, Sound fireballSound, Sound chestOpenSound, Sound chestClosedSound) {
 		this.player = player;
 		this.fireballSound = fireballSound;
+		this.chestClosedSound = chestClosedSound;
+		this.chestOpenSound = chestOpenSound;
 	}
 	
 	@Override
@@ -37,7 +42,10 @@ public class PlayerController extends InputAdapter {
 				Chest chest = (Chest) destination.getGameObject();
 				if (player.hasFirstKey() && player.hasSecondKey()) {
 					chest.setOpen(true);
+					chestOpenSound.play();
 					return false;
+				} else {
+					chestClosedSound.play();
 				}
 			} else if (player.getNbFireball() > 0) {
 				fireballSound.play();

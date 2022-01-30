@@ -58,6 +58,10 @@ public class Player extends GameObject {
 		if (destination != null && (destination.isWalkable() || destination.getGroundType() == Ground.WATER)) {
 			if (state == PlayerState.MOONWALKING) {
 				animWalkingTimer = 0f;
+
+				this.getMap().getTile(this.getCoord()).setPlayer(null);
+				destination.setPlayer(this);
+
 				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
 			} else {
 				animWalkingTimer = 0f;

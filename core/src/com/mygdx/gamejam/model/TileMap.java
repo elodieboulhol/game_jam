@@ -44,6 +44,7 @@ public class TileMap {
 		this.getTile(chestCoord).setGameObject(this.chest);
 		
 		this.monsterList = new ArrayList<Monster>();
+		this.genStaticMonsters();
 		for (int nbMonster = 0; nbMonster < Settings.NB_MONSTER; nbMonster++) {
 			this.genNewMonster();
 		}
@@ -76,6 +77,34 @@ public class TileMap {
 
 	}
 	
+	public void genStaticMonsters() {		
+		Coordinates coord1 = new Coordinates(Settings.MONSTER1_ABS_MAP, Settings.MONSTER1_ORD_MAP);
+		this.genMonster(coord1);
+		Coordinates coord2 = new Coordinates(Settings.MONSTER2_ABS_MAP, Settings.MONSTER2_ORD_MAP);
+		this.genMonster(coord2);
+		Coordinates coord3 = new Coordinates(Settings.MONSTER3_ABS_MAP, Settings.MONSTER3_ORD_MAP);
+		this.genMonster(coord3);
+		Coordinates coord4 = new Coordinates(Settings.MONSTER4_ABS_MAP, Settings.MONSTER4_ORD_MAP);
+		this.genMonster(coord4);
+		Coordinates coord5 = new Coordinates(Settings.MONSTER5_ABS_MAP, Settings.MONSTER5_ORD_MAP);
+		this.genMonster(coord5);
+		Coordinates coord6 = new Coordinates(Settings.MONSTER6_ABS_MAP, Settings.MONSTER6_ORD_MAP);
+		this.genMonster(coord6);
+	}
+
+	public void genMonster(Coordinates coordMonster) {
+		// Pick random monster
+		MonsterType monsterType = MonsterType.values()[new Random().nextInt(Settings.NB_NORMAL_MONSTER)];
+
+		// Get tile
+		Tile tileMonster = this.getTile(coordMonster);
+		Monster monster = new Monster(coordMonster, this, monsterType, MonsterState.LIVING);
+
+		// Put monster on tile
+		this.monsterList.add(monster);
+		tileMonster.setGameObject(monster);
+	}
+
 	public void genNewMonster() {
 		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD);
 		

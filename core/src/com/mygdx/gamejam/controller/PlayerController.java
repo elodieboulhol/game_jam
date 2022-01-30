@@ -2,7 +2,6 @@ package com.mygdx.gamejam.controller;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.gamejam.model.Chest;
 import com.mygdx.gamejam.model.Direction;

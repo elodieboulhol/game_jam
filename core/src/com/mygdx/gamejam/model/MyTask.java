@@ -1,6 +1,5 @@
 package com.mygdx.gamejam.model;
 
-import java.util.TimerTask;
 
 import com.badlogic.gdx.utils.Timer.Task;
 

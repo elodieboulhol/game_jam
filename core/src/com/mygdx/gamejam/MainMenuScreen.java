@@ -3,6 +3,7 @@ package com.mygdx.gamejam;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,8 @@ public class MainMenuScreen implements Screen {
 	OrthographicCamera camera;
 	
 	Texture homeScreenTexture, rulesTexture, playTexture, exitTexture, arrowTexture;
+	
+	private Sound beepSound;
 	
 	private boolean isArrowOnPlay = true;
 	
@@ -29,6 +32,8 @@ public class MainMenuScreen implements Screen {
 		playTexture = new Texture("img/menu_play.png");
 		exitTexture = new Texture("img/menu_exit.png");
 		arrowTexture = new Texture("img/menu_arrow.png");
+		
+		beepSound = Gdx.audio.newSound(Gdx.files.internal("sound/beep.mp3"));
 	}
 	
 	@Override
@@ -89,6 +94,7 @@ public class MainMenuScreen implements Screen {
 		if (Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
 			if (isArrowOnPlay) isArrowOnPlay = false;
 			else isArrowOnPlay = true;
+			beepSound.play();
 		}
 		if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isKeyPressed(Keys.ENTER)) {
 			if (isArrowOnPlay) {
@@ -129,7 +135,12 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		
+		playTexture.dispose();
+		exitTexture.dispose();
+		arrowTexture.dispose();
+		
+		beepSound.dispose();
 		
 	}
 

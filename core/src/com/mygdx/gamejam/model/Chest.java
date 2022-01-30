@@ -1,7 +1,5 @@
 package com.mygdx.gamejam.model;
 
-import com.mygdx.gamejam.GameScreen;
-
 public class Chest extends GameObject {
 	
 	private boolean isOpen = false;
@@ -16,6 +14,5 @@ public class Chest extends GameObject {
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
-		GameScreen.chestSound.play();
 	}
 }

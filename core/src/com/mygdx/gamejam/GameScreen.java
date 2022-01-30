@@ -374,8 +374,6 @@ public class GameScreen implements Screen {
 			
 			if (delayWin < Settings.DELAY_WINGAME) {
 				delayWin += delta;
-				System.out.println(delayWin);
-				System.out.println(delta);
 			} else {				
 				switchDayTask.cancel();
 				for (Monster monster : map.getMonsterList()) {

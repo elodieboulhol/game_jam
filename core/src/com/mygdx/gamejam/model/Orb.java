@@ -1,9 +1,6 @@
 package com.mygdx.gamejam.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.Settings;
 

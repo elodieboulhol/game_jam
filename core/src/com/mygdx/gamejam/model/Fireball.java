@@ -1,7 +1,5 @@
 package com.mygdx.gamejam.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.gamejam.GameScreen;
 
@@ -84,11 +82,6 @@ public class Fireball extends GameObject {
 		}
 		return false;
 	}
-	
-//	public void interact(Player player) {
-//		player.loseLifePoint();
-//		this.getMap().getTile(this.getCoord()).setGameObject(null);
-//	}
 
 	public Direction getCurrentDir() {
 		return currentDir;

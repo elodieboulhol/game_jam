@@ -193,7 +193,7 @@ public class GameScreen implements Screen {
 		fireballCounterTextureMap.put(new Integer(2), new Texture("img/fireball_counter_2.png"));
 		fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
 		
-		// TODO Check this
+		
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1.length);
 		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
 		playerController = new PlayerController(player, fireballSound);
@@ -248,9 +248,6 @@ public class GameScreen implements Screen {
 
 		for (Monster monster : map.getMonsterList()) {
 			monster.update(delta);
-//			if (!isDay) {
-//				monster.sendFireballs();
-//			}
 			game.batch.draw(monster.getSprite(animationsMonster),
 				   	  mapStartAbs + monster.getCoord().getAbs() * Settings.TILE_SIZE,
 				   	  mapStartOrd + monster.getCoord().getOrd() * Settings.TILE_SIZE,

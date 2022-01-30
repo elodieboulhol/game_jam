@@ -380,7 +380,7 @@ public class GameScreen implements Screen {
 					monster.stopSendFireballs();
 				}
 				
-				game.setScreen(new GameOverScreen(game));
+				game.setScreen(new WinScreen(game));
 				dispose();
 			}
 		}

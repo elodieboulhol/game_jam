@@ -77,6 +77,10 @@ public class GameScreen implements Screen {
 	private Music gameMusic;
 	private Sound fireballSound;
 	
+	public static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
+	public static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
+	public static Sound ploofSound = Gdx.audio.newSound(Gdx.files.internal("sound/ploof.mp3"));
+	
 	private Task switchDayTask;
 	
 	public GameScreen(final NightHunt game) {
@@ -410,6 +414,7 @@ public class GameScreen implements Screen {
 		for(Texture texture : textureAnimationsPlayerRight) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerLeft) texture.dispose();
 		
+		gameMusic.stop();
 		gameMusic.dispose();
 		fireballSound.dispose();
 	}

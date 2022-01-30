@@ -2,6 +2,7 @@ package com.mygdx.gamejam.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
+import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.Settings;
 
 public class Player extends GameObject {
@@ -59,6 +60,7 @@ public class Player extends GameObject {
 			if (state == PlayerState.MOONWALKING) {
 				animWalkingTimer = 0f;
 				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
+				GameScreen.ploofSound.play(); 
 			} else {
 				animWalkingTimer = 0f;
 				state = PlayerState.WALKING;

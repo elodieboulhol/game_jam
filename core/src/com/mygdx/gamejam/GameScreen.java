@@ -372,8 +372,10 @@ public class GameScreen implements Screen {
 				hasJustWon = false;
 			}
 			
-			if (delayWin < Settings.DELAY_WIN) {
+			if (delayWin < Settings.DELAY_WINGAME) {
 				delayWin += delta;
+				System.out.println(delayWin);
+				System.out.println(delta);
 			} else {				
 				switchDayTask.cancel();
 				for (Monster monster : map.getMonsterList()) {
@@ -383,8 +385,6 @@ public class GameScreen implements Screen {
 				game.setScreen(new GameOverScreen(game));
 				dispose();
 			}
-			game.setScreen(new WinScreen(game));
-			dispose();
 		}
 	}
 	

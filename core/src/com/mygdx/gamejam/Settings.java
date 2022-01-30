@@ -61,6 +61,7 @@ public class Settings {
 	public static int ICE_TIMING = 5;
 	
 	public static float DELAY_GAMEOVER = 1f;
+	public static float DELAY_WINGAME = 1f;
 	
 	public static float DAY_LENGTH = 6f; 
 	

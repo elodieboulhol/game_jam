@@ -3,6 +3,7 @@ package com.mygdx.gamejam;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -13,7 +14,7 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 	
-	Texture playTexture, exitTexture, arrowTexture;
+	Texture homeScreenTexture, playTexture, exitTexture, arrowTexture;
 	
 	private boolean isArrowOnPlay = true;
 	
@@ -23,6 +24,7 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
 		
+		homeScreenTexture = new Texture("img/home_screen.png");
 		playTexture = new Texture("img/menu_play.png");
 		exitTexture = new Texture("img/menu_exit.png");
 		arrowTexture = new Texture("img/menu_arrow.png");
@@ -38,30 +40,39 @@ public class MainMenuScreen implements Screen {
 
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
-
-		game.batch.begin();
 		
+		Gdx.gl.glClearColor(41/255f, 183/255f, 195/255f, 1);
+	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+	    game.batch.begin();
+
+		game.batch.draw(homeScreenTexture,
+				Settings.SCREEN_WIDTH / 4,
+				Settings.SCREEN_HEIGHT / 2 - 30,
+				Settings.SCREEN_WIDTH / 2,
+				Settings.SCREEN_HEIGHT / 2);
+
 		game.batch.draw(playTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 2,
+						Settings.SCREEN_HEIGHT / 8 - 30,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		game.batch.draw(exitTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 4,
+						Settings.SCREEN_HEIGHT / 8 - 100,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		
 		if (isArrowOnPlay) {
 			game.batch.draw(arrowTexture,
 							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 2,
+							Settings.SCREEN_HEIGHT / 8 - 30,
 							Settings.SCREEN_WIDTH / 4,
 							Settings.SCREEN_HEIGHT / 2);
 		} else {
 			game.batch.draw(arrowTexture,
 							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 4,
+							Settings.SCREEN_HEIGHT / 8 - 100,
 							Settings.SCREEN_WIDTH / 4,
 							Settings.SCREEN_HEIGHT / 2);
 		}

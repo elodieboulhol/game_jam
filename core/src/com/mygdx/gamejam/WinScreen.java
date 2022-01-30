@@ -6,8 +6,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -27,17 +29,14 @@ public class WinScreen implements Screen {
 								   new OrthographicCamera());
 		stage = new Stage(viewport, game.batch);
 		
-		Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+		Texture winTexture = new Texture("img/win_screen.png");
+		Image winImage = new Image(winTexture);
+		
 		Table table = new Table();
 		table.center();
 		table.setFillParent(true);
-		
-		Label gameOverLabel = new Label("You won !", font);
-		Label playAgainLabel = new Label("Press 'a' to play again !", font);
-		
-		table.add(gameOverLabel).expandX();
+		table.add(winImage).expandX();
 		table.row();
-		table.add(playAgainLabel).expandX().padTop(10f);
 		
 		stage.addActor(table);
 	}

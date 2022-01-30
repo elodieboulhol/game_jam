@@ -76,6 +76,7 @@ public class GameScreen implements Screen {
 	public static Sound boomSound = Gdx.audio.newSound(Gdx.files.internal("sound/boom.mp3"));
 	
 	private Task switchDayTask;
+	private Task delayGameOver;
 	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
@@ -342,8 +343,19 @@ public class GameScreen implements Screen {
 			for (Monster monster : map.getMonsterList()) {
 				monster.stopSendFireballs();
 			}
-			game.setScreen(new GameOverScreen(game));
-			dispose();
+			
+			delayGameOver = new Task(){
+			    @Override
+			    public void run() {
+					game.setScreen(new GameOverScreen(game));
+					dispose();
+			    }
+			};
+			if (this.map.getTile(player.getCoord()).getGroundType() == Ground.WATER) Timer.schedule(delayGameOver, Settings.DELAY_GAMEOVER);
+			else {
+				game.setScreen(new GameOverScreen(game));
+				dispose();
+			}
 		}
 		
 		if (playerWon()) {

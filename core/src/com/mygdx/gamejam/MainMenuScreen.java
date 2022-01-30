@@ -14,7 +14,7 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 	
-	Texture homeScreenTexture, playTexture, exitTexture, arrowTexture;
+	Texture homeScreenTexture, rulesTexture, playTexture, exitTexture, arrowTexture;
 	
 	private boolean isArrowOnPlay = true;
 	
@@ -25,6 +25,7 @@ public class MainMenuScreen implements Screen {
 		camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
 		
 		homeScreenTexture = new Texture("img/home_screen.png");
+		rulesTexture = new Texture("img/rules.png");
 		playTexture = new Texture("img/menu_play.png");
 		exitTexture = new Texture("img/menu_exit.png");
 		arrowTexture = new Texture("img/menu_arrow.png");
@@ -51,6 +52,12 @@ public class MainMenuScreen implements Screen {
 				Settings.SCREEN_HEIGHT / 4 + 20,
 				Settings.SCREEN_WIDTH / 2 + 150,
 				Settings.SCREEN_HEIGHT / 2 + 100);
+
+		game.batch.draw(rulesTexture,
+				Settings.SCREEN_WIDTH / 2 + 400,
+				Settings.SCREEN_HEIGHT / 8 - 90,
+				Settings.SCREEN_WIDTH / 6,
+				Settings.SCREEN_HEIGHT / 4);
 
 		game.batch.draw(playTexture,
 						Settings.SCREEN_WIDTH / 3,

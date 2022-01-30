@@ -47,34 +47,34 @@ public class MainMenuScreen implements Screen {
 	    game.batch.begin();
 
 		game.batch.draw(homeScreenTexture,
-				Settings.SCREEN_WIDTH / 4,
-				Settings.SCREEN_HEIGHT / 2 - 30,
-				Settings.SCREEN_WIDTH / 2,
-				Settings.SCREEN_HEIGHT / 2);
+				Settings.SCREEN_WIDTH / 6 + 20,
+				Settings.SCREEN_HEIGHT / 4 + 20,
+				Settings.SCREEN_WIDTH / 2 + 150,
+				Settings.SCREEN_HEIGHT / 2 + 100);
 
 		game.batch.draw(playTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 8 - 30,
+						Settings.SCREEN_HEIGHT / 8 - 50,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		game.batch.draw(exitTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 8 - 100,
+						Settings.SCREEN_HEIGHT / 8 - 150,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		
 		if (isArrowOnPlay) {
 			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 8 - 30,
-							Settings.SCREEN_WIDTH / 4,
-							Settings.SCREEN_HEIGHT / 2);
+							Settings.SCREEN_WIDTH / 6 + 40,
+							Settings.SCREEN_HEIGHT / 8 - 20,
+							Settings.SCREEN_WIDTH / 4 - 50,
+							Settings.SCREEN_HEIGHT / 2 - 50);
 		} else {
 			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 8 - 100,
-							Settings.SCREEN_WIDTH / 4,
-							Settings.SCREEN_HEIGHT / 2);
+							Settings.SCREEN_WIDTH / 6 + 40,
+							Settings.SCREEN_HEIGHT / 8 - 120,
+							Settings.SCREEN_WIDTH / 4 - 50,
+							Settings.SCREEN_HEIGHT / 2 - 50);
 		}
 		
 		game.batch.end();

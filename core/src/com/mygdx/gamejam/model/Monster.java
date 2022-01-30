@@ -20,7 +20,6 @@ public class Monster extends GameObject {
 
 	private static float ANIM_TIME = 1.5f;
 	private float animTimer = 0;
-	private float monsterTimer;
 	
 	
 	public Monster(Coordinates coord, TileMap map, MonsterType monsterType, MonsterState monsterState) {
@@ -55,6 +54,7 @@ public class Monster extends GameObject {
 	@Override
 	public void interact(Player player) {
 		this.setMonsterState(MonsterState.RED);
+		this.animTimer = 0f;
 		if (this.monsterType == MonsterType.MONSTER1_NORMAL) this.monsterType = MonsterType.MONSTER1_RED;
 		if (this.monsterType == MonsterType.MONSTER2_NORMAL) this.monsterType = MonsterType.MONSTER2_RED;
 		if (this.monsterType == MonsterType.MONSTER3_NORMAL) this.monsterType = MonsterType.MONSTER3_RED;
@@ -100,10 +100,9 @@ public class Monster extends GameObject {
 	public void update(float delta) {
 		if (this.monsterState == MonsterState.RED) {
 			animTimer += delta;
-			monsterTimer += delta;
 			
 			if (animTimer > ANIM_TIME) {
-				monsterTimer = 0f;
+				animTimer = 0f;
 				this.setMonsterState(MonsterState.LIVING);
 				if (this.monsterType == MonsterType.MONSTER1_RED) this.monsterType = MonsterType.MONSTER1_NORMAL;
 				if (this.monsterType == MonsterType.MONSTER2_RED) this.monsterType = MonsterType.MONSTER2_NORMAL;
@@ -115,7 +114,7 @@ public class Monster extends GameObject {
 
 	public Texture getSprite(AnimationSetMonster animations) {
 		if (this.monsterState == MonsterState.RED) {
-			return animations.getRedTexture(this.monsterType).getKeyFrame(this.monsterTimer);
+			return animations.getRedTexture(this.monsterType).getKeyFrame(this.animTimer);
 		} else {
 			return animations.getNormalTexture(this.monsterType);
 		}

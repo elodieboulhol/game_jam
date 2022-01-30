@@ -9,7 +9,8 @@ public class Player extends GameObject {
 	private int lifePoint = Settings.MAX_LIFEPOINTS;
 	private int nbFireball = 0;
 	
-	private boolean hasKey = false;
+	private boolean hasFirstKey = false;
+	private boolean hasSecondKey = false;
 
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;
@@ -64,7 +65,6 @@ public class Player extends GameObject {
 				destination.setPlayer(this);
 
 				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
-				GameScreen.ploofSound.play(); 
 			} else {
 				animWalkingTimer = 0f;
 				state = PlayerState.WALKING;
@@ -105,6 +105,7 @@ public class Player extends GameObject {
 					this.destination.getGameObject().interact(this);
 				} else if (this.destination.getGroundType() == Ground.WATER) {
 					this.destination.interact(this);
+					GameScreen.ploofSound.play(); 
 				} else if (moveRequestThisFrame) {
 					move(this.currentDir);
 				} else {
@@ -166,13 +167,22 @@ public class Player extends GameObject {
 		this.lifePoint += 1;
 	}
 
-	public boolean hasKey() {
-		return hasKey;
+	public boolean hasFirstKey() {
+		return hasFirstKey;
 	}
 
-	public void setHasKey(boolean hasKey) {
-		this.hasKey = hasKey;
+	public void setHasFirstKey(boolean hasKey) {
+		this.hasFirstKey = hasKey;
 	}
+	
+	public boolean hasSecondKey() {
+		return hasSecondKey;
+	}
+
+	public void setHasSecondKey(boolean hasSecondKey) {
+		this.hasSecondKey = hasSecondKey;
+	}
+
 
 	public Direction getCurrentDir() {
 		return currentDir;

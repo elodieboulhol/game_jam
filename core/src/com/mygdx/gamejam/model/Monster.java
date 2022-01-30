@@ -30,7 +30,7 @@ public class Monster extends GameObject {
 		this.task = new Task(){
 		    @Override
 		    public void run() {
-				fireballSound.play();
+				fireballSound.play(1f / (float) getMap().getMonsterList().size());
 				Direction dir = Direction.values()[new Random().nextInt(Direction.values().length)];
 				Fireball fireball = new Fireball(getCoord().clone(), getMap(), dir, true);
 				getMap().getFireballList().add(fireball);

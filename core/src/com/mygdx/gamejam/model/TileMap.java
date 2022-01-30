@@ -11,7 +11,8 @@ public class TileMap {
 	private int height;
 	private ArrayList<Orb> orbsList;
 	private ArrayList<Fireball> fireballList = new ArrayList<Fireball>();
-	private Key key;
+	private Key key1;
+	private Key key2;
 	private Chest chest;
 
 	private static int NB_ORB = 8;
@@ -28,9 +29,13 @@ public class TileMap {
 			}
 		}
 		
-		Coordinates keyCoord = new Coordinates(Settings.KEY_ABS_MAP, Settings.KEY_ORD_MAP);
-		this.key = new Key(keyCoord, this);
-		this.getTile(keyCoord).setGameObject(this.key);
+		Coordinates key1Coord = new Coordinates(Settings.KEY1_ABS_MAP, Settings.KEY1_ORD_MAP);
+		this.key1 = new Key(key1Coord, this);
+		this.getTile(key1Coord).setGameObject(this.key1);
+		
+		Coordinates key2Coord = new Coordinates(Settings.KEY2_ABS_MAP, Settings.KEY2_ORD_MAP);
+		this.key2 = new Key(key2Coord, this);
+		this.getTile(key2Coord).setGameObject(this.key2);
 		
 		Coordinates chestCoord = new Coordinates(Settings.CHEST_ABS, Settings.CHEST_ORD);
 		this.chest = new Chest(chestCoord, this);
@@ -121,12 +126,20 @@ public class TileMap {
 		return fireballList;
 	}
 
-	public Key getKey() {
-		return key;
+	public Key getKey1() {
+		return key1;
 	}
 
-	public void setKey(Key key) {
-		this.key = key;
+	public void setKey1(Key key) {
+		this.key1 = key;
+	}
+
+	public Key getKey2() {
+		return key2;
+	}
+
+	public void setKey2(Key key2) {
+		this.key2 = key2;
 	}
 
 	public Chest getChest() {

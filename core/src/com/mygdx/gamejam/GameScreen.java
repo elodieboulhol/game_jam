@@ -80,6 +80,7 @@ public class GameScreen implements Screen {
 	public static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
 	public static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	public static Sound ploofSound = Gdx.audio.newSound(Gdx.files.internal("sound/ploof.mp3"));
+	public static Sound chestSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
 	
 	private Task switchDayTask;
 	
@@ -298,18 +299,32 @@ public class GameScreen implements Screen {
 					Settings.TILE_SIZE);
 		}
 		
-		if (map.getKey() != null) {
+		if (map.getKey1() != null) {
 			game.batch.draw(keyTexture, 
-							mapStartAbs + map.getKey().getCoord().getAbs() * Settings.TILE_SIZE,
-							mapStartOrd + map.getKey().getCoord().getOrd() * Settings.TILE_SIZE,
+							mapStartAbs + map.getKey1().getCoord().getAbs() * Settings.TILE_SIZE,
+							mapStartOrd + map.getKey1().getCoord().getOrd() * Settings.TILE_SIZE,
 							Settings.TILE_SIZE,
 							Settings.TILE_SIZE);
-		} else if (player.hasKey()) {
+		} else if (player.hasFirstKey()) {
 			game.batch.draw(keyTexture, 
-							Settings.KEY_ABS_SCREEN,
-							Settings.KEY_ORD_SCREEN,
-							Settings.KEY_ORD_SCREEN_SIZE,
-							Settings.KEY_ORD_SCREEN_SIZE);
+							Settings.KEY1_ABS_SCREEN,
+							Settings.KEY1_ORD_SCREEN,
+							Settings.KEY1_ORD_SCREEN_SIZE,
+							Settings.KEY1_ORD_SCREEN_SIZE);
+		}
+		
+		if (map.getKey2() != null) {
+			game.batch.draw(keyTexture, 
+							mapStartAbs + map.getKey2().getCoord().getAbs() * Settings.TILE_SIZE,
+							mapStartOrd + map.getKey2().getCoord().getOrd() * Settings.TILE_SIZE,
+							Settings.TILE_SIZE,
+							Settings.TILE_SIZE);
+		} else if (player.hasSecondKey()) {
+			game.batch.draw(keyTexture, 
+							Settings.KEY2_ABS_SCREEN,
+							Settings.KEY2_ORD_SCREEN,
+							Settings.KEY2_ORD_SCREEN_SIZE,
+							Settings.KEY2_ORD_SCREEN_SIZE);
 		}
 		
 		for (int nbLifePoint = 0; nbLifePoint < player.getLifePoint(); nbLifePoint++) {

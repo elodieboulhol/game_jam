@@ -32,16 +32,15 @@ public class PlayerController extends InputAdapter {
 		} else if (keycode == Keys.RIGHT) {
 			right = true;
 		} else if (keycode == Keys.SPACE) {
-			if (player.hasKey()) {
-				Tile destination = player.getMap().getTile(player.getCoord().getAbs() + player.getCurrentDir().getDeltaAbs(),
-														   player.getCoord().getOrd() + player.getCurrentDir().getDeltaOrd());
-				if (destination.getGameObject() != null && destination.getGameObject() instanceof Chest) {
-					Chest chest = (Chest) destination.getGameObject();
+			Tile destination = player.getMap().getTile(player.getCoord().getAbs() + player.getCurrentDir().getDeltaAbs(),
+					   								   player.getCoord().getOrd() + player.getCurrentDir().getDeltaOrd());
+			if (destination.getGameObject() != null && destination.getGameObject() instanceof Chest) {
+				Chest chest = (Chest) destination.getGameObject();
+				if (player.hasFirstKey() && player.hasSecondKey()) {
 					chest.setOpen(true);
 					return false;
 				}
-			}
-			if (player.getNbFireball() > 0) {
+			} else if (player.getNbFireball() > 0) {
 				fireballSound.play();
 				player.attack();
 			}

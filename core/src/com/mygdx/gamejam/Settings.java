@@ -4,36 +4,43 @@ import com.mygdx.gamejam.model.Ground;
 
 public class Settings {
 	
-	public static int SCREEN_WIDTH = 800;
-	public static int SCREEN_HEIGHT = 480;
+	public static int SCREEN_WIDTH = 1200;
+	public static int SCREEN_HEIGHT = 720;
 	
-	public static int TILE_SIZE = 50;
+	public static int TILE_SIZE = 70;
 	
 	public static int MAX_LIFEPOINTS = 3;
 	public static int MAX_NBFIREBALLS = 3;
 	
 	public static int LIFEABS = 10;
-	public static int LIFEORD = SCREEN_HEIGHT - 40;
-	public static int LIFESIZE = 32;
+	public static int LIFESIZE = 2 * TILE_SIZE / 3;
+	public static int LIFEORD = SCREEN_HEIGHT - (3 * LIFESIZE / 2);
 	public static int LIFESPACE = 3;
 	
-	public static int FIREBALL_SIZE = 70;
+	public static int FIREBALL_SIZE = 3 * TILE_SIZE / 2;
 	public static int FIREBALL_ABS = Settings.SCREEN_WIDTH - Settings.LIFEABS - Settings.FIREBALL_SIZE;
-	public static int FIREBALL_ORD = SCREEN_HEIGHT - 60;
+	public static int FIREBALL_ORD = SCREEN_HEIGHT - FIREBALL_SIZE;
 	
-	public static int KEY_ORD_SCREEN_SIZE = TILE_SIZE;
-	public static int KEY_ABS_SCREEN = FIREBALL_ABS;
-	public static int KEY_ORD_SCREEN = KEY_ORD_SCREEN_SIZE / 3;
-	// public static int KEY_ABS_MAP = 24;
-	// public static int KEY_ORD_MAP = 8;
-	public static int KEY_ABS_MAP = 18;
-	public static int KEY_ORD_MAP = 22;
+	public static int KEY1_ORD_SCREEN_SIZE = TILE_SIZE;
+	public static int KEY1_ABS_SCREEN = FIREBALL_ABS;
+	public static int KEY1_ORD_SCREEN = 0;
+	
+	public static int KEY2_ORD_SCREEN_SIZE = TILE_SIZE;
+	public static int KEY2_ABS_SCREEN = FIREBALL_ABS;
+	public static int KEY2_ORD_SCREEN = TILE_SIZE / 2;
+	
+	// public static int KEY1_ABS_MAP = 24;
+	// public static int KEY1_ORD_MAP = 9;
+	public static int KEY1_ABS_MAP = 18;
+	public static int KEY1_ORD_MAP = 23;
+	public static int KEY2_ABS_MAP = 11;
+	public static int KEY2_ORD_MAP = 24;
 	
 	public static int CHEST_ABS= 18;
-	public static int CHEST_ORD = 23;
+	public static int CHEST_ORD = 24;
 	
 	public static int PLAYER_ABS = 11;
-	public static int PLAYER_ORD = 6;
+	public static int PLAYER_ORD = 7;
 	
 	public static int NB_MONSTER = 10;
 	public static int NB_NORMAL_MONSTER = 4;
@@ -76,6 +83,7 @@ public class Settings {
 		
 		
 		
+		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },

@@ -3,6 +3,7 @@ package com.mygdx.gamejam.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.Settings;
 
 import java.util.Random;
@@ -87,6 +88,7 @@ public class Monster extends GameObject {
 		this.getMap().getMonsterList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);
 		this.stopSendFireballs();
+		GameScreen.boomSound.play();
 	}
 	
 	public void sendFireballs() {

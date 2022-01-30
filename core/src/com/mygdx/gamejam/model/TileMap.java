@@ -53,6 +53,8 @@ public class TileMap {
 	}
 	
 	public void genNewOrb() {
+		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD);
+		
 		// Pick random tile
 		Coordinates coordOrb = Coordinates.randomCoordinates(this.width, this.height);
 		Tile tileOrb = this.getTile(coordOrb);

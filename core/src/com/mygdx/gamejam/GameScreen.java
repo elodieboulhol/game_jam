@@ -23,11 +23,9 @@ import com.mygdx.gamejam.model.Direction;
 import com.mygdx.gamejam.model.Fireball;
 import com.mygdx.gamejam.model.Ground;
 import com.mygdx.gamejam.model.Monster;
-import com.mygdx.gamejam.model.MonsterType;
 import com.mygdx.gamejam.model.Orb;
 import com.mygdx.gamejam.model.OrbType;
 import com.mygdx.gamejam.model.Player;
-import com.mygdx.gamejam.model.PlayerState;
 import com.mygdx.gamejam.model.TileMap;
 
 public class GameScreen implements Screen {
@@ -47,7 +45,6 @@ public class GameScreen implements Screen {
 	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
-//	private HashMap<MonsterType, Texture> monsterTextureMap = new HashMap<MonsterType, Texture>();
 	private HashMap<Direction, Texture> fireballTextureMap = new HashMap<Direction, Texture>();
 	private PlayerController playerController;
 	private Player player;
@@ -69,11 +66,6 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsMonster3Left = new Array<Texture>();
 	private Array<Texture> textureAnimationsMonster4Left = new Array<Texture>();
 	
-//	private Array<Texture> textureAnimationsMonster1Right = new Array<Texture>();
-//	private Array<Texture> textureAnimationsMonster2Right = new Array<Texture>();
-//	private Array<Texture> textureAnimationsMonster3Right = new Array<Texture>();
-//	private Array<Texture> textureAnimationsMonster4Right = new Array<Texture>();
-	
 	private Music gameMusic;
 	private Sound fireballSound;
 	
@@ -81,6 +73,7 @@ public class GameScreen implements Screen {
 	public static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	public static Sound ploofSound = Gdx.audio.newSound(Gdx.files.internal("sound/ploof.mp3"));
 	public static Sound chestSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
+	public static Sound boomSound = Gdx.audio.newSound(Gdx.files.internal("sound/boom.mp3"));
 	
 	private Task switchDayTask;
 	
@@ -150,23 +143,15 @@ public class GameScreen implements Screen {
 		
 		textureAnimationsMonster1Left.add(new Texture("img/monster1_left_red.png"));
 		textureAnimationsMonster1Left.add(new Texture("img/monster1_left.png"));
-//		textureAnimationsMonster1Right.add(new Texture("img/monster1_right_red.png"));
-//		textureAnimationsMonster1Right.add(new Texture("img/monster1_right.png"));
 		
 		textureAnimationsMonster2Left.add(new Texture("img/monster2_left_red.png"));
 		textureAnimationsMonster2Left.add(new Texture("img/monster2_left.png"));
-//		textureAnimationsMonster2Right.add(new Texture("img/monster2_right_red.png"));
-//		textureAnimationsMonster2Right.add(new Texture("img/monster2_right.png"));
 		
 		textureAnimationsMonster3Left.add(new Texture("img/monster3_left_red.png"));
 		textureAnimationsMonster3Left.add(new Texture("img/monster3_left.png"));
-//		textureAnimationsMonster3Right.add(new Texture("img/monster3_right_red.png"));
-//		textureAnimationsMonster3Right.add(new Texture("img/monster3_right.png"));
 		
 		textureAnimationsMonster4Left.add(new Texture("img/monster4_left_red.png"));
 		textureAnimationsMonster4Left.add(new Texture("img/monster4_left.png"));
-//		textureAnimationsMonster4Right.add(new Texture("img/monster4_right_red.png"));
-//		textureAnimationsMonster4Right.add(new Texture("img/monster4_right.png"));
 		
 		animationsMonster = new AnimationSetMonster(
 				new Animation<Texture>(0.3f/2f, textureAnimationsMonster1Left, PlayMode.LOOP_PINGPONG),
@@ -196,11 +181,6 @@ public class GameScreen implements Screen {
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
 		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
-
-//		monsterTextureMap.put(MonsterType.MONSTER1, new Texture("img/monster1_left.png"));
-//		monsterTextureMap.put(MonsterType.MONSTER2, new Texture("img/monster2_left.png"));
-//		monsterTextureMap.put(MonsterType.MONSTER3, new Texture("img/monster3_left.png"));
-//		monsterTextureMap.put(MonsterType.MONSTER4, new Texture("img/monster4_left.png"));
 		
 		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
 		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));

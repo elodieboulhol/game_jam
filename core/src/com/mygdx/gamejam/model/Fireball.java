@@ -1,6 +1,9 @@
 package com.mygdx.gamejam.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Interpolation;
+import com.mygdx.gamejam.GameScreen;
 
 public class Fireball extends GameObject {
 
@@ -60,6 +63,7 @@ public class Fireball extends GameObject {
 				if ((destination.isWalkable() || destination.getGroundType() == Ground.WATER) && destination.isEmpty()) {
 					if (this.destination.getPlayer() != null) {
 						this.destination.getPlayer().loseLifePoint();
+						GameScreen.boomSound.play();
 						return true;
 					}
 					else {						

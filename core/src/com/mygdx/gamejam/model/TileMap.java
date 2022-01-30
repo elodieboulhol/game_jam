@@ -41,14 +41,14 @@ public class TileMap {
 		this.chest = new Chest(chestCoord, this);
 		this.getTile(chestCoord).setGameObject(this.chest);
 		
-		this.orbsList = new ArrayList<Orb>();
-		for (int nbOrb = 0; nbOrb < NB_ORB; nbOrb++) {
-			this.genNewOrb();
-		}
-		
 		this.monsterList = new ArrayList<Monster>();
 		for (int nbMonster = 0; nbMonster < Settings.NB_MONSTER; nbMonster++) {
 			this.genNewMonster();
+		}
+		
+		this.orbsList = new ArrayList<Orb>();
+		for (int nbOrb = 0; nbOrb < NB_ORB; nbOrb++) {
+			this.genNewOrb();
 		}
 	}
 	
@@ -58,7 +58,10 @@ public class TileMap {
 		// Pick random tile
 		Coordinates coordOrb = Coordinates.randomCoordinates(this.width, this.height);
 		Tile tileOrb = this.getTile(coordOrb);
-		while (!tileOrb.isWalkable() || !tileOrb.isEmpty() || tileOrb.getGroundType() == Ground.ICE) {
+		
+		while (!tileOrb.isWalkable() || !tileOrb.isEmpty() || tileOrb.getGroundType() == Ground.ICE || 
+				coordOrb.equals(playerStartingCoord) || getTile(coordOrb).getGameObject() != null || getTile(coordOrb).getPlayer() != null) {
+			
 			coordOrb = Coordinates.randomCoordinates(this.width, this.height);
 			tileOrb = this.getTile(coordOrb);
 		}
@@ -72,13 +75,16 @@ public class TileMap {
 	}
 	
 	public void genNewMonster() {
+		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD);
+		
 		// Pick random monster
 		MonsterType monsterType = MonsterType.values()[new Random().nextInt(Settings.NB_NORMAL_MONSTER)];
 		
 		// Pick random tile
 		Coordinates coordMonster = Coordinates.randomCoordinates(this.width, this.height);
 		Tile tileMonster = this.getTile(coordMonster);
-		while (!tileMonster.isWalkable() || !tileMonster.isEmpty()) {
+		
+		while (!tileMonster.isWalkable() || !tileMonster.isEmpty() || coordMonster.equals(playerStartingCoord)) {
 			coordMonster = Coordinates.randomCoordinates(this.width, this.height);
 			tileMonster = this.getTile(coordMonster);
 		}

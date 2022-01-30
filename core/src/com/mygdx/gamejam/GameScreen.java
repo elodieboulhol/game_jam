@@ -78,7 +78,10 @@ public class GameScreen implements Screen {
 	public static Sound keyCollectSound = Gdx.audio.newSound(Gdx.files.internal("sound/key_collect.mp3"));
 	
 	private Task switchDayTask;
-	private Task delayGameOver;
+	private float delayGameOver = -1f;
+	private boolean isDeadInWater = false;
+	private boolean hasJustWon = true;
+	private float delayWin = -1f;
 	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
@@ -340,20 +343,19 @@ public class GameScreen implements Screen {
 		game.batch.end();
 		
 		if (gameOver()) {
-			switchDayTask.cancel();
-			for (Monster monster : map.getMonsterList()) {
-				monster.stopSendFireballs();
+			if (this.map.getTile(player.getCoord()).getGroundType() == Ground.WATER && !isDeadInWater) {
+				delayGameOver = 0f;
+				isDeadInWater = true;
 			}
 			
-			delayGameOver = new Task(){
-			    @Override
-			    public void run() {
-					game.setScreen(new GameOverScreen(game));
-					dispose();
-			    }
-			};
-			if (this.map.getTile(player.getCoord()).getGroundType() == Ground.WATER) Timer.schedule(delayGameOver, Settings.DELAY_GAMEOVER);
-			else {
+			if (isDeadInWater && delayGameOver < Settings.DELAY_GAMEOVER) {
+				delayGameOver += delta;
+			} else {				
+				switchDayTask.cancel();
+				for (Monster monster : map.getMonsterList()) {
+					monster.stopSendFireballs();
+				}
+				
 				game.setScreen(new GameOverScreen(game));
 				dispose();
 			}
@@ -363,6 +365,23 @@ public class GameScreen implements Screen {
 			switchDayTask.cancel();
 			for (Monster monster : map.getMonsterList()) {
 				monster.stopSendFireballs();
+			}
+			
+			if (hasJustWon) {
+				delayWin = 0f;
+				hasJustWon = false;
+			}
+			
+			if (delayWin < Settings.DELAY_WIN) {
+				delayWin += delta;
+			} else {				
+				switchDayTask.cancel();
+				for (Monster monster : map.getMonsterList()) {
+					monster.stopSendFireballs();
+				}
+				
+				game.setScreen(new GameOverScreen(game));
+				dispose();
 			}
 			game.setScreen(new WinScreen(game));
 			dispose();

@@ -1,7 +1,5 @@
 package com.mygdx.gamejam.model;
 
-import com.mygdx.gamejam.GameScreen;
-
 public class Chest extends GameObject {
 	
 	private boolean isOpen = false;

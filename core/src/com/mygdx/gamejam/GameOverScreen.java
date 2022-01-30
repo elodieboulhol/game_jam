@@ -2,13 +2,13 @@ package com.mygdx.gamejam;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -20,6 +20,10 @@ public class GameOverScreen implements Screen {
 	private Stage stage;
 	private Viewport viewport;
 	
+	private Music gameOverMusic;
+	
+	private Texture gameOverTexture;
+	
 	public GameOverScreen(NightHunt game) {
 		this.game = game;
 		viewport = new FitViewport(Settings.SCREEN_WIDTH, 
@@ -27,24 +31,24 @@ public class GameOverScreen implements Screen {
 								   new OrthographicCamera());
 		stage = new Stage(viewport, game.batch);
 		
-		Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+		gameOverTexture = new Texture("img/gameover_screen.png");
+		Image gameOverImage = new Image(gameOverTexture);
+		
 		Table table = new Table();
 		table.center();
 		table.setFillParent(true);
-		
-		Label gameOverLabel = new Label("GAME OVER", font);
-		Label playAgainLabel = new Label("Press 'a' to play again !", font);
-		
-		table.add(gameOverLabel).expandX();
+		table.add(gameOverImage).expandX();
 		table.row();
-		table.add(playAgainLabel).expandX().padTop(10f);
 		
 		stage.addActor(table);
+		
+		gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/gameover.mp3"));
+		gameOverMusic.setLooping(true);
 	}
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		gameOverMusic.play();
 
 	}
 
@@ -54,8 +58,9 @@ public class GameOverScreen implements Screen {
 			game.setScreen(new MainMenuScreen(game));
 			dispose();
 		}
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		Gdx.gl.glClearColor(41/255f, 183/255f, 195/255f, 1);
+	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.draw();
 
 	}
@@ -87,5 +92,8 @@ public class GameOverScreen implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
+		gameOverMusic.stop();
+		gameOverMusic.dispose();
+		gameOverTexture.dispose();
 	}
 }

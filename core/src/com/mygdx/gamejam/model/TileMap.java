@@ -3,6 +3,7 @@ package com.mygdx.gamejam.model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.Settings;
 
 public class TileMap {
@@ -14,6 +15,7 @@ public class TileMap {
 	private Key key1;
 	private Key key2;
 	private Chest chest;
+	private Task myTask = null;
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
@@ -130,6 +132,14 @@ public class TileMap {
 		return height;
 	}
 		
+	public Task getMyTask() {
+		return myTask;
+	}
+
+	public void setMyTask(Task myTask) {
+		this.myTask = myTask;
+	}
+
 	public ArrayList<Fireball> getFireballList() {
 		return fireballList;
 	}

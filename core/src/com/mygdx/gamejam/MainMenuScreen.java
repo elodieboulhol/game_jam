@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,7 +15,7 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 	
-	Texture playTexture, exitTexture, arrowTexture;
+	Texture homeScreenTexture, rulesTexture, playTexture, exitTexture, arrowTexture;
 	
 	private Sound beepSound;
 	
@@ -26,6 +27,8 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
 		
+		homeScreenTexture = new Texture("img/home_screen.png");
+		rulesTexture = new Texture("img/rules.png");
 		playTexture = new Texture("img/menu_play.png");
 		exitTexture = new Texture("img/menu_exit.png");
 		arrowTexture = new Texture("img/menu_arrow.png");
@@ -43,32 +46,47 @@ public class MainMenuScreen implements Screen {
 
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
-
-		game.batch.begin();
 		
+		Gdx.gl.glClearColor(41/255f, 183/255f, 195/255f, 1);
+	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+	    game.batch.begin();
+
+		game.batch.draw(homeScreenTexture,
+				Settings.SCREEN_WIDTH / 6 + 20,
+				Settings.SCREEN_HEIGHT / 4 + 20,
+				Settings.SCREEN_WIDTH / 2 + 150,
+				Settings.SCREEN_HEIGHT / 2 + 100);
+
+		game.batch.draw(rulesTexture,
+				Settings.SCREEN_WIDTH / 2 + 400,
+				Settings.SCREEN_HEIGHT / 8 - 90,
+				Settings.SCREEN_WIDTH / 6,
+				Settings.SCREEN_HEIGHT / 4);
+
 		game.batch.draw(playTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 2,
+						Settings.SCREEN_HEIGHT / 8 - 50,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		game.batch.draw(exitTexture,
 						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 4,
+						Settings.SCREEN_HEIGHT / 8 - 150,
 						Settings.SCREEN_WIDTH / 3,
 						Settings.SCREEN_HEIGHT / 2);
 		
 		if (isArrowOnPlay) {
 			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 2,
-							Settings.SCREEN_WIDTH / 4,
-							Settings.SCREEN_HEIGHT / 2);
+							Settings.SCREEN_WIDTH / 6 + 40,
+							Settings.SCREEN_HEIGHT / 8 - 20,
+							Settings.SCREEN_WIDTH / 4 - 50,
+							Settings.SCREEN_HEIGHT / 2 - 50);
 		} else {
 			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6,
-							Settings.SCREEN_HEIGHT / 4,
-							Settings.SCREEN_WIDTH / 4,
-							Settings.SCREEN_HEIGHT / 2);
+							Settings.SCREEN_WIDTH / 6 + 40,
+							Settings.SCREEN_HEIGHT / 8 - 120,
+							Settings.SCREEN_WIDTH / 4 - 50,
+							Settings.SCREEN_HEIGHT / 2 - 50);
 		}
 		
 		game.batch.end();

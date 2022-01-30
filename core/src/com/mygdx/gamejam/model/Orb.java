@@ -1,12 +1,13 @@
 package com.mygdx.gamejam.model;
 
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.Settings;
 
 public class Orb extends GameObject {
 	private OrbType orbType;
-	
+
 	public Orb(Coordinates coord, TileMap map, OrbType orbType) {
 		super(coord, map);
 		this.orbType = orbType;
@@ -40,6 +41,7 @@ public class Orb extends GameObject {
 			if (player.getNbFireball() < Settings.MAX_NBFIREBALLS) player.incrNbFireball();
 		} else if (this.orbType == OrbType.ICE) {
 			GameScreen.freezingSound.play();
+
 			for (int width = 0; width < getMap().getWidth(); width++) {
 				for (int height = 0; height < getMap().getHeight(); height++) {
 					if (getMap().getTile(new Coordinates(width, height)).getGroundType() == Ground.WATER) {
@@ -47,7 +49,9 @@ public class Orb extends GameObject {
 					}
 				}
 			}
-			Timer.schedule(new MyTask(player){
+			
+			if (this.getMap().getMyTask() != null) this.getMap().getMyTask().cancel();
+			Task task = new MyTask(player){
 			    @Override
 			    public void run() {
 					for (int width = 0; width < getMap().getWidth(); width++) {
@@ -63,7 +67,9 @@ public class Orb extends GameObject {
 						GameScreen.ploofSound.play();
 					}
 			    }
-			}, Settings.ICE_TIMING);
+			};
+			this.getMap().setMyTask(task);
+			Timer.schedule(this.getMap().getMyTask(), Settings.ICE_TIMING);
 		} else if (this.orbType == OrbType.LIFE) {
 			GameScreen.orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();

@@ -51,7 +51,7 @@ public class TileMap {
 		// Pick random tile
 		Coordinates coordOrb = Coordinates.randomCoordinates(this.width, this.height);
 		Tile tileOrb = this.getTile(coordOrb);
-		while (!tileOrb.isWalkable() || !tileOrb.isEmpty()) {
+		while (!tileOrb.isWalkable() || !tileOrb.isEmpty() || tileOrb.getGroundType() == Ground.ICE) {
 			coordOrb = Coordinates.randomCoordinates(this.width, this.height);
 			tileOrb = this.getTile(coordOrb);
 		}

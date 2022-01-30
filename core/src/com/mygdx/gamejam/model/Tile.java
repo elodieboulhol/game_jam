@@ -4,6 +4,7 @@ public class Tile {
 	private Coordinates coord;
 	private Ground groundType;
 	private GameObject gameObject = null;
+	private Player player = null;
 
 	public GameObject getGameObject() {
 		return gameObject;
@@ -11,6 +12,14 @@ public class Tile {
 
 	public void setGameObject(GameObject gameObject) {
 		this.gameObject = gameObject;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public Tile(Coordinates coord, Ground groundType) {

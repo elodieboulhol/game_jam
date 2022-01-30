@@ -33,9 +33,9 @@ public class Monster extends GameObject {
 		    public void run() {
 				fireballSound.play();
 				Direction dir = Direction.values()[new Random().nextInt(Direction.values().length)];
-				Fireball fireball = new Fireball(getCoord().clone(), getMap(), dir);
+				Fireball fireball = new Fireball(getCoord().clone(), getMap(), dir, true);
 				getMap().getFireballList().add(fireball);
-				fireball.move();	    
+				fireball.move();
 			}
 		};
 	}
@@ -83,8 +83,10 @@ public class Monster extends GameObject {
 	
 	@Override
 	public void interact(Fireball fireball) {
+		if (fireball.isFromMonster()) return;
 		this.getMap().getMonsterList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);
+		this.stopSendFireballs();
 	}
 	
 	public void sendFireballs() {

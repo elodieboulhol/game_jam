@@ -8,14 +8,16 @@ public class Fireball extends GameObject {
 	private CoordinatesFloat currentCoord;
 	private Coordinates srcCoord;
 	private Tile destination = null;
+	private boolean FromMonster;
 
 	private float animThrowingTimer = 0;
 	private static float ANIM_THROWING_TIME = 0.20f;
 	
-	public Fireball(Coordinates coord, TileMap map, Direction currentDir) {
+	public Fireball(Coordinates coord, TileMap map, Direction currentDir, boolean FromMonster) {
 		super(coord, map);
 		this.currentDir = currentDir;
 		this.currentCoord = new CoordinatesFloat(coord.getAbs(), coord.getOrd());
+		this.FromMonster = FromMonster;
 	}
 
 	/**
@@ -56,8 +58,14 @@ public class Fireball extends GameObject {
 			if (animThrowingTimer > ANIM_THROWING_TIME) {
 				
 				if ((destination.isWalkable() || destination.getGroundType() == Ground.WATER) && destination.isEmpty()) {
-					this.move();
-					return false;
+					if (this.destination.getPlayer() != null) {
+						this.destination.getPlayer().loseLifePoint();
+						return true;
+					}
+					else {						
+						this.move();
+						return false;
+					}
 				} else {
 					this.currentCoord.setAbs(destination.getCoord().getAbs());
 					this.currentCoord.setOrd(destination.getCoord().getOrd());
@@ -72,8 +80,19 @@ public class Fireball extends GameObject {
 		}
 		return false;
 	}
+	
+//	public void interact(Player player) {
+//		player.loseLifePoint();
+//		this.getMap().getTile(this.getCoord()).setGameObject(null);
+//	}
 
 	public Direction getCurrentDir() {
 		return currentDir;
 	}
+
+	public boolean isFromMonster() {
+		return FromMonster;
+	}
+	
+	
 }

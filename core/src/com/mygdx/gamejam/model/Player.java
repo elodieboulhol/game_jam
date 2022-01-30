@@ -62,6 +62,10 @@ public class Player extends GameObject {
 			} else {
 				animWalkingTimer = 0f;
 				state = PlayerState.WALKING;
+				
+				this.getMap().getTile(this.getCoord()).setPlayer(null);
+				destination.setPlayer(this);
+				
 				this.getCoord().move(dir.getDeltaAbs(), dir.getDeltaOrd());
 			}
 		}
@@ -134,7 +138,7 @@ public class Player extends GameObject {
 	public void attack() {
 		if (nbFireball > 0) {
 			nbFireball--;
-			Fireball fireball = new Fireball(this.getCoord().clone(), this.getMap(), this.currentDir);
+			Fireball fireball = new Fireball(this.getCoord().clone(), this.getMap(), this.currentDir, false);
 			this.getMap().getFireballList().add(fireball);
 			fireball.move();
 		}		

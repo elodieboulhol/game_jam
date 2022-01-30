@@ -77,13 +77,15 @@ public class GameScreen implements Screen {
 	private Music gameMusic;
 	private Sound fireballSound;
 	
+	private Task switchDayTask;
+	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
 		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
 		gameMusic.setLooping(true);
 		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 		
-		Timer.schedule(new Task(){
+		switchDayTask = new Task(){
 		    @Override
 		    public void run() {
 		        if (isDay) {
@@ -99,7 +101,8 @@ public class GameScreen implements Screen {
 		    		}
 		        }
 		    }
-		}, Settings.DAY_LENGTH, Settings.DAY_LENGTH);
+		};
+		Timer.schedule(switchDayTask, Settings.DAY_LENGTH, Settings.DAY_LENGTH);
 
 		fullHeartTexture = new Texture("img/heart_full.png");
 		emptyHeartTexture = new Texture("img/heart_empty.png");
@@ -335,6 +338,31 @@ public class GameScreen implements Screen {
 		
 		game.batch.end();
 		
+		if (gameOver()) {
+			switchDayTask.cancel();
+			for (Monster monster : map.getMonsterList()) {
+				monster.stopSendFireballs();
+			}
+			game.setScreen(new GameOverScreen(game));
+			dispose();
+		}
+		
+		if (playerWon()) {
+			switchDayTask.cancel();
+			for (Monster monster : map.getMonsterList()) {
+				monster.stopSendFireballs();
+			}
+			game.setScreen(new WinScreen(game));
+			dispose();
+		}
+	}
+	
+	public boolean gameOver() {
+		return player.getLifePoint() <= 0;
+	}
+	
+	public boolean playerWon() {
+		return this.map.getChest().isOpen();
 	}
 
 	@Override
@@ -362,7 +390,7 @@ public class GameScreen implements Screen {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() {		
 		fullHeartTexture.dispose();
 		emptyHeartTexture.dispose();
 		for(HashMap.Entry<OrbType, Texture> orb : orbTextureMap.entrySet()) {

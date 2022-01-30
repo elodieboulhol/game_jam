@@ -24,8 +24,10 @@ public class Settings {
 	public static int KEY_ORD_SCREEN_SIZE = TILE_SIZE;
 	public static int KEY_ABS_SCREEN = FIREBALL_ABS;
 	public static int KEY_ORD_SCREEN = KEY_ORD_SCREEN_SIZE / 3;
-	public static int KEY_ABS_MAP = 24;
-	public static int KEY_ORD_MAP = 8;
+	// public static int KEY_ABS_MAP = 24;
+	// public static int KEY_ORD_MAP = 8;
+	public static int KEY_ABS_MAP = 18;
+	public static int KEY_ORD_MAP = 22;
 	
 	public static int CHEST_ABS= 18;
 	public static int CHEST_ORD = 23;

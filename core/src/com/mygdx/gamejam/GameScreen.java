@@ -66,7 +66,11 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsMonster3Left = new Array<Texture>();
 	private Array<Texture> textureAnimationsMonster4Left = new Array<Texture>();
 	
-	private Music gameMusic;
+	private static Music gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
+	static {
+		gameMusic.setLooping(true);
+	}
+	
 	private Sound fireballSound;
 	private Sound chestOpenSound;
 	private Sound chestClosedSound;
@@ -85,8 +89,7 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(final NightHunt game) {
 		this.game = game;
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/background_music.mp3"));
-		gameMusic.setLooping(true);
+		
 		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 		chestOpenSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
 		chestClosedSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_locked.mp3"));
@@ -357,15 +360,10 @@ public class GameScreen implements Screen {
 				}
 				
 				game.setScreen(new GameOverScreen(game));
-				dispose();
 			}
 		}
 		
 		if (playerWon()) {
-			switchDayTask.cancel();
-			for (Monster monster : map.getMonsterList()) {
-				monster.stopSendFireballs();
-			}
 			
 			if (hasJustWon) {
 				delayWin = 0f;
@@ -381,7 +379,7 @@ public class GameScreen implements Screen {
 				}
 				
 				game.setScreen(new WinScreen(game));
-				dispose();
+//				dispose();
 			}
 		}
 	}
@@ -414,7 +412,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		gameMusic.stop();
 		
 	}
 
@@ -439,7 +437,6 @@ public class GameScreen implements Screen {
 		for(Texture texture : textureAnimationsPlayerRight) texture.dispose();
 		for(Texture texture : textureAnimationsPlayerLeft) texture.dispose();
 		
-		gameMusic.stop();
 		gameMusic.dispose();
 		fireballSound.dispose();
 		chestOpenSound.dispose();

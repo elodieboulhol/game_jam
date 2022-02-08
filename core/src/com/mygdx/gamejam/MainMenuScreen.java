@@ -99,7 +99,6 @@ public class MainMenuScreen implements Screen {
 		if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isKeyPressed(Keys.ENTER)) {
 			if (isArrowOnPlay) {
 				game.setScreen(new GameScreen(game));
-				dispose();
 			} else {
 				Gdx.app.exit();
 				System.exit(0);

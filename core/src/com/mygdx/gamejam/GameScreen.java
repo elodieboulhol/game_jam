@@ -256,7 +256,7 @@ public class GameScreen implements Screen {
 		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/plank_night.png"));
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
-		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
+		orbTextureMap.put(OrbType.ATTACK, new Texture("img/fireball.png"));
 		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
 		orbTextureMap.put(OrbType.INVINCIBILITY, new Texture("img/orb_green.png"));
 		orbTextureMap.put(OrbType.SLOWER, new Texture("img/orb_purple.png"));

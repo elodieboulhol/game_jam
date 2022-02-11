@@ -78,8 +78,10 @@ public class Monster extends GameObject {
 			break;
 		}
 
-		player.loseLifePoint();
-		hitSound.play();
+		if (!player.isInvincible()) {
+			player.loseLifePoint();
+			hitSound.play();
+		}
 	}
 	
 	@Override

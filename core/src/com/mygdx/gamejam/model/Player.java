@@ -21,10 +21,11 @@ public class Player extends GameObject {
 
 	private float animWalkingTimer = 0;
 	private static float ANIM_WALKING_TIME = 0.25f;
-
+	
 	private float walkTimer;
+	private float standingInvincibleTimer = 0f;
 	private boolean moveRequestThisFrame;
-	private boolean isInvicible = false;
+	private boolean isInvincible = false;
 	
 	public Player(Coordinates coord, TileMap map, AnimationSetPlayer animations) {
 		super(coord, map);
@@ -45,12 +46,12 @@ public class Player extends GameObject {
 		this.lifePoint = lifePoint;
 	}
 
-	public boolean isInvicible() {
-		return isInvicible;
+	public boolean isInvincible() {
+		return isInvincible;
 	}
 
-	public void setInvicible(boolean isInvicible) {
-		this.isInvicible = isInvicible;
+	public void setInvincible(boolean isInvicible) {
+		this.isInvincible = isInvicible;
 	}
 
 	public void move(Direction dir) {
@@ -87,7 +88,10 @@ public class Player extends GameObject {
 	}
 
 	public void update(float delta) {
+		if (state == PlayerState.STANDING) standingInvincibleTimer += delta;
+		
 		if (state == PlayerState.WALKING || state == PlayerState.MOONWALKING) {
+			standingInvincibleTimer = 0f;
 			animWalkingTimer += delta;
 			walkTimer += delta;
 			
@@ -138,6 +142,17 @@ public class Player extends GameObject {
 	}
 
 	public Texture getSprite() {
+		if (this.isInvincible()) {
+			if (this.state == PlayerState.WALKING) {
+				return animations.getWalkingInvincible(this.currentDir).getKeyFrame(walkTimer);
+			} else if (this.state == PlayerState.MOONWALKING) {
+				return animations.getMoonwalkingInvincible(this.currentDir).getKeyFrame(walkTimer);
+			} else if (this.state == PlayerState.STANDING) {
+				return animations.getStandingInvincible(this.currentDir).getKeyFrame(standingInvincibleTimer);
+			}
+			return animations.getStandingInvincible(Direction.DOWN).getKeyFrame(standingInvincibleTimer);
+		}
+		
 		if (this.state == PlayerState.WALKING) {
 			return animations.getWalking(this.currentDir).getKeyFrame(walkTimer);
 		} else if (this.state == PlayerState.MOONWALKING) {
@@ -169,10 +184,7 @@ public class Player extends GameObject {
 	}
 	
 	public void loseLifePoint() {
-		System.out.println(this.isInvicible);
-		System.out.println(this.lifePoint);
-		if (!this.isInvicible) this.lifePoint -= 1;
-		System.out.println(this.lifePoint);
+		this.lifePoint -= 1;
 	}
 	
 	public void winLifePoint() {

@@ -38,6 +38,7 @@ public class GameScreen implements Screen {
 	private Texture keyTexture;
 	private Texture closedChestTexture;
 	private Texture openedChestTexture;
+	private Texture shieldTexture;
 
 	private AnimationSetPlayer animationsPlayer;
 	private AnimationSetMonster animationsMonster;
@@ -60,6 +61,21 @@ public class GameScreen implements Screen {
 	private Array<Texture> textureAnimationsPlayerMoonWalkDown = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerMoonWalkLeft = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerMoonWalkRight = new Array<Texture>();
+	
+	private Array<Texture> textureAnimationsPlayerUpInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerDownInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerLeftInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerRightInvincible = new Array<Texture>();
+
+	private Array<Texture> textureAnimationsPlayerMoonWalkUpInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkDownInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkLeftInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerMoonWalkRightInvincible = new Array<Texture>();
+	
+	private Array<Texture> textureAnimationsPlayerStandingUpInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerStandingDownInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerStandingLeftInvincible = new Array<Texture>();
+	private Array<Texture> textureAnimationsPlayerStandingRightInvincible = new Array<Texture>();
 	
 	private Array<Texture> textureAnimationsMonster1Left = new Array<Texture>();
 	private Array<Texture> textureAnimationsMonster2Left = new Array<Texture>();
@@ -118,6 +134,7 @@ public class GameScreen implements Screen {
 		keyTexture = new Texture("img/key.png");
 		closedChestTexture = new Texture("img/chest.png");
 		openedChestTexture = new Texture("img/chest_coins.png");
+		shieldTexture = new Texture("img/shield.png");
 		
 		textureAnimationsPlayerUp.add(new Texture("img/player_up_walk1.png"));
 		textureAnimationsPlayerUp.add(new Texture("img/player_up_walk2.png"));
@@ -127,7 +144,7 @@ public class GameScreen implements Screen {
 		textureAnimationsPlayerLeft.add(new Texture("img/player_left_walk2.png"));
 		textureAnimationsPlayerRight.add(new Texture("img/player_right_walk1.png"));
 		textureAnimationsPlayerRight.add(new Texture("img/player_right_walk2.png"));
-
+		
 		textureAnimationsPlayerMoonWalkUp.add(new Texture("img/player_down_walk2.png"));
 		textureAnimationsPlayerMoonWalkUp.add(new Texture("img/player_down_walk1.png"));
 		textureAnimationsPlayerMoonWalkDown.add(new Texture("img/player_up_walk2.png"));
@@ -137,11 +154,46 @@ public class GameScreen implements Screen {
 		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk2.png"));
 		textureAnimationsPlayerMoonWalkRight.add(new Texture("img/player_left_walk1.png"));
 		
+		textureAnimationsPlayerUpInvincible.add(new Texture("img/player_up_walk1_invincible.png"));
+		textureAnimationsPlayerUpInvincible.add(new Texture("img/player_up_walk1.png"));
+		textureAnimationsPlayerUpInvincible.add(new Texture("img/player_up_walk2_invincible.png"));
+		textureAnimationsPlayerUpInvincible.add(new Texture("img/player_up_walk2.png"));
+		textureAnimationsPlayerDownInvincible.add(new Texture("img/player_down_walk1_invincible.png"));
+		textureAnimationsPlayerDownInvincible.add(new Texture("img/player_down_walk1.png"));
+		textureAnimationsPlayerDownInvincible.add(new Texture("img/player_down_walk2_invincible.png"));
+		textureAnimationsPlayerDownInvincible.add(new Texture("img/player_down_walk2.png"));
+		textureAnimationsPlayerLeftInvincible.add(new Texture("img/player_left_walk1_invincible.png"));
+		textureAnimationsPlayerLeftInvincible.add(new Texture("img/player_left_walk1.png"));
+		textureAnimationsPlayerLeftInvincible.add(new Texture("img/player_left_walk2_invincible.png"));
+		textureAnimationsPlayerLeftInvincible.add(new Texture("img/player_left_walk2.png"));
+		textureAnimationsPlayerRightInvincible.add(new Texture("img/player_right_walk1_invincible.png"));
+		textureAnimationsPlayerRightInvincible.add(new Texture("img/player_right_walk1.png"));
+		textureAnimationsPlayerRightInvincible.add(new Texture("img/player_right_walk2_invincible.png"));
+		textureAnimationsPlayerRightInvincible.add(new Texture("img/player_right_walk2.png"));
+		
+		textureAnimationsPlayerMoonWalkUpInvincible.add(new Texture("img/player_down_walk2_invincible.png"));
+		textureAnimationsPlayerMoonWalkUpInvincible.add(new Texture("img/player_down_walk1_invincible.png"));
+		textureAnimationsPlayerMoonWalkDownInvincible.add(new Texture("img/player_up_walk2_invincible.png"));
+		textureAnimationsPlayerMoonWalkDownInvincible.add(new Texture("img/player_up_walk1_invincible.png"));
+		textureAnimationsPlayerMoonWalkLeftInvincible.add(new Texture("img/player_right_walk2_invincible.png"));
+		textureAnimationsPlayerMoonWalkLeftInvincible.add(new Texture("img/player_right_walk1_invincible.png"));
+		textureAnimationsPlayerMoonWalkRightInvincible.add(new Texture("img/player_left_walk2_invincible.png"));
+		textureAnimationsPlayerMoonWalkRightInvincible.add(new Texture("img/player_left_walk1_invincible.png"));
+		
+		textureAnimationsPlayerStandingUpInvincible.add(new Texture("img/player_up_invincible.png"));		
+		textureAnimationsPlayerStandingUpInvincible.add(new Texture("img/player_up.png"));
+		textureAnimationsPlayerStandingDownInvincible.add(new Texture("img/player_down_invincible.png"));		
+		textureAnimationsPlayerStandingDownInvincible.add(new Texture("img/player_down.png"));
+		textureAnimationsPlayerStandingLeftInvincible.add(new Texture("img/player_left_invincible.png"));		
+		textureAnimationsPlayerStandingLeftInvincible.add(new Texture("img/player_left.png"));
+		textureAnimationsPlayerStandingRightInvincible.add(new Texture("img/player_right_invincible.png"));		
+		textureAnimationsPlayerStandingRightInvincible.add(new Texture("img/player_right.png"));
+		
 		animationsPlayer = new AnimationSetPlayer(
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerUp, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerDown, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerLeft, PlayMode.LOOP_PINGPONG),
-							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerRight, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerRight, PlayMode.LOOP_PINGPONG),						
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkUp, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkDown, PlayMode.LOOP_PINGPONG),
 							new Animation<Texture>(0.3f/2f, textureAnimationsPlayerMoonWalkLeft, PlayMode.LOOP_PINGPONG),
@@ -149,8 +201,22 @@ public class GameScreen implements Screen {
 							new Texture("img/player_up.png"),
 							new Texture("img/player_down.png"),
 							new Texture("img/player_left.png"),
-							new Texture("img/player_right.png")
+							new Texture("img/player_right.png"),
+
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerUpInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerDownInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerLeftInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerRightInvincible, PlayMode.LOOP_PINGPONG),						
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerMoonWalkUpInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerMoonWalkDownInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerMoonWalkLeftInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerMoonWalkRightInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerStandingUpInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerStandingDownInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerStandingLeftInvincible, PlayMode.LOOP_PINGPONG),
+							new Animation<Texture>(0.3f/4f, textureAnimationsPlayerStandingRightInvincible, PlayMode.LOOP_PINGPONG)
 						);
+		
 		
 		textureAnimationsMonster1Left.add(new Texture("img/monster1_left_red.png"));
 		textureAnimationsMonster1Left.add(new Texture("img/monster1_left.png"));
@@ -331,6 +397,15 @@ public class GameScreen implements Screen {
 							Settings.LIFEORD,
 							Settings.LIFESIZE,
 							Settings.LIFESIZE);
+		}
+		
+		if (player.isInvincible()) {
+			game.batch.draw(shieldTexture, 
+							Settings.SHIELDABS,
+							Settings.SHIELDORD,
+							Settings.SHIELDSIZE,
+							Settings.SHIELDSIZE);
+			
 		}
 		
 		game.batch.draw(fireballCounterTextureMap.get(new Integer(player.getNbFireball())), 

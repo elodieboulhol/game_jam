@@ -60,9 +60,11 @@ public class Fireball extends GameObject {
 				
 				if ((destination.isWalkable() || destination.getGroundType() == Ground.WATER) && destination.isEmpty()) {
 					if (this.destination.getPlayer() != null) {
-						this.destination.getPlayer().loseLifePoint();
-						GameScreen.boomSound.play();
-						return true;
+						if (!this.destination.getPlayer().isInvincible()) {							
+							this.destination.getPlayer().loseLifePoint();
+							GameScreen.boomSound.play();
+							return true;
+						}
 					}
 					else {						
 						this.move();

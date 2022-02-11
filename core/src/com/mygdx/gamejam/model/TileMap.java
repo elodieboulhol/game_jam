@@ -15,7 +15,8 @@ public class TileMap {
 	private Key key1;
 	private Key key2;
 	private Chest chest;
-	private Task myTask = null;
+	private Task myIceTask = null;
+	private Task myInvicibilityTask = null;
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
@@ -160,13 +161,21 @@ public class TileMap {
 	public int getHeight() {
 		return height;
 	}
-		
-	public Task getMyTask() {
-		return myTask;
+
+	public Task getMyIceTask() {
+		return myIceTask;
 	}
 
-	public void setMyTask(Task myTask) {
-		this.myTask = myTask;
+	public void setMyIceTask(Task myIceTask) {
+		this.myIceTask = myIceTask;
+	}
+
+	public Task getMyInvicibilityTask() {
+		return myInvicibilityTask;
+	}
+
+	public void setMyInvicibilityTask(Task myInvicibilityTask) {
+		this.myInvicibilityTask = myInvicibilityTask;
 	}
 
 	public ArrayList<Fireball> getFireballList() {

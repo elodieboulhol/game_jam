@@ -50,7 +50,7 @@ public class Orb extends GameObject {
 				}
 			}
 			
-			if (this.getMap().getMyTask() != null) this.getMap().getMyTask().cancel();
+			if (this.getMap().getMyIceTask() != null) this.getMap().getMyIceTask().cancel();
 			Task task = new MyTask(player){
 			    @Override
 			    public void run() {
@@ -68,23 +68,24 @@ public class Orb extends GameObject {
 					}
 			    }
 			};
-			this.getMap().setMyTask(task);
-			Timer.schedule(this.getMap().getMyTask(), Settings.ICE_TIMING);
+			this.getMap().setMyIceTask(task);
+			Timer.schedule(this.getMap().getMyIceTask(), Settings.ICE_TIMING);
 		} else if (this.orbType == OrbType.LIFE) {
 			GameScreen.orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
 		} else if (this.orbType == OrbType.INVINCIBILITY) {
-			player.setInvicible(true);
-
+			player.setInvincible(true);
+			
+			if (this.getMap().getMyInvicibilityTask() != null) this.getMap().getMyInvicibilityTask().cancel();
 			Task task = new MyTask(player){
 			    @Override
 			    public void run() {
-			    	param.setInvicible(false);
+			    	param.setInvincible(false);
 			    }
 			};
-
-			Timer.schedule(task, Settings.INVINCIBILITY_TIMING);
-			// then, should be in map.task
+			
+			this.getMap().setMyInvicibilityTask(task);
+			Timer.schedule(this.getMap().getMyInvicibilityTask(), Settings.INVINCIBILITY_TIMING);
 		} else if (this.orbType == OrbType.SLOWER) {
 			// TODO
 		}

@@ -20,7 +20,10 @@ public class WinScreen implements Screen {
 	private Stage stage;
 	private Viewport viewport;
 	
-	private Music winMusic;
+	private static Music winMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/win.mp3"));
+	static {
+		winMusic.setLooping(true);
+	}
 	
 	private Texture winTexture;
 
@@ -41,9 +44,6 @@ public class WinScreen implements Screen {
 		table.row();
 		
 		stage.addActor(table);
-		
-		winMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/win.mp3"));
-		winMusic.setLooping(true);
 	}
 	
 	@Override
@@ -56,7 +56,6 @@ public class WinScreen implements Screen {
 	public void render(float delta) {
 		if (Gdx.input.isKeyPressed(Keys.A)) {
 			game.setScreen(new MainMenuScreen(game));
-			dispose();
 		}
 		
 		Gdx.gl.glClearColor(41/255f, 183/255f, 195/255f, 1);
@@ -85,7 +84,7 @@ public class WinScreen implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		winMusic.stop();
 
 	}
 
@@ -93,8 +92,6 @@ public class WinScreen implements Screen {
 	public void dispose() {
 		stage.dispose();
 		winTexture.dispose();
-		winMusic.stop();
-		winMusic.dispose();
 	}
 
 }

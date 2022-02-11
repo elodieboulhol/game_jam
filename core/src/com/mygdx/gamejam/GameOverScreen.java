@@ -20,7 +20,10 @@ public class GameOverScreen implements Screen {
 	private Stage stage;
 	private Viewport viewport;
 	
-	private Music gameOverMusic;
+	private static Music gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/gameover.mp3"));
+	static {
+		gameOverMusic.setLooping(true);
+	}
 	
 	private Texture gameOverTexture;
 	
@@ -41,9 +44,6 @@ public class GameOverScreen implements Screen {
 		table.row();
 		
 		stage.addActor(table);
-		
-		gameOverMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/gameover.mp3"));
-		gameOverMusic.setLooping(true);
 	}
 	
 	@Override
@@ -56,7 +56,6 @@ public class GameOverScreen implements Screen {
 	public void render(float delta) {
 		if (Gdx.input.isKeyPressed(Keys.A)) {
 			game.setScreen(new MainMenuScreen(game));
-			dispose();
 		}
 
 		Gdx.gl.glClearColor(41/255f, 183/255f, 195/255f, 1);
@@ -85,14 +84,13 @@ public class GameOverScreen implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		gameOverMusic.stop();
 
 	}
 
 	@Override
 	public void dispose() {
 		stage.dispose();
-		gameOverMusic.stop();
 		gameOverMusic.dispose();
 		gameOverTexture.dispose();
 	}

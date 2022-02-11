@@ -73,6 +73,20 @@ public class Orb extends GameObject {
 		} else if (this.orbType == OrbType.LIFE) {
 			GameScreen.orbSound.play();
 			if (player.getLifePoint() < Settings.MAX_LIFEPOINTS) player.winLifePoint();
+		} else if (this.orbType == OrbType.INVINCIBILITY) {
+			player.setInvicible(true);
+
+			Task task = new MyTask(player){
+			    @Override
+			    public void run() {
+			    	param.setInvicible(false);
+			    }
+			};
+
+			Timer.schedule(task, Settings.INVINCIBILITY_TIMING);
+			// then, should be in map.task
+		} else if (this.orbType == OrbType.SLOWER) {
+			// TODO
 		}
 		this.getMap().getOrbsList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);

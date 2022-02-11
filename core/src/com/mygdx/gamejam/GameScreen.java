@@ -189,6 +189,8 @@ public class GameScreen implements Screen {
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/orb_orange.png"));
 		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
+		orbTextureMap.put(OrbType.INVINCIBILITY, new Texture("img/orb_green.png"));
+		orbTextureMap.put(OrbType.SLOWER, new Texture("img/orb_purple.png"));
 		
 		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
 		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));

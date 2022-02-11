@@ -24,6 +24,7 @@ public class Player extends GameObject {
 
 	private float walkTimer;
 	private boolean moveRequestThisFrame;
+	private boolean isInvicible = false;
 	
 	public Player(Coordinates coord, TileMap map, AnimationSetPlayer animations) {
 		super(coord, map);
@@ -42,6 +43,14 @@ public class Player extends GameObject {
 
 	public void setLifePoint(int lifePoint) {
 		this.lifePoint = lifePoint;
+	}
+
+	public boolean isInvicible() {
+		return isInvicible;
+	}
+
+	public void setInvicible(boolean isInvicible) {
+		this.isInvicible = isInvicible;
 	}
 
 	public void move(Direction dir) {
@@ -160,7 +169,10 @@ public class Player extends GameObject {
 	}
 	
 	public void loseLifePoint() {
-		this.lifePoint -= 1;
+		System.out.println(this.isInvicible);
+		System.out.println(this.lifePoint);
+		if (!this.isInvicible) this.lifePoint -= 1;
+		System.out.println(this.lifePoint);
 	}
 	
 	public void winLifePoint() {

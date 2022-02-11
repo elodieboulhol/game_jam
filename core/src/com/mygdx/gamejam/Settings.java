@@ -59,6 +59,7 @@ public class Settings {
 	public static int FIREBALL_MONSTER_DELAY = 1;
 
 	public static int ICE_TIMING = 5;
+	public static int INVINCIBILITY_TIMING = 5;
 	
 	public static float DELAY_GAMEOVER = 1f;
 	public static float DELAY_WINGAME = 1f;

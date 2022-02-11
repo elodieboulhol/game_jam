@@ -20,12 +20,13 @@ public class Player extends GameObject {
 	private AnimationSetPlayer animations;
 
 	private float animWalkingTimer = 0;
-	private static float ANIM_WALKING_TIME = 0.25f;
+	private static float ANIM_WALKING_TIME = Settings.ANIM_WALKING_TIME;
 	
 	private float walkTimer;
 	private float standingInvincibleTimer = 0f;
 	private boolean moveRequestThisFrame;
 	private boolean isInvincible = false;
+	private boolean isSlower = false;
 	
 	public Player(Coordinates coord, TileMap map, AnimationSetPlayer animations) {
 		super(coord, map);
@@ -52,6 +53,14 @@ public class Player extends GameObject {
 
 	public void setInvincible(boolean isInvicible) {
 		this.isInvincible = isInvicible;
+	}
+
+	public boolean isSlower() {
+		return isSlower;
+	}
+
+	public void setSlower(boolean isSlower) {
+		this.isSlower = isSlower;
 	}
 
 	public void move(Direction dir) {
@@ -88,6 +97,9 @@ public class Player extends GameObject {
 	}
 
 	public void update(float delta) {
+		if (this.isSlower) ANIM_WALKING_TIME = Settings.ANIM_WALKING_TIME_SLOWER;
+		else ANIM_WALKING_TIME = Settings.ANIM_WALKING_TIME;
+		
 		if (state == PlayerState.STANDING) standingInvincibleTimer += delta;
 		
 		if (state == PlayerState.WALKING || state == PlayerState.MOONWALKING) {

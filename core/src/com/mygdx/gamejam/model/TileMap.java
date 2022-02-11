@@ -17,6 +17,7 @@ public class TileMap {
 	private Chest chest;
 	private Task myIceTask = null;
 	private Task myInvicibilityTask = null;
+	private Task mySlowerTask = null;
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
@@ -176,6 +177,14 @@ public class TileMap {
 
 	public void setMyInvicibilityTask(Task myInvicibilityTask) {
 		this.myInvicibilityTask = myInvicibilityTask;
+	}
+
+	public Task getMySlowerTask() {
+		return mySlowerTask;
+	}
+
+	public void setMySlowerTask(Task mySlowerTask) {
+		this.mySlowerTask = mySlowerTask;
 	}
 
 	public ArrayList<Fireball> getFireballList() {

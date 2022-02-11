@@ -87,7 +87,18 @@ public class Orb extends GameObject {
 			this.getMap().setMyInvicibilityTask(task);
 			Timer.schedule(this.getMap().getMyInvicibilityTask(), Settings.INVINCIBILITY_TIMING);
 		} else if (this.orbType == OrbType.SLOWER) {
-			// TODO
+			player.setSlower(true);
+			
+			if (this.getMap().getMySlowerTask() != null) this.getMap().getMySlowerTask().cancel();
+			Task task = new MyTask(player){
+			    @Override
+			    public void run() {
+			    	param.setSlower(false);
+			    }
+			};
+			
+			this.getMap().setMySlowerTask(task);
+			Timer.schedule(this.getMap().getMySlowerTask(), Settings.SLOWER_TIMING);
 		}
 		this.getMap().getOrbsList().remove(this);
 		this.getMap().getTile(this.getCoord()).setGameObject(null);

@@ -16,10 +16,10 @@ public class Settings {
 	public static int LIFESIZE = 2 * TILE_SIZE / 3;
 	public static int LIFEORD = SCREEN_HEIGHT - (3 * LIFESIZE / 2);
 	public static int LIFESPACE = 3;
-	
-	public static int SHIELDABS = 22 + 6 * TILE_SIZE / 3;
-	public static int SHIELDORD = SCREEN_HEIGHT - (3 * LIFESIZE / 2);
+
+	public static int SHIELDABS = 10;
 	public static int SHIELDSIZE = 2 * TILE_SIZE / 3;
+	public static int SHIELDORD = SCREEN_HEIGHT - 2 * SHIELDSIZE - TILE_SIZE / 2;
 	
 	public static int FIREBALL_SIZE = 3 * TILE_SIZE / 2;
 	public static int FIREBALL_ABS = Settings.SCREEN_WIDTH - Settings.LIFEABS - Settings.FIREBALL_SIZE;

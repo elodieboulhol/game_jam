@@ -1,13 +1,14 @@
 package com.mygdx.gamejam;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.gamejam.controller.MenuController;
+import com.mygdx.gamejam.model.SelectedLevel;
 
 public class MainMenuScreen implements Screen {
 
@@ -15,11 +16,14 @@ public class MainMenuScreen implements Screen {
 
 	OrthographicCamera camera;
 	
-	Texture homeScreenTexture, rulesTexture, playTexture, exitTexture, arrowTexture;
+	private Texture homeScreenTexture, rulesTexture, playTexture, exitTexture, arrowTexture;
+	private Texture introTexture, level1Texture, level2Texture, level3Texture, backTexture;
 	
-	private Sound beepSound;
+	public static Sound beepSound;
 	
-	private boolean isArrowOnPlay = true;
+	private MenuController menuController;
+	
+	private static final int OFFSET = 55;
 	
 	public MainMenuScreen(final NightHunt game) {
 		this.game = game;
@@ -33,11 +37,20 @@ public class MainMenuScreen implements Screen {
 		exitTexture = new Texture("img/menu_exit.png");
 		arrowTexture = new Texture("img/menu_arrow.png");
 		
+		introTexture = new Texture("img/intro.png");
+		level1Texture = new Texture("img/level1.png");
+		level2Texture = new Texture("img/level2.png");
+		level3Texture = new Texture("img/level3.png");
+		backTexture = new Texture("img/back.png");
+		
 		beepSound = Gdx.audio.newSound(Gdx.files.internal("sound/beep.mp3"));
+		
+		menuController = new MenuController();
 	}
 	
 	@Override
 	public void show() {
+		Gdx.input.setInputProcessor(menuController);
 	}
 
 	@Override
@@ -52,60 +65,89 @@ public class MainMenuScreen implements Screen {
 		
 	    game.batch.begin();
 
-		game.batch.draw(homeScreenTexture,
-				Settings.SCREEN_WIDTH / 6 + 20,
-				Settings.SCREEN_HEIGHT / 4 + 20,
-				Settings.SCREEN_WIDTH / 2 + 150,
-				Settings.SCREEN_HEIGHT / 2 + 100);
+	    if (menuController.getLevelSelected() == SelectedLevel.NONE) {
+	    	game.batch.draw(homeScreenTexture,
+					Settings.SCREEN_WIDTH / 6 + 20,
+					Settings.SCREEN_HEIGHT / 4 + 20,
+					Settings.SCREEN_WIDTH / 2 + 150,
+					Settings.SCREEN_HEIGHT / 2 + 100);
 
-		game.batch.draw(rulesTexture,
-				Settings.SCREEN_WIDTH / 2 + 400,
-				Settings.SCREEN_HEIGHT / 8 - 90,
-				Settings.SCREEN_WIDTH / 6,
-				Settings.SCREEN_HEIGHT / 4);
+			game.batch.draw(rulesTexture,
+					Settings.SCREEN_WIDTH / 2 + 400,
+					Settings.SCREEN_HEIGHT / 8 - 90,
+					Settings.SCREEN_WIDTH / 6,
+					Settings.SCREEN_HEIGHT / 4);
 
-		game.batch.draw(playTexture,
-						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 8 - 50,
-						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 2);
-		game.batch.draw(exitTexture,
-						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 8 - 150,
-						Settings.SCREEN_WIDTH / 3,
-						Settings.SCREEN_HEIGHT / 2);
-		
-		if (isArrowOnPlay) {
+			game.batch.draw(playTexture,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 8 - 50,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+			game.batch.draw(exitTexture,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 8 - 150,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+			
+			if (menuController.getIsArrowOnPlay()) {
+				game.batch.draw(arrowTexture,
+								Settings.SCREEN_WIDTH / 6 + 40,
+								Settings.SCREEN_HEIGHT / 8 - 20,
+								Settings.SCREEN_WIDTH / 4 - 50,
+								Settings.SCREEN_HEIGHT / 2 - 50);
+			} else {
+				game.batch.draw(arrowTexture,
+								Settings.SCREEN_WIDTH / 6 + 40,
+								Settings.SCREEN_HEIGHT / 8 - 120,
+								Settings.SCREEN_WIDTH / 4 - 50,
+								Settings.SCREEN_HEIGHT / 2 - 50);
+			}
+	    } else {
+	    	game.batch.draw(introTexture,
+			    			Settings.SCREEN_WIDTH / 3,
+			    			Settings.SCREEN_HEIGHT / 2 + OFFSET,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+
+			game.batch.draw(level1Texture,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 3 + OFFSET,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+
+			game.batch.draw(level2Texture,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 6 + OFFSET,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+			
+			game.batch.draw(level3Texture,
+							Settings.SCREEN_WIDTH / 3,
+							OFFSET,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+			
+			game.batch.draw(backTexture,
+							Settings.SCREEN_WIDTH / 3,
+							-Settings.SCREEN_HEIGHT / 6 + OFFSET,
+							Settings.SCREEN_WIDTH / 3,
+							Settings.SCREEN_HEIGHT / 2);
+			
 			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6 + 40,
-							Settings.SCREEN_HEIGHT / 8 - 20,
-							Settings.SCREEN_WIDTH / 4 - 50,
-							Settings.SCREEN_HEIGHT / 2 - 50);
-		} else {
-			game.batch.draw(arrowTexture,
-							Settings.SCREEN_WIDTH / 6 + 40,
-							Settings.SCREEN_HEIGHT / 8 - 120,
-							Settings.SCREEN_WIDTH / 4 - 50,
-							Settings.SCREEN_HEIGHT / 2 - 50);
-		}
+							Settings.SCREEN_WIDTH / 6 + 20,
+							menuController.getLevelSelected().getValue() * Settings.SCREEN_HEIGHT / 6 + OFFSET + 60,
+							Settings.SCREEN_WIDTH / 6,
+							Settings.SCREEN_HEIGHT / 3);
+	    }
 		
 		game.batch.end();
-
-		if (Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
-			if (isArrowOnPlay) isArrowOnPlay = false;
-			else isArrowOnPlay = true;
-			beepSound.play();
-		}
-		if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isKeyPressed(Keys.ENTER)) {
-			if (isArrowOnPlay) {
-				game.setScreen(new GameScreen(game));
-			} else {
-				Gdx.app.exit();
-				System.exit(0);
-			}
-		}
 		
-		
+		if (menuController.getShouldGameStart()) {
+			game.setScreen(new GameScreen(game));
+		} else if (menuController.getShouldGameStop()) {
+			Gdx.app.exit();
+			System.exit(0);
+		}
 	}
 
 	@Override
@@ -135,12 +177,8 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void dispose() {
 		
-		playTexture.dispose();
-		exitTexture.dispose();
-		arrowTexture.dispose();
-		
-		beepSound.dispose();
-		
 	}
-
 }
+
+
+

@@ -87,10 +87,9 @@ public class GameScreen implements Screen {
 		gameMusic.setLooping(true);
 	}
 	
-	private Sound fireballSound;
-	private Sound chestOpenSound;
-	private Sound chestClosedSound;
-	
+	public static Sound fireballSound;
+	public static Sound chestOpenSound;
+	public static Sound chestClosedSound;
 	public static Sound orbSound = Gdx.audio.newSound(Gdx.files.internal("sound/orb.mp3"));
 	public static Sound freezingSound = Gdx.audio.newSound(Gdx.files.internal("sound/freeze.mp3"));
 	public static Sound ploofSound = Gdx.audio.newSound(Gdx.files.internal("sound/ploof.mp3"));
@@ -274,7 +273,7 @@ public class GameScreen implements Screen {
 		
 		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1.length);
 		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
-		playerController = new PlayerController(player, fireballSound, chestOpenSound, chestClosedSound);
+		playerController = new PlayerController(player);
 		camera = new Camera();
 	}
 	

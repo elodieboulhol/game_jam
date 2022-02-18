@@ -143,7 +143,7 @@ public class MainMenuScreen implements Screen {
 		game.batch.end();
 		
 		if (menuController.getShouldGameStart()) {
-			game.setScreen(new GameScreen(game));
+			game.setScreen(new GameScreen(game, menuController.getLevelSelected()));
 		} else if (menuController.getShouldGameStop()) {
 			Gdx.app.exit();
 			System.exit(0);

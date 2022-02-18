@@ -21,32 +21,40 @@ public class TileMap {
 
 	private static int NB_ORB = 8;
 	private ArrayList<Monster> monsterList;
+	
+	private SelectedLevel selectedLevel;
 
-	public TileMap(Ground[][] groundMap, int width, int height) {
+	public TileMap(Ground[][] groundMap, int width, int height, SelectedLevel selectedLevel) {
 		super();
 		this.map = new Tile[height][width];
 		this.width = width;
 		this.height = height;
+		this.selectedLevel = selectedLevel;
+		
 		for (int ord = 0; ord < height; ord++) {
 			for (int abs = 0; abs < width; abs++) {
 				map[ord][abs] = new Tile(new Coordinates(abs, ord), groundMap[height - 1 - ord][abs]);
 			}
 		}
 		
-		Coordinates key1Coord = new Coordinates(Settings.KEY1_ABS_MAP, Settings.KEY1_ORD_MAP);
+		Coordinates key1Coord = new Coordinates(Settings.KEY1_ABS_MAP.get(this.selectedLevel),
+												Settings.KEY1_ORD_MAP.get(this.selectedLevel));
 		this.key1 = new Key(key1Coord, this);
 		this.getTile(key1Coord).setGameObject(this.key1);
 		
-		Coordinates key2Coord = new Coordinates(Settings.KEY2_ABS_MAP, Settings.KEY2_ORD_MAP);
+		Coordinates key2Coord = new Coordinates(Settings.KEY2_ABS_MAP.get(this.selectedLevel),
+												Settings.KEY2_ORD_MAP.get(this.selectedLevel));
 		this.key2 = new Key(key2Coord, this);
 		this.getTile(key2Coord).setGameObject(this.key2);
 		
-		Coordinates chestCoord = new Coordinates(Settings.CHEST_ABS, Settings.CHEST_ORD);
+		Coordinates chestCoord = new Coordinates(Settings.CHEST_ABS_MAP.get(this.selectedLevel),
+												 Settings.CHEST_ORD_MAP.get(this.selectedLevel));
+		
 		this.chest = new Chest(chestCoord, this);
 		this.getTile(chestCoord).setGameObject(this.chest);
 		
 		this.monsterList = new ArrayList<Monster>();
-		this.genStaticMonsters();
+//		this.genStaticMonsters();
 		for (int nbMonster = 0; nbMonster < Settings.NB_MONSTER; nbMonster++) {
 			this.genNewMonster();
 		}
@@ -58,7 +66,8 @@ public class TileMap {
 	}
 	
 	public void genNewOrb() {
-		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD);
+		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS_MAP.get(selectedLevel),
+				  										  Settings.PLAYER_ORD_MAP.get(selectedLevel));
 		
 		// Pick random tile
 		Coordinates coordOrb = Coordinates.randomCoordinates(this.width, this.height);
@@ -108,7 +117,8 @@ public class TileMap {
 	}
 
 	public void genNewMonster() {
-		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD);
+		Coordinates playerStartingCoord = new Coordinates(Settings.PLAYER_ABS_MAP.get(selectedLevel),
+				  										  Settings.PLAYER_ORD_MAP.get(selectedLevel));
 		
 		// Pick random monster
 		MonsterType monsterType = MonsterType.values()[new Random().nextInt(Settings.NB_NORMAL_MONSTER)];

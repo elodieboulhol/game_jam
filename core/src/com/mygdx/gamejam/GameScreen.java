@@ -26,6 +26,7 @@ import com.mygdx.gamejam.model.Monster;
 import com.mygdx.gamejam.model.Orb;
 import com.mygdx.gamejam.model.OrbType;
 import com.mygdx.gamejam.model.Player;
+import com.mygdx.gamejam.model.SelectedLevel;
 import com.mygdx.gamejam.model.TileMap;
 
 public class GameScreen implements Screen {
@@ -102,8 +103,11 @@ public class GameScreen implements Screen {
 	private boolean hasJustWon = true;
 	private float delayWin = -1f;
 	
-	public GameScreen(final NightHunt game) {
+	private SelectedLevel selectedLevel;
+	
+	public GameScreen(final NightHunt game, SelectedLevel selectedLevel) {
 		this.game = game;
+		this.selectedLevel = selectedLevel;
 		
 		fireballSound = Gdx.audio.newSound(Gdx.files.internal("sound/fireball.wav"));
 		chestOpenSound = Gdx.audio.newSound(Gdx.files.internal("sound/chest_effect.mp3"));
@@ -271,8 +275,15 @@ public class GameScreen implements Screen {
 		fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
 		
 		
-		map = new TileMap(Settings.GROUNDMAP1, Settings.GROUNDMAP1[0].length, Settings.GROUNDMAP1.length);
-		player = new Player(new Coordinates(Settings.PLAYER_ABS, Settings.PLAYER_ORD), map, animationsPlayer);
+		Ground[][] groundMap = Settings.GROUNDMAPS.get(this.selectedLevel);
+ 		map = new TileMap(groundMap,
+ 						  groundMap[0].length,
+ 						  groundMap.length,
+ 						  this.selectedLevel);
+		
+ 		Coordinates playerCoord = new Coordinates(Settings.PLAYER_ABS_MAP.get(selectedLevel),
+ 												  Settings.PLAYER_ORD_MAP.get(selectedLevel));
+		player = new Player(playerCoord, map, animationsPlayer);
 		playerController = new PlayerController(player);
 		camera = new Camera();
 	}
@@ -280,7 +291,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(playerController);
-		gameMusic.play();
+//		gameMusic.play();
 	}
 
 	@Override

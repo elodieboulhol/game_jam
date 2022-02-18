@@ -1,6 +1,10 @@
 package com.mygdx.gamejam;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mygdx.gamejam.model.Ground;
+import com.mygdx.gamejam.model.SelectedLevel;
 
 public class Settings {
 	
@@ -32,11 +36,6 @@ public class Settings {
 	public static int KEY2_ORD_SCREEN_SIZE = TILE_SIZE;
 	public static int KEY2_ABS_SCREEN = FIREBALL_ABS;
 	public static int KEY2_ORD_SCREEN = TILE_SIZE / 2;
-	
-	public static int KEY1_ABS_MAP = 25;
-	public static int KEY1_ORD_MAP = 9;
-	public static int KEY2_ABS_MAP = 12;
-	public static int KEY2_ORD_MAP = 24;
 
 	public static int MONSTER1_ABS_MAP = 12;
 	public static int MONSTER1_ORD_MAP = 23;
@@ -51,11 +50,50 @@ public class Settings {
 	public static int MONSTER6_ABS_MAP = 18;
 	public static int MONSTER6_ORD_MAP = 23;
 	
-	public static int CHEST_ABS= 18;
-	public static int CHEST_ORD = 24;
+
+	public static Map<SelectedLevel, Integer> CHEST_ABS_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		CHEST_ABS_MAP.put(SelectedLevel.LEVEL1, 18);
+		CHEST_ABS_MAP.put(SelectedLevel.LEVEL2, 33);
+	}
+	public static Map<SelectedLevel, Integer> CHEST_ORD_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		CHEST_ORD_MAP.put(SelectedLevel.LEVEL1, 24);
+		CHEST_ORD_MAP.put(SelectedLevel.LEVEL2, 18);
+	}
+
+	public static Map<SelectedLevel, Integer> KEY1_ABS_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		KEY1_ABS_MAP.put(SelectedLevel.LEVEL1, 25);
+		KEY1_ABS_MAP.put(SelectedLevel.LEVEL2, 33);
+	}
+	public static Map<SelectedLevel, Integer> KEY1_ORD_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		KEY1_ORD_MAP.put(SelectedLevel.LEVEL1, 9);
+		KEY1_ORD_MAP.put(SelectedLevel.LEVEL2, 5);
+	}
+	public static Map<SelectedLevel, Integer> KEY2_ABS_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		KEY2_ABS_MAP.put(SelectedLevel.LEVEL1, 12);
+		KEY2_ABS_MAP.put(SelectedLevel.LEVEL2, 12);
+	}
+	public static Map<SelectedLevel, Integer> KEY2_ORD_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		KEY2_ORD_MAP.put(SelectedLevel.LEVEL1, 24);
+		KEY2_ORD_MAP.put(SelectedLevel.LEVEL2, 24);
+	}
 	
-	public static int PLAYER_ABS = 11;
-	public static int PLAYER_ORD = 7;
+	public static Map<SelectedLevel, Integer> PLAYER_ABS_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		PLAYER_ABS_MAP.put(SelectedLevel.LEVEL1, 11);
+		PLAYER_ABS_MAP.put(SelectedLevel.LEVEL2, 22);
+	}
+	public static Map<SelectedLevel, Integer> PLAYER_ORD_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		PLAYER_ORD_MAP.put(SelectedLevel.LEVEL1, 7);
+		PLAYER_ORD_MAP.put(SelectedLevel.LEVEL2, 25);
+	}
+	
 	
 	public static int NB_MONSTER = 7;
 	public static int NB_NORMAL_MONSTER = 4;
@@ -113,4 +151,52 @@ public class Settings {
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 	};
+	
+	
+	public static Ground[][] GROUNDMAP2= {
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			
+			
+			
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS,  		Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE, 				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.GRASS, Ground.GRASS,  		Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.WATER, Ground.WATER, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.ROCK,  Ground.ROCK,  Ground.GRASS, Ground.GRASS, 		Ground.WATER, Ground.WATER, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.ROCK,  Ground.ROCK,  Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.ROCK,  Ground.GRASS, Ground.ROCK,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  	Ground.TREE,  Ground.ROCK,  Ground.ROCK,  Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.WATER, Ground.PLANK, Ground.WATER, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.WATER, Ground.PLANK, Ground.WATER, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.WATER, Ground.PLANK, Ground.WATER, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.GRASS,	 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.WATER, Ground.PLANK, Ground.WATER, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.GRASS, 	Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.WATER, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.GRASS, Ground.WATER, Ground.PLANK, Ground.WATER, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.GRASS, Ground.GRASS, 		Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.ROCK,  	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },	
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.ROCK,  	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },	
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },	
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.ROCK,  Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },	
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.ROCK,  Ground.WATER, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.ROCK,  Ground.WATER, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.WATER, Ground.WATER, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.ROCK,  Ground.WATER, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.WATER, Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.GRASS, Ground.GRASS, 	Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, 		Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.WATER, Ground.GRASS, Ground.GRASS, Ground.GRASS, Ground.TREE,  Ground.TREE,  Ground.TREE,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			
+			
+			
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+			{ Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, 			Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,  Ground.ROCK,  Ground.ROCK, Ground.ROCK,				Ground.ROCK, 	Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK,  Ground.ROCK, },
+	};
+	
+	
+	public static Map<SelectedLevel, Ground[][]> GROUNDMAPS = new HashMap<SelectedLevel, Ground[][]>();
+	static {
+		GROUNDMAPS.put(SelectedLevel.LEVEL1, GROUNDMAP1);
+		GROUNDMAPS.put(SelectedLevel.LEVEL2, GROUNDMAP2);
+	}
 }

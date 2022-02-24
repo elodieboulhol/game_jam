@@ -54,7 +54,7 @@ public class TileMap {
 		}
 		
 		this.monsterList = new ArrayList<Monster>();
-//		this.genStaticMonsters();
+		this.genStaticMonsters();
 		for (int nbMonster = 0; nbMonster < Settings.NB_MONSTER_MAP.get(this.selectedLevel); nbMonster++) {
 			this.genNewMonster();
 		}
@@ -88,7 +88,8 @@ public class TileMap {
 
 	}
 	
-	public void genStaticMonsters() {		
+	public void genStaticMonsters() {
+		if (this.selectedLevel != SelectedLevel.LEVEL1) return;
 		Coordinates coord1 = new Coordinates(Settings.MONSTER1_ABS_MAP, Settings.MONSTER1_ORD_MAP);
 		this.genMonster(coord1);
 		Coordinates coord2 = new Coordinates(Settings.MONSTER2_ABS_MAP, Settings.MONSTER2_ORD_MAP);

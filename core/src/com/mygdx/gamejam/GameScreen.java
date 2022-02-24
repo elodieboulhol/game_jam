@@ -244,71 +244,73 @@ public class GameScreen implements Screen {
 				new Texture("img/monster4_left.png")
 				);
 		
-		dayGroundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
-		dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
-		dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
-		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
-		dayGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg.png"));
-		dayGroundTextureMap.put(Ground.PLANK, new Texture("img/plank.png"));
 
-		dayGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
-		dayGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
-		dayGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
-		dayGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
-		dayGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
-		dayGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
-		dayGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
-		dayGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
-		dayGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
-		dayGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
-		dayGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
-		dayGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
-		dayGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
-		dayGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
-		dayGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
-		dayGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
-		
-		
-		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
-		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
-		nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
-		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
-		nightGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg_night.png"));
-		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/plank_night.png"));
+		if (selectedLevel == SelectedLevel.INTRO) {
+			dayGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
+			dayGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
+			dayGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
+			dayGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
+			dayGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
+			dayGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
+			dayGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
+			dayGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
+			dayGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
+			dayGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
+			dayGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
+			dayGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
+			dayGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
+			dayGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
+			dayGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
+			dayGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
+			
+			nightGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
+			nightGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
+			nightGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
+			nightGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
+			nightGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
+			nightGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
+			nightGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
+			nightGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
+			nightGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
+			nightGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
+			nightGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
+			nightGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
+			nightGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
+			nightGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
+			nightGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
+			nightGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
+			
+		} else {
+			dayGroundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
+			dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
+			dayGroundTextureMap.put(Ground.WATER, new Texture("img/water.png"));
+			dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
+			dayGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg.png"));
+			dayGroundTextureMap.put(Ground.PLANK, new Texture("img/plank.png"));			
 
-		nightGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
-		nightGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
-		nightGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
-		nightGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
-		nightGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
-		nightGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
-		nightGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
-		nightGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
-		nightGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
-		nightGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
-		nightGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
-		nightGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
-		nightGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
-		nightGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
-		nightGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
-		nightGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
-
-		
-		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
-		orbTextureMap.put(OrbType.ATTACK, new Texture("img/fireball.png"));
-		orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
-		orbTextureMap.put(OrbType.INVINCIBILITY, new Texture("img/orb_green.png"));
-		orbTextureMap.put(OrbType.SLOWER, new Texture("img/orb_purple.png"));
-		
-		fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
-		fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));
-		fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
-		fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
-		
-		fireballCounterTextureMap.put(new Integer(0), new Texture("img/fireball_counter_0.png"));
-		fireballCounterTextureMap.put(new Integer(1), new Texture("img/fireball_counter_1.png"));
-		fireballCounterTextureMap.put(new Integer(2), new Texture("img/fireball_counter_2.png"));
-		fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
+			nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
+			nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
+			nightGroundTextureMap.put(Ground.WATER, new Texture("img/water_night.png"));
+			nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
+			nightGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg_night.png"));
+			nightGroundTextureMap.put(Ground.PLANK, new Texture("img/plank_night.png"));
+			
+			orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
+			orbTextureMap.put(OrbType.ATTACK, new Texture("img/fireball.png"));
+			orbTextureMap.put(OrbType.LIFE, new Texture("img/orb_red.png"));
+			orbTextureMap.put(OrbType.INVINCIBILITY, new Texture("img/orb_green.png"));
+			orbTextureMap.put(OrbType.SLOWER, new Texture("img/orb_purple.png"));
+			
+			fireballTextureMap.put(Direction.DOWN, new Texture("img/fireball_down.png"));
+			fireballTextureMap.put(Direction.UP, new Texture("img/fireball_up.png"));
+			fireballTextureMap.put(Direction.LEFT, new Texture("img/fireball_left.png"));
+			fireballTextureMap.put(Direction.RIGHT, new Texture("img/fireball_right.png"));
+			
+			fireballCounterTextureMap.put(new Integer(0), new Texture("img/fireball_counter_0.png"));
+			fireballCounterTextureMap.put(new Integer(1), new Texture("img/fireball_counter_1.png"));
+			fireballCounterTextureMap.put(new Integer(2), new Texture("img/fireball_counter_2.png"));
+			fireballCounterTextureMap.put(new Integer(3), new Texture("img/fireball_counter_3.png"));
+		}
 		
 		
 		Ground[][] groundMap = Settings.GROUNDMAPS.get(this.selectedLevel);
@@ -338,6 +340,7 @@ public class GameScreen implements Screen {
 		camera.update(player.getCurrentCoord().getAbs(), player.getCurrentCoord().getOrd());
 		player.update(delta);
 		
+		
 		Iterator<Fireball> fireballList = map.getFireballList().iterator();
 	    while (fireballList.hasNext()) {
 	    	Fireball fireball = fireballList.next();
@@ -363,13 +366,7 @@ public class GameScreen implements Screen {
 		}
 		
 		if (this.selectedLevel == SelectedLevel.INTRO) {
-			game.batch.draw(player.getSprite(),
-					   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
-					   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
-					   Settings.TILE_SIZE,
-					   Settings.TILE_SIZE);
-			
-			game.batch.end();
+			drawIntro();
 			return;
 		}
 
@@ -477,6 +474,7 @@ public class GameScreen implements Screen {
 				   Settings.TILE_SIZE,
 				   Settings.TILE_SIZE);
 		
+		
 		game.batch.end();
 		
 		if (gameOver()) {
@@ -513,11 +511,42 @@ public class GameScreen implements Screen {
 				}
 				
 				game.setScreen(new WinScreen(game));
-//				dispose();
 			}
 		}
 	}
 	
+	private void drawIntro() {
+		float mapStartAbs = Gdx.graphics.getWidth() / 2 - camera.getCameraAbs() * Settings.TILE_SIZE ;		
+		float mapStartOrd = Gdx.graphics.getHeight() / 2 - camera.getCameraOrd() * Settings.TILE_SIZE ;
+		
+		game.batch.draw(player.getSprite(),
+				   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
+				   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
+				   Settings.TILE_SIZE,
+				   Settings.TILE_SIZE);
+		
+		if (player.getIndexDialog() == 0) {
+			game.batch.draw(shieldTexture,
+							Settings.SHIELDABS,
+							Settings.SHIELDORD,
+						    Settings.TILE_SIZE,
+						    Settings.TILE_SIZE);
+		} else if (player.getIndexDialog() == 1) {
+			game.batch.draw(fullHeartTexture,
+					Settings.SHIELDABS,
+					Settings.SHIELDORD,
+				    Settings.TILE_SIZE,
+				    Settings.TILE_SIZE);
+		} else if (player.getIndexDialog() == 2) {
+			game.batch.draw(emptyHeartTexture,
+					Settings.SHIELDABS,
+					Settings.SHIELDORD,
+				    Settings.TILE_SIZE,
+				    Settings.TILE_SIZE);
+		}
+		game.batch.end();
+	}
+
 	public boolean gameOver() {
 		return player.getLifePoint() <= 0;
 	}

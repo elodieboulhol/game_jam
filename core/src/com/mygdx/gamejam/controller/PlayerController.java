@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.mygdx.gamejam.GameScreen;
 import com.mygdx.gamejam.model.Chest;
 import com.mygdx.gamejam.model.Direction;
+import com.mygdx.gamejam.model.Ground;
 import com.mygdx.gamejam.model.Player;
 import com.mygdx.gamejam.model.PlayerState;
 import com.mygdx.gamejam.model.Tile;
@@ -39,6 +40,8 @@ public class PlayerController extends InputAdapter {
 				} else {
 					GameScreen.chestClosedSound.play();
 				}
+			} else if (destination.getGroundType() == Ground.GRDMA || this.player.getIndexDialog() >= 0) {
+				this.player.setIndexDialog(this.player.getIndexDialog() + 1);
 			} else if (player.getNbFireball() > 0) {
 				GameScreen.fireballSound.play();
 				player.attack();

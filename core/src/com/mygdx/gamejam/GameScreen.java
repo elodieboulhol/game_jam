@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 
 	private AnimationSetPlayer animationsPlayer;
 	private AnimationSetMonster animationsMonster;
-	private HashMap<Integer, Texture> fireballCounterTextureMap = new HashMap<Integer, Texture>();;	
+	private HashMap<Integer, Texture> fireballCounterTextureMap = new HashMap<Integer, Texture>();
 	private HashMap<Ground, Texture> dayGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<Ground, Texture> nightGroundTextureMap = new HashMap<Ground, Texture>();
 	private HashMap<OrbType, Texture> orbTextureMap = new HashMap<OrbType, Texture>();
@@ -250,6 +250,24 @@ public class GameScreen implements Screen {
 		dayGroundTextureMap.put(Ground.TREE, new Texture("img/tree1.png"));
 		dayGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg.png"));
 		dayGroundTextureMap.put(Ground.PLANK, new Texture("img/plank.png"));
+
+		dayGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
+		dayGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
+		dayGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
+		dayGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
+		dayGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
+		dayGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
+		dayGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
+		dayGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
+		dayGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
+		dayGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
+		dayGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
+		dayGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
+		dayGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
+		dayGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
+		dayGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
+		dayGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
+		
 		
 		nightGroundTextureMap.put(Ground.GRASS, new Texture("img/grass_night.png"));
 		nightGroundTextureMap.put(Ground.ROCK, new Texture("img/rock_night.png"));
@@ -257,6 +275,24 @@ public class GameScreen implements Screen {
 		nightGroundTextureMap.put(Ground.TREE, new Texture("img/tree_night.png"));
 		nightGroundTextureMap.put(Ground.ICE, new Texture("img/iceberg_night.png"));
 		nightGroundTextureMap.put(Ground.PLANK, new Texture("img/plank_night.png"));
+
+		nightGroundTextureMap.put(Ground.FLOOR, new Texture("img/floor.png"));
+		nightGroundTextureMap.put(Ground.WALL, new Texture("img/wall.png"));
+		nightGroundTextureMap.put(Ground.BED_T, new Texture("img/bed_top.png"));
+		nightGroundTextureMap.put(Ground.BED_B, new Texture("img/bed_bottom.png"));
+		nightGroundTextureMap.put(Ground.BRICK, new Texture("img/brick_wall.png"));
+		nightGroundTextureMap.put(Ground.DRESR, new Texture("img/dresser.png"));
+		nightGroundTextureMap.put(Ground.FURN1, new Texture("img/furniture1.png"));
+		nightGroundTextureMap.put(Ground.FURN2, new Texture("img/furniture2.png"));
+		nightGroundTextureMap.put(Ground.FURN3, new Texture("img/furniture3.png"));
+		nightGroundTextureMap.put(Ground.FURN4, new Texture("img/furniture4.png"));
+		nightGroundTextureMap.put(Ground.FURN5, new Texture("img/furniture5.png"));
+		nightGroundTextureMap.put(Ground.FURN6, new Texture("img/furniture6.png"));
+		nightGroundTextureMap.put(Ground.PAINT, new Texture("img/paint.png"));
+		nightGroundTextureMap.put(Ground.TAB_L, new Texture("img/table_left.png"));
+		nightGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
+		nightGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
+
 		
 		orbTextureMap.put(OrbType.ICE, new Texture("img/orb_blue.png"));
 		orbTextureMap.put(OrbType.ATTACK, new Texture("img/fireball.png"));
@@ -291,7 +327,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(playerController);
-//		gameMusic.play();
+		gameMusic.play();
 	}
 
 	@Override
@@ -324,6 +360,17 @@ public class GameScreen implements Screen {
 							    Settings.TILE_SIZE,
 							    Settings.TILE_SIZE);
 			}
+		}
+		
+		if (this.selectedLevel == SelectedLevel.INTRO) {
+			game.batch.draw(player.getSprite(),
+					   mapStartAbs + player.getCurrentCoord().getAbs() * Settings.TILE_SIZE,
+					   mapStartOrd + player.getCurrentCoord().getOrd() * Settings.TILE_SIZE,
+					   Settings.TILE_SIZE,
+					   Settings.TILE_SIZE);
+			
+			game.batch.end();
+			return;
 		}
 
 		for (Orb orb : map.getOrbsList()) { 		      

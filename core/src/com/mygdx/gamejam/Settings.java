@@ -87,15 +87,29 @@ public class Settings {
 	static {
 		PLAYER_ABS_MAP.put(SelectedLevel.LEVEL1, 11);
 		PLAYER_ABS_MAP.put(SelectedLevel.LEVEL2, 22);
+		PLAYER_ABS_MAP.put(SelectedLevel.INTRO, 25);
 	}
 	public static Map<SelectedLevel, Integer> PLAYER_ORD_MAP = new HashMap<SelectedLevel, Integer>();
 	static {
 		PLAYER_ORD_MAP.put(SelectedLevel.LEVEL1, 7);
 		PLAYER_ORD_MAP.put(SelectedLevel.LEVEL2, 25);
+		PLAYER_ORD_MAP.put(SelectedLevel.INTRO, 8);
 	}
 	
+	public static Map<SelectedLevel, Integer> NB_MONSTER_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		NB_MONSTER_MAP.put(SelectedLevel.LEVEL1, 7);
+		NB_MONSTER_MAP.put(SelectedLevel.LEVEL2, 7);
+		NB_MONSTER_MAP.put(SelectedLevel.INTRO, 0);
+	}
 	
-	public static int NB_MONSTER = 7;
+	public static Map<SelectedLevel, Integer> NB_ORB_MAP = new HashMap<SelectedLevel, Integer>();
+	static {
+		NB_ORB_MAP.put(SelectedLevel.LEVEL1, 8);
+		NB_ORB_MAP.put(SelectedLevel.LEVEL2, 12);
+		NB_ORB_MAP.put(SelectedLevel.INTRO, 0);
+	}
+	
 	public static int NB_NORMAL_MONSTER = 4;
 	public static int FIREBALL_MONSTER_TIMING = 1;
 	public static int FIREBALL_MONSTER_DELAY = 1;
@@ -112,6 +126,37 @@ public class Settings {
 	
 	public static float DAY_LENGTH = 6f; 
 	
+
+	public static Ground[][] GROUNDHOUSEMAP= {
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		
+		
+
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,       Ground.BRICK,  Ground.BRICK,  Ground.PAINT,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,        Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,       Ground.BRICK,  Ground.BRICK,  Ground.BED_T,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.FURN1,  Ground.FURN2,  Ground.FURN6,  Ground.FURN4,  Ground.FURN5,  Ground.FURN3,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,        Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.BED_B,  Ground.GRDMA,  Ground.FLOOR,  Ground.FLOOR,  Ground.BRICK,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.BRICK,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.TAB_L,  Ground.TAB_R,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.BRICK,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, 		Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR,  Ground.FLOOR, 		Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		
+		
+		
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+		{ Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, Ground.BRICK, 	Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK,  Ground.BRICK, },
+	};
+	
+
 	public static Ground[][] GROUNDMAP1= {
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
 		{ Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, Ground.TREE, 	Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE,  Ground.TREE, },
@@ -198,5 +243,6 @@ public class Settings {
 	static {
 		GROUNDMAPS.put(SelectedLevel.LEVEL1, GROUNDMAP1);
 		GROUNDMAPS.put(SelectedLevel.LEVEL2, GROUNDMAP2);
+		GROUNDMAPS.put(SelectedLevel.INTRO, GROUNDHOUSEMAP);
 	}
 }

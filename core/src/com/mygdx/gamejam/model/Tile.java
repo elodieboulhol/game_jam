@@ -48,7 +48,8 @@ public class Tile {
 		if (this.gameObject != null && this.gameObject instanceof Chest) {
 			return false;
 		}
-		return (this.groundType == Ground.GRASS || this.groundType == Ground.PLANK || this.groundType == Ground.ICE);
+		
+		return (this.groundType == Ground.GRASS || this.groundType == Ground.PLANK || this.groundType == Ground.ICE || this.groundType == Ground.FLOOR );
 	}
 	
 	public void interact(Player player) {

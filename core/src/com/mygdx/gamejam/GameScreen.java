@@ -53,6 +53,9 @@ public class GameScreen implements Screen {
 	private TileMap map;
 	private Camera camera;
 	
+	
+	private Array<Texture> dialogTextures = new Array<Texture>();
+	
 	private Array<Texture> textureAnimationsPlayerUp = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerDown = new Array<Texture>();
 	private Array<Texture> textureAnimationsPlayerLeft = new Array<Texture>();
@@ -280,6 +283,10 @@ public class GameScreen implements Screen {
 			nightGroundTextureMap.put(Ground.TAB_R, new Texture("img/table_right.png"));
 			nightGroundTextureMap.put(Ground.GRDMA, new Texture("img/old_lady.png"));
 			
+			for (int i = 1; i <= 12; i++) {
+				dialogTextures.add(new Texture("dialogue/dialogue_" + i + ".png"));
+			}
+			
 		} else {
 			dayGroundTextureMap.put(Ground.GRASS, new Texture("img/grass.png"));
 			dayGroundTextureMap.put(Ground.ROCK, new Texture("img/rock1.png"));
@@ -366,7 +373,7 @@ public class GameScreen implements Screen {
 		}
 		
 		if (this.selectedLevel == SelectedLevel.INTRO) {
-			drawIntro();
+			drawIntro(delta);
 			return;
 		}
 
@@ -515,7 +522,7 @@ public class GameScreen implements Screen {
 		}
 	}
 	
-	private void drawIntro() {
+	private void drawIntro(float delta) {
 		float mapStartAbs = Gdx.graphics.getWidth() / 2 - camera.getCameraAbs() * Settings.TILE_SIZE ;		
 		float mapStartOrd = Gdx.graphics.getHeight() / 2 - camera.getCameraOrd() * Settings.TILE_SIZE ;
 		
@@ -525,24 +532,24 @@ public class GameScreen implements Screen {
 				   Settings.TILE_SIZE,
 				   Settings.TILE_SIZE);
 		
-		if (player.getIndexDialog() == 0) {
-			game.batch.draw(shieldTexture,
-							Settings.SHIELDABS,
-							Settings.SHIELDORD,
-						    Settings.TILE_SIZE,
-						    Settings.TILE_SIZE);
-		} else if (player.getIndexDialog() == 1) {
-			game.batch.draw(fullHeartTexture,
-					Settings.SHIELDABS,
-					Settings.SHIELDORD,
-				    Settings.TILE_SIZE,
-				    Settings.TILE_SIZE);
-		} else if (player.getIndexDialog() == 2) {
-			game.batch.draw(emptyHeartTexture,
-					Settings.SHIELDABS,
-					Settings.SHIELDORD,
-				    Settings.TILE_SIZE,
-				    Settings.TILE_SIZE);
+		if (player.getIndexDialog() > -1 && player.getIndexDialog() < dialogTextures.size) {
+			game.batch.draw(dialogTextures.get(player.getIndexDialog()),
+							Settings.SCREEN_WIDTH / 4,
+							0,
+						    Settings.SCREEN_WIDTH / 2,
+						    1080 * Settings.SCREEN_WIDTH / (2 * 1920));
+		} else if (player.getIndexDialog() >= dialogTextures.size) {
+			if (hasJustWon) {
+				delayWin = 0f;
+				hasJustWon = false;
+			}
+			
+			if (delayWin < Settings.DELAY_WINGAME) {
+				delayWin += delta;
+			} else {				
+				switchDayTask.cancel();
+				game.setScreen(new WinScreen(game));
+			}
 		}
 		game.batch.end();
 	}

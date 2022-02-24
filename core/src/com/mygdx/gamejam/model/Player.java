@@ -11,6 +11,7 @@ public class Player extends GameObject {
 	
 	private boolean hasFirstKey = false;
 	private boolean hasSecondKey = false;
+	private int indexDialog = -1;
 
 	private PlayerState state = PlayerState.STANDING;
 	private CoordinatesFloat currentCoord;
@@ -223,4 +224,14 @@ public class Player extends GameObject {
 	public Direction getCurrentDir() {
 		return currentDir;
 	}
+
+	public int getIndexDialog() {
+		return indexDialog;
+	}
+
+	public void setIndexDialog(int indexDialog) {
+		this.indexDialog = indexDialog;
+	}
+
+	
 }
